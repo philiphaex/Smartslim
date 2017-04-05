@@ -203,11 +203,13 @@
             </div>
         </div>
     </section>
+    @component('index.cookieConsent')
     <footer>
         <div class="container">
             <p> Copyright &copy; Philip Haex</p>
         </div>
     </footer>
+    @endcomponent
 
 
     <!-- Google Analytics -->
