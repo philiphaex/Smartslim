@@ -15,8 +15,10 @@
 
                 <!-- Branding Image -->
                 <a class="navbar-brand" href="{{ url('/') }}">
-                    {{ config('app.name', 'Laravel') }}
+                <img alt="Brand" src="/img/logo-navbar30.png">
+{{--                {{ config('app.name', 'SmartSlim') }}--}}
                 </a>
+
             </div>
 
             <div class="collapse navbar-collapse" id="app-navbar-collapse">
@@ -27,7 +29,6 @@
                     <li><a href="#services">Diensten</a></li>
                     <li><a href="#formules">Formules</a></li>
                     <li><a href="#contact">Contact</a></li>
-                    <li><a href="/">Inschrijven</a></li>
                 </ul>
 
                 <!-- Right Side Of Navbar -->
@@ -208,13 +209,6 @@
         </div>
     </footer>
 
-    <!-- jQuery -->
-    <script src="https://code.jquery.com/jquery-3.1.1.min.js"
-            integrity="sha256-hVVnYaiADRTO2PzUGmuLJr8BLUSjGIZsDYGmIJLv2b8="
-            crossorigin="anonymous"></script>
-
-    <!-- Bootstrap Core JavaScript -->
-    <script src="./js/bootstrap.js"></script>
 
     <!-- Google Analytics -->
     <script>
