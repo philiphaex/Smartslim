@@ -30,3 +30,7 @@ Route::post('/register', 'Auth\RegisterController@register');
 
 Route::get('/app', 'AppController@index');
 Route::get('/', 'IndexController@index');
+
+
+//Email
+Route::post('/send', 'EmailController@send');
