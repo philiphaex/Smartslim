@@ -21,7 +21,7 @@ class CreateUsersTable extends Migration
             $table->string('password');
             $table->string('street');
             $table->string('street_number');
-            $table->string('street_bus_number');
+            $table->string('street_bus_number')->nullable();
             $table->string('zipcode');
             $table->integer('phone');
             $table->boolean('confirmed')->default(0);

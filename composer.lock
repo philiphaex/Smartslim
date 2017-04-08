@@ -4,8 +4,8 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "9abe10d9a6473e50cf4454c89de66f05",
-    "content-hash": "8ae1b5d51430a851c8957091bac1cb27",
+    "hash": "f5c272c8c8bfe181e3fce40d377b1722",
+    "content-hash": "f10fcfe5696c90b36644b12b1cd1cb1c",
     "packages": [
         {
             "name": "dnoegel/php-xdg-base-dir",
@@ -1865,16 +1865,16 @@
         },
         {
             "name": "zizaco/entrust",
-            "version": "5.2.x-dev",
+            "version": "dev-master",
             "source": {
                 "type": "git",
                 "url": "https://github.com/Zizaco/entrust.git",
-                "reference": "3623cc052937d9e62543402b50f24065720d44b9"
+                "reference": "6a0fd8c3b73037b4855c6c4eaf1060788c0df1e9"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/Zizaco/entrust/zipball/3623cc052937d9e62543402b50f24065720d44b9",
-                "reference": "3623cc052937d9e62543402b50f24065720d44b9",
+                "url": "https://api.github.com/repos/Zizaco/entrust/zipball/6a0fd8c3b73037b4855c6c4eaf1060788c0df1e9",
+                "reference": "6a0fd8c3b73037b4855c6c4eaf1060788c0df1e9",
                 "shasum": ""
             },
             "require": {
@@ -1929,7 +1929,7 @@
                 "permission",
                 "roles"
             ],
-            "time": "2016-12-29 06:25:06"
+            "time": "2016-12-29 06:24:46"
         }
     ],
     "packages-dev": [
