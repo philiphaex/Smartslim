@@ -1,9 +1,9 @@
 <?php
 
-namespace SmartSlim\Http\Controllers\Auth;
+namespace App\Http\Controllers\Auth;
 
-use SmartSlim\User;
-use SmartSlim\Http\Controllers\Controller;
+use App\User;
+use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Foundation\Auth\RegistersUsers;
 

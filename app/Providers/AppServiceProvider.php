@@ -1,6 +1,6 @@
 <?php
 
-namespace SmartSlim\Providers;
+namespace App\Providers;
 
 use Illuminate\Support\ServiceProvider;
 

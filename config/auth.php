@@ -67,9 +67,17 @@ return [
     'providers' => [
         'users' => [
             'driver' => 'eloquent',
-            'model' => SmartSlim\User::class,
+            'model' => App\User::class,
         ],
 
+
+        'providers' => [
+            'users' => [
+                'driver' => 'eloquent',
+                'model' => App\User::class,
+                'table' => 'users',
+            ],
+        ],
         // 'users' => [
         //     'driver' => 'database',
         //     'table' => 'users',

@@ -25,6 +25,8 @@ class CreateUsersTable extends Migration
             $table->string('zipcode');
             $table->integer('phone');
             $table->integer('mobile');
+            $table->date('birthday');
+            $table->string('sex');
             $table->boolean('confirmed')->default(0);
             $table->string('confirmation_code')->nullable();
             $table->rememberToken();
