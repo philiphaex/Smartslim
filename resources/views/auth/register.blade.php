@@ -86,13 +86,13 @@
                                     </span>
                                 @endif
                             </div>
-                            <div class="col-md-6 form-group{{ $errors->has('zipcode_id') ? ' has-error' : '' }}">
-                                <label for="zipcode_id" class="col-md-3control-label">Postcode</label>
-                                <input id="zipcode_id" type="text" class="form-control" name="zipcode_id"  required>
+                            <div class="col-md-6 form-group{{ $errors->has('zipcode') ? ' has-error' : '' }}">
+                                <label for="zipcode" class="col-md-3control-label">Postcode</label>
+                                <input id="zipcode" type="text" class="form-control" name="zipcode"  required>
 
-                                @if ($errors->has('zipcode_id'))
+                                @if ($errors->has('zipcode'))
                                     <span class="help-block">
-                                        <strong>{{ $errors->first('zipcode_id') }}</strong>
+                                        <strong>{{ $errors->first('zipcode') }}</strong>
                                     </span>
                                 @endif
                             </div>
@@ -116,19 +116,10 @@
                                     </span>
                                 @endif
                             </div>
-                            <div class="col-md-6 form-group{{ $errors->has('mobile') ? ' has-error' : '' }}">
-                                <label for="mobile" class="col-md-3control-label">Mobiel</label>
-                                <input id="mobile" type="text" class="form-control" name="mobile">
 
-                                @if ($errors->has('mobile'))
-                                    <span class="help-block">
-                                        <strong>{{ $errors->first('mobile') }}</strong>
-                                    </span>
-                                @endif
-                            </div>
 
                             <div class="col-md-12 form-group">
-                                <label><input type="checkbox"> Ik accepteer de <a>algemene voorwaarden</a></label>
+                                <label><input type="checkbox" required> Ik accepteer de <a>algemene voorwaarden</a></label>
                             </div>
 
                             <div class="col-md-12 form-group">
