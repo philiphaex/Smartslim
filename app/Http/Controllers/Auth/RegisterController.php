@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Auth;
 
+
 use App\User;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Validator;
@@ -68,6 +69,9 @@ class RegisterController extends Controller
      */
     protected function create(array $data)
     {
+        //confirmatie code werkt niet
+        $confirmation_code = 'test';
+
         return User::create([
             'firstname' => $data['firstname'],
             'lastname' => $data['lastname'],
@@ -78,6 +82,34 @@ class RegisterController extends Controller
             'street_bus_number' => $data['street_bus_number'],
             'zipcode' => $data['zipcode'],
             'phone' => $data['phone'],
+            'confirmation_code' => $confirmation_code,
         ]);
+
+        action('EmailController@send', ['confirmation_code' =>  $confirmation_code ]);
+
     }
+
+    public function confirm($confirmation_code)
+    {
+        if( ! $confirmation_code)
+        {
+            throw new InvalidConfirmationCodeException;
+        }
+
+        $user = User::whereConfirmationCode($confirmation_code)->first();
+
+        if ( ! $user)
+        {
+            throw new InvalidConfirmationCodeException;
+        }
+
+        $user->confirmed = 1;
+        $user->confirmation_code = null;
+        $user->save();
+
+        Flash::message('You have successfully verified your account.');
+
+        return action('AppController@app');
+    }
+
 }
