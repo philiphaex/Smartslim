@@ -2,9 +2,14 @@
 
 namespace App\Http\Controllers\Auth;
 
-
+use Illuminate\Support\Facades;
+use Illuminate\Http\Request;
+use DB;
+use Session;
+use Mail;
 use App\User;
 use App\Http\Controllers\Controller;
+use App\Mail\EmailVerification;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Foundation\Auth\RegistersUsers;
 
@@ -69,8 +74,6 @@ class RegisterController extends Controller
      */
     protected function create(array $data)
     {
-        //confirmatie code werkt niet
-        $confirmation_code = 'test';
 
         return User::create([
             'firstname' => $data['firstname'],
@@ -82,34 +85,47 @@ class RegisterController extends Controller
             'street_bus_number' => $data['street_bus_number'],
             'zipcode' => $data['zipcode'],
             'phone' => $data['phone'],
-            'confirmation_code' => $confirmation_code,
+            'confirmation_code' => str_random(30),
         ]);
 
-        action('EmailController@send', ['confirmation_code' =>  $confirmation_code ]);
 
     }
 
-    public function confirm($confirmation_code)
+//    origin: https://github.com/lubusIN/laravel-email-verification-app-boilerplate/blob/master/app/Http/Controllers/Auth/RegisterController.php
+    public function register(Request $request)
     {
-        if( ! $confirmation_code)
+        // Laravel validation
+        $validator = $this->validator($request->all());
+        if ($validator->fails())
         {
-            throw new InvalidConfirmationCodeException;
+            $this->throwValidationException($request, $validator);
         }
-
-        $user = User::whereConfirmationCode($confirmation_code)->first();
-
-        if ( ! $user)
+        // Using database transactions is useful here because stuff happening is actually a transaction
+        // I don't know what I said in the last line! Weird!
+        DB::beginTransaction();
+        try
         {
-            throw new InvalidConfirmationCodeException;
+            $user = $this->create($request->all());
+            // After creating the user send an email with the random token generated in the create method above
+            $email = new EmailVerification(new User(['confirmation_code' => $user->confirmation_code, 'firstname' => $user->firstname]));
+            Mail::to($user->email)->send($email);
+            DB::commit();
+            Session::flash('message', 'Een email werd verstuurd');
+            return back();
         }
+        catch(Exception $e)
+        {
+            DB::rollback();
+            return back();
+        }
+    }
 
-        $user->confirmed = 1;
-        $user->confirmation_code = null;
-        $user->save();
-
-        Flash::message('You have successfully verified your account.');
-
-        return action('AppController@app');
+    public function verify($token)
+    {
+        // The verified method has been added to the user model and chained here
+        // for better readability
+        User::where('confirmation_code',$token)->firstOrFail()->verified();
+        return redirect('login');
     }
 
 }

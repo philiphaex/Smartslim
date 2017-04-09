@@ -18,7 +18,7 @@ class User extends Authenticatable
      * @var array
      */
     protected $fillable = [
-        'firstname', 'lastname', 'email', 'password','street','street_number','street_bus_number','zipcode','phone','mobile'
+        'firstname', 'lastname', 'email', 'password','street','street_number','street_bus_number','zipcode','phone','mobile','confirmation_code'
     ];
 
     /**
@@ -29,4 +29,12 @@ class User extends Authenticatable
     protected $hidden = [
         'password', 'remember_token',
     ];
+
+    public function verified()
+    {
+        $this->confirmed= 1;
+        $this->confirmation_code = null;
+
+        $this->save();
+    }
 }

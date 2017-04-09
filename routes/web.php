@@ -27,6 +27,13 @@ Route::get('/password/reset/{token}', 'Auth\ResetPasswordController@showResetFor
 Route::get('/register', 'Auth\RegisterController@showRegistrationForm')->name('register');
 Route::post('/register', 'Auth\RegisterController@register');
 
+//User confirmation
+Route::get('/mail',[
+    'uses' => 'EmailController@send'
+]);
+
+Route::get('register/verify/{token}', 'Auth\RegisterController@verify');
+
 
 Route::get('/app', 'AppController@index');
 Route::get('/', 'IndexController@index');
@@ -34,3 +41,4 @@ Route::get('/', 'IndexController@index');
 
 //Email
 Route::post('/send', 'EmailController@send');
+
