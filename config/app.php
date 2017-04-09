@@ -164,6 +164,8 @@ return [
         Illuminate\View\ViewServiceProvider::class,
 
         Zizaco\Entrust\EntrustServiceProvider::class,
+        Mollie\Laravel\MollieServiceProvider::class,
+
 
 
         /*
@@ -229,6 +231,8 @@ return [
         'Validator' => Illuminate\Support\Facades\Validator::class,
         'View' => Illuminate\Support\Facades\View::class,
         'Entrust'   => Zizaco\Entrust\EntrustFacade::class,
+        'Mollie' => Mollie\Laravel\Facades\Mollie::class,
+
 
     ],
 
