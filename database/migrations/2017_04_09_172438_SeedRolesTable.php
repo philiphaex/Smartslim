@@ -18,15 +18,15 @@ class SeedRolesTable extends Migration
             array('name' => 'admin',
                   'display_name' =>'Admin',
                   'description' =>'Administrator toegang'),
-            array('name' => 'level1',
-                  'display_name' =>'Start',
-                  'description' =>'Gratis pakket, cliëntbeheer, max 10 cliënten per maand'),
-            array('name' => 'level2',
-                'display_name' =>'Basis',
-                'description' =>'Basis pakket, agenda, max 30 cliënten per maand' ),
             array('name' => 'level3',
                 'display_name' =>'Professioneel',
                 'description' =>'Professioneel pakket, cliëntenlogboek, max 60 cliënten per maand' ),
+            array('name' => 'level2',
+                'display_name' =>'Basis',
+                'description' =>'Basis pakket, agenda, max 30 cliënten per maand' ),
+            array('name' => 'level1',
+                'display_name' =>'Start',
+                'description' =>'Gratis pakket, cliëntbeheer, max 10 cliënten per maand'),
         ));
     }
 

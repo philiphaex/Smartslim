@@ -110,8 +110,9 @@ class RegisterController extends Controller
             $email = new EmailVerification(new User(['confirmation_code' => $user->confirmation_code, 'firstname' => $user->firstname]));
             Mail::to($user->email)->send($email);
             DB::commit();
-            Session::flash('message', 'Een email werd verstuurd');
-            return back();
+            Session::flash('message', 'Een bevestigings-email werd verstuurd');
+//            return back();
+            return redirect('subscription');
         }
         catch(Exception $e)
         {
@@ -127,5 +128,11 @@ class RegisterController extends Controller
         User::where('confirmation_code',$token)->firstOrFail()->verified();
         return redirect('login');
     }
+
+    public function showSubscribeForm()
+    {
+        return view('auth.subscribe');
+    }
+
 
 }
