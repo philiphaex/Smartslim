@@ -112,7 +112,7 @@ class RegisterController extends Controller
             DB::commit();
             Session::flash('message', 'Een bevestigings-email werd verstuurd');
 //            return back();
-            return redirect('subscription');
+            return redirect('subscribe');
         }
         catch(Exception $e)
         {
