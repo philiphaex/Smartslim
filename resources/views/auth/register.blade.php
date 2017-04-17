@@ -119,7 +119,7 @@
 
 
                             <div class="col-md-12 form-group">
-                                <label><input type="checkbox" required> Ik accepteer de <a>algemene voorwaarden</a></label>
+                                <label><input type="checkbox" required name="legal1"> Ik accepteer de <a>algemene voorwaarden</a></label>
                             </div>
 
                             <div class="col-md-12 form-group">
