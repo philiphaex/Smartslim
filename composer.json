@@ -6,10 +6,11 @@
     "type": "project",
     "require": {
         "php": ">=5.6.4",
+        "laravel/dusk": "^1.0",
         "laravel/framework": "5.4.*",
         "laravel/tinker": "~1.0",
-        "zizaco/entrust": "dev-master#6a0fd8c3b73037b4855c6c4eaf1060788c0df1e9",
-        "mollie/laravel-mollie": "~1.0"
+        "mollie/laravel-mollie": "~1.0",
+        "zizaco/entrust": "dev-master#6a0fd8c3b73037b4855c6c4eaf1060788c0df1e9"
     },
     "require-dev": {
         "fzaninotto/faker": "~1.4",
