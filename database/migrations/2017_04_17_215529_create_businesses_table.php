@@ -15,6 +15,14 @@ class CreateBusinessesTable extends Migration
     {
         Schema::create('businesses', function (Blueprint $table) {
             $table->increments('id');
+            $table->integer('user_id');
+            $table->string('name');
+            $table->string('vat');
+            $table->string('street');
+            $table->string('street_number');
+            $table->string('street_bus_number')->nullable();
+            $table->string('zipcode');
+            $table->boolean('paymentconditions');
             $table->timestamps();
 
         });

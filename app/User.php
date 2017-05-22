@@ -2,6 +2,8 @@
 
 namespace App;
 
+use App\Business;
+use App\Payment;
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Zizaco\Entrust\Traits\EntrustUserTrait;
@@ -36,5 +38,13 @@ class User extends Authenticatable
         $this->confirmation_code = null;
 
         $this->save();
+    }
+    public function business()
+    {
+        return $this->hasOne(Business::class);
+    }
+    public function payment()
+    {
+        return $this->hasMany(Payment::class);
     }
 }

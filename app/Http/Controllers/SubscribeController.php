@@ -5,6 +5,8 @@ namespace App\Http\Controllers;
 use App\User;
 use App\Role;
 use App\Price;
+use App\Business;
+use App\Payment;
 use Illuminate\Http\Request;
 
 class SubscribeController extends Controller
@@ -23,11 +25,8 @@ class SubscribeController extends Controller
         $subscription_info = Role::find($subscription);
         $price_info = Price::where('role_id','=',$subscription)->first();
 
-        $user_id=session('user_id');
-        $role_id = $request->get('subscription');
+        session(['role_id' => $subscription]);
 
-        $user = User::where('id', '=', $user_id)->first();
-        $user->attachRole($role_id);
 
         if ($payment_option == 'invoice'){
             return view('subscription.invoice',[
@@ -45,8 +44,49 @@ class SubscribeController extends Controller
         
     }
 
-    public function invoicing(Request $request)
+    public function invoice(Request $request)
     {
+        dd($request->all());
+        //Attaching role to user
+        $user_id=session('user_id');
+        $role_id=session('role_id');
+        $user = User::where('id', '=', $user_id)->first();
+        $user->attachRole($role_id);
+
+        //Business registration
+        $business = new Business;
+        $business->user_id = $user_id;
+        $business->name = $request->business;
+        $business->vat = $request->vat;
+        $business->paymentconditions = $request->paymentconditions;
+
+        if ($request->address_business){
+            $business->street = $user->street;
+            $business->street_number = $user->street_number;
+            $business->street_bus_number = $user->street_bus_number;
+            $business->zipcode = $user->zipcode;
+        }else{
+            $business->street = $request->street;
+            $business->street_number = $request->street_number;
+            $business->street_bus_number = $request->street_bus_number;
+            $business->zipcode = $request->zipcode;
+        }
+        $business->save();
+
+        $price_info = Price::where('role_id','=',$role_id)->first();
+        $price = $price_info->price;
+
+        //payment registratie
+        $payment = new Payment;
+        $payment->user_id = $user_id;
+        $payment->payment_option = 'invoice';
+        $payment->amount = $price;
+        $payment->frequency = $request->frequency;
+        $payment->status = 0;
+
+        $payment->save();
+
+        return view('subscription.success');
 
     }
     public function banktransfer(Request $request){
