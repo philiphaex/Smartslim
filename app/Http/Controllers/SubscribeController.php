@@ -83,7 +83,12 @@ class SubscribeController extends Controller
         //Amount on invoice
         $amount = $price * $request->frequency;
         //Number of invoices on year basis
-        $frequency =   12 / $request->frequency;
+        if($price>0){
+
+            $frequency =   12 / $request->frequency;
+        }else{
+            $frequency = 0;
+        }
 
         $payment = new Payment;
         $payment->user_id = $user_id;
