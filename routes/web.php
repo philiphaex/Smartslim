@@ -26,8 +26,11 @@ Route::post('/password/reset', 'Auth\ResetPasswordController@reset ');
 Route::get('/password/reset/{token}', 'Auth\ResetPasswordController@showResetForm ')->name('password.reset');
 Route::get('/register', 'Auth\RegisterController@showRegistrationForm')->name('register');
 Route::post('/register', 'Auth\RegisterController@register');
-Route::get('/subscribe', 'Auth\RegisterController@showSubscribeForm')->name('subscribe');
-Route::post('/subscribe', 'Auth\RegisterController@subscribe');
+
+//Subscription
+Route::get('/subscribe', 'SubscribeController@index');
+Route::post('/subscribe/payment', 'SubscribeController@subscribe');
+
 
 //User confirmation
 Route::get('/mail',[

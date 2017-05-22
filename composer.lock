@@ -4,8 +4,8 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "f2927223ad449bbfeb88c40a83605f44",
-    "content-hash": "99da50a83a3efc84ffcc28c9b4eeaa56",
+    "hash": "f12fb55fc33628a6463a5cacdd18f830",
+    "content-hash": "cd5b0427bbfbbd9aafd87139ffc2ca9f",
     "packages": [
         {
             "name": "dnoegel/php-xdg-base-dir",
@@ -290,21 +290,22 @@
         },
         {
             "name": "laravel/dusk",
-            "version": "v1.0.12",
+            "version": "v1.1.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/laravel/dusk.git",
-                "reference": "9a150bedc3ae6566d05f0a8d1657c658ce98dcad"
+                "reference": "6b81e97ae1ce384e3d8dbd020b2b9751c1449889"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/laravel/dusk/zipball/9a150bedc3ae6566d05f0a8d1657c658ce98dcad",
-                "reference": "9a150bedc3ae6566d05f0a8d1657c658ce98dcad",
+                "url": "https://api.github.com/repos/laravel/dusk/zipball/6b81e97ae1ce384e3d8dbd020b2b9751c1449889",
+                "reference": "6b81e97ae1ce384e3d8dbd020b2b9751c1449889",
                 "shasum": ""
             },
             "require": {
                 "facebook/webdriver": "~1.0",
-                "illuminate/support": "~5.3",
+                "illuminate/console": "~5.4",
+                "illuminate/support": "~5.4",
                 "nesbot/carbon": "~1.20",
                 "php": ">=5.6.4",
                 "symfony/console": "~3.2",
@@ -341,7 +342,7 @@
                 "testing",
                 "webdriver"
             ],
-            "time": "2017-04-07 21:47:06"
+            "time": "2017-04-23 17:13:04"
         },
         {
             "name": "laravel/framework",

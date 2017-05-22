@@ -38,11 +38,15 @@ section{
     margin-top: 30px;
 }
 
+#form-subscribe{
+    margin-top: 30px;
+}
+
 
 .hero-unit{
     height: 400px;
     /*background-color: white;*/
-    background-image: url('../img/hero.png');
+    /*background-image: url('../img/hero.png');*/
     background-size:800px;
     background-position: center;
     background-repeat:no-repeat;

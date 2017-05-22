@@ -112,7 +112,16 @@ class RegisterController extends Controller
             DB::commit();
             Session::flash('message', 'Een bevestigings-email werd verstuurd');
 //            return back();
-            return redirect('subscribe');
+
+
+
+           /* return view('subscription.subscribe',[
+                'user'=>$user->id
+            ]);
+            */
+
+            session(['user_id' => $user->id]);
+            return redirect('/subscribe');
         }
         catch(Exception $e)
         {
@@ -127,11 +136,6 @@ class RegisterController extends Controller
         // for better readability
         User::where('confirmation_code',$token)->firstOrFail()->verified();
         return redirect('login');
-    }
-
-    public function showSubscribeForm()
-    {
-        return view('auth.subscribe');
     }
 
 
