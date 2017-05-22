@@ -41,7 +41,7 @@ class User extends Authenticatable
     }
     public function business()
     {
-        return $this->hasOne(Business::class);
+        return $this->belongsTo(Business::class);
     }
     public function payment()
     {

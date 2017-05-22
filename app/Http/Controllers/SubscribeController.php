@@ -46,7 +46,8 @@ class SubscribeController extends Controller
 
     public function invoice(Request $request)
     {
-        dd($request->all());
+        //debug
+//        dd($request->all());
         //Attaching role to user
         $user_id=session('user_id');
         $role_id=session('role_id');
@@ -58,9 +59,11 @@ class SubscribeController extends Controller
         $business->user_id = $user_id;
         $business->name = $request->business;
         $business->vat = $request->vat;
-        $business->paymentconditions = $request->paymentconditions;
+        if ($request->paymentconditions == 'on'){
+            $business->paymentconditions = true;
+        }
 
-        if ($request->address_business){
+        if ($request->address_business == 'on'){
             $business->street = $user->street;
             $business->street_number = $user->street_number;
             $business->street_bus_number = $user->street_bus_number;
@@ -77,11 +80,16 @@ class SubscribeController extends Controller
         $price = $price_info->price;
 
         //payment registratie
+        //Amount on invoice
+        $amount = $price * $request->frequency;
+        //Number of invoices on year basis
+        $frequency =   12 / $request->frequency;
+
         $payment = new Payment;
         $payment->user_id = $user_id;
         $payment->payment_option = 'invoice';
-        $payment->amount = $price;
-        $payment->frequency = $request->frequency;
+        $payment->amount = $amount;
+        $payment->frequency = $frequency;
         $payment->status = 0;
 
         $payment->save();
