@@ -80,9 +80,9 @@
                             <div class="col-md-12 form-group">
                                 <a href="{{url('/')}}" class="btn btn-default">Annuleer</a>
 
-                                <input type="submit"  class="pull-right btn btn-success">
-                                    Valideren
-                                </input>
+                                <button  class="pull-right btn btn-success">
+                                    Betalen
+                                </button>
                             </div>
                         </form>
                     </div>
