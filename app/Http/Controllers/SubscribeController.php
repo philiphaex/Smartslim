@@ -7,6 +7,7 @@ use App\Role;
 use App\Price;
 use App\Business;
 use App\Payment;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Http\Request;
 
 class SubscribeController extends Controller
@@ -14,7 +15,9 @@ class SubscribeController extends Controller
     //
     public function index()
     {
+        session()->forget('invoice');
         return view('subscription.subscribe');
+
     }
 
     public function subscribe(Request $request)
@@ -41,19 +44,25 @@ class SubscribeController extends Controller
 
             ]);
         }
-        
+
     }
 
     public function invoice(Request $request)
     {
+
         //debug
-//        dd($request->all());
         //Attaching role to user
         $user_id=session('user_id');
         $role_id=session('role_id');
         $user = User::where('id', '=', $user_id)->first();
-        $user->attachRole($role_id);
-
+        $test =session('invoice');
+//        dd($test);
+        if($test =='created'){
+            return redirect('subscribe/success');
+        }
+        if($test == null){
+            $user->attachRole($role_id);
+        }
         //Business registration
         $business = new Business;
         $business->user_id = $user_id;
@@ -99,7 +108,24 @@ class SubscribeController extends Controller
 
         $payment->save();
 
-        return view('subscription.success');
+        $role = Role::find($role_id);
+
+
+        session(['invoice' => 'created']);
+        session(['user' => $user]);
+        session(['business' => $business]);
+        session(['role' => $role]);
+        session(['payment' => $payment]);
+
+
+            return view('subscription.success', [
+                'user'=>$user,
+                'business'=>$business,
+                'role'=>$role,
+                'payment'=>$payment,
+            ]);
+
+
 
     }
     public function banktransfer(Request $request){
@@ -117,5 +143,16 @@ class SubscribeController extends Controller
         {
             echo "Payment received.";
         }
+    }
+
+    public function finish()
+    {
+
+        return view('subscription.success', [
+            'user'=>session('user'),
+            'business'=>session('business'),
+            'role'=>session('role'),
+            'payment'=>session('payment'),
+            ]);
     }
 }

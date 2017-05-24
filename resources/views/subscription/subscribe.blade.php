@@ -3,7 +3,7 @@
 @section('content')
     <div class="container" >
         <div class="row">
-            <div class="col-md-6 col-md-offset-3" id="form-subscribe">
+            <div class="col-md-6 col-md-offset-3 form-registration">
                 <div class="panel panel-default" >
                     <div class="panel-body">
                         <h4>Inschrijving</h4>

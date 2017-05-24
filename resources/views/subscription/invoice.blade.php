@@ -4,7 +4,7 @@
     {{--Facturatie--}}
     <div class="container">
         <div class="row">
-            <div class="col-md-6 col-md-offset-2" id="form-invoice">
+            <div class="col-md-6 col-md-offset-2 form-registration">
                 <div class="panel panel-default" >
                     <div class="panel-body">
                         <h4>Facturatie</h4>
@@ -88,7 +88,7 @@
                                 @endif
                             </div>
                             <div class="col-md-12 form-group">
-                                <label><input type="checkbox" name="paymentconditions" required> Ik accepteer de <a>betalingscondities</a></label>
+                                <label><input type="checkbox" name="paymentconditions" required> Ik accepteer de <a href="{{url('/')}}">betalingscondities</a></label>
                             </div>
                             <div class="col-md-12 form-group">
                                 <a href="{{url('/')}}" class="btn btn-default">Annuleer</a>
@@ -101,7 +101,7 @@
                     </div>
                 </div>
             </div>
-            <div class="col-md-3" id="form-sub_overview">
+            <div class="col-md-3 form-registration">
                 <div class="panel panel-default" >
                     <div class="panel-body">
                         <h4>Inschrijvingsinformatie</h4>

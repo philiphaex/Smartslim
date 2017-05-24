@@ -31,6 +31,7 @@ Route::post('/register', 'Auth\RegisterController@register');
 Route::get('/subscribe', 'SubscribeController@index');
 Route::post('/subscribe/payment', 'SubscribeController@subscribe');
 Route::post('/invoice', 'SubscribeController@invoice');
+Route::get('/subscribe/success', 'SubscribeController@finish');
 
 
 //User confirmation

@@ -34,11 +34,7 @@ section{
 #cookieConsent span{
     color:white;
 }
-#form-registration{
-    margin-top: 30px;
-}
-
-#form-subscribe{
+.form-registration{
     margin-top: 30px;
 }
 
