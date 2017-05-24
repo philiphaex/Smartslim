@@ -32,6 +32,10 @@ Route::get('/subscribe', 'SubscribeController@index');
 Route::post('/subscribe/payment', 'SubscribeController@subscribe');
 Route::post('/invoice', 'SubscribeController@invoice');
 Route::get('/subscribe/success', 'SubscribeController@finish');
+Route::post('/banktransfer', 'SubscribeController@banktransfer');
+Route::get('/banktransfer/success', function(){
+    return http_response_code(200);
+});
 
 
 //User confirmation

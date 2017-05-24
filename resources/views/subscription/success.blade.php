@@ -5,7 +5,7 @@
         <div class="row">
 
             <div class="col-md-6 col-md-offset-3 form-registration">
-                @if(session('invoice') == 'created')
+                @if(session('invoice') == 'created' || session('online_payment') == 'success')
                     <div class="alert alert-success">
                         <a href="#" class="close" data-dismiss="alert">&times;</a>
                         Uw inschrijving is succesvol geregistreerd. Gelieve uw e-mail te controleren voor een confirmatie e-mail.
