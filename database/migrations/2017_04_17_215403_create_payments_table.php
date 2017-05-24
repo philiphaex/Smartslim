@@ -20,7 +20,7 @@ class CreatePaymentsTable extends Migration
             $table->integer('amount');
             $table->integer('frequency');
             $table->integer('status');
-            $table->string('mollie_id')->nullable;
+            $table->string('mollie_id')->nullable();
             $table->timestamps();
 
         });
