@@ -1,0 +1,39 @@
+html {
+    font-family: 'Lato', sans-serif;
+}
+
+body {
+    font-family: 'Lato', sans-serif;
+    font-size: 16px;
+    background-color: white;
+    /*padding-top: 30px;*/
+
+}
+#nav-top{
+    background-color: #9C68E3;
+    position: fixed;
+    top: 0;
+    left: 0;
+    z-index: 9999;
+    width: 100%;
+    height: 30px;
+    margin-bottom: 30px;
+    padding-top:5px;
+
+}
+#content{
+    margin-top:30px;
+}
+
+.navbar-top{
+    color:white;
+    padding-top:5px;
+    height:22px;
+}
+#navbar-brand{
+    color:white;
+    padding-top:40px;
+}
+#nav-dashboard{
+    margin-top:30px;
+}

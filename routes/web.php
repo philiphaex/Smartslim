@@ -11,9 +11,7 @@
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
+
 
 //Auth::routes();
 //Auth routes
@@ -30,26 +28,30 @@ Route::post('/register', 'Auth\RegisterController@register');
 //Subscription
 Route::get('/subscribe', 'SubscribeController@index');
 Route::post('/subscribe/payment', 'SubscribeController@subscribe');
+
 Route::post('/invoice', 'SubscribeController@invoice');
-Route::get('/subscribe/success', 'SubscribeController@finish');
+Route::get('/invoice/success', 'SubscribeController@completeInvoice');
+Route::post('/invoice/success', 'SubscribeController@completeInvoice');
+
 Route::post('/banktransfer', 'SubscribeController@banktransfer');
-Route::get('/banktransfer/success', function(){
-    return http_response_code(200);
-});
-
-
-//User confirmation
-Route::get('/mail',[
-    'uses' => 'EmailController@send'
-]);
-
-Route::get('register/verify/{token}', 'Auth\RegisterController@verify');
-
-
-Route::get('/app', 'AppController@index');
-Route::get('/', 'IndexController@index');
-
+Route::post('/banktransfer/success','SubscribeController@webhookBanktransfer');
+Route::get('/banktransfer/success','SubscribeController@webhookBanktransfer');
+Route::get('/banktransfer/complete/{id}', 'SubscribeController@completeBanktransfer');
 
 //Email
 Route::post('/send', 'EmailController@send');
+//Mail confirmation
+Route::get('/mail',[
+    'uses' => 'EmailController@send'
+]);
+//User confirmation from mail
+Route::get('register/verify/{token}', 'Auth\RegisterController@verify');
+
+//Front
+Route::get('/', 'IndexController@index');
+
+//Logged in
+Route::get('/dashboard', 'AppController@index');
+
+
 

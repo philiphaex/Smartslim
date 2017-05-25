@@ -30,6 +30,8 @@ class EmailVerification extends Mailable
      */
     public function build()
     {
-        return $this->view('emails.verification');
+        return $this->from('info@smartslim.dev')
+                    ->view('emails.verification')
+                    ->subject('Bevestig uw e-mailadres - SmartSlim');
     }
 }

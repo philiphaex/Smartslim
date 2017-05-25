@@ -245,16 +245,16 @@ class SubscribeController extends Controller
 
     public function webhookBanktransfer()
     {
-        //Storage::put('test.txt', file_get_contents('php://input'));
 
         $mollie_id = $_POST['id'];
-        $mollie_payment_info =  Mollie::api()->payments()->get($mollie_id);
         $payment_id =  Mollie::api()->payments()->get($mollie_id)->metadata->order_id;
         $status =  Mollie::api()->payments()->get($mollie_id)->status;
 
 
 
 
+//        Storage::put('test.txt', file_get_contents('php://input'));
+//        $mollie_payment_info =  Mollie::api()->payments()->get($mollie_id);
 //        Storage::put('test.txt', serialize($mollie_payment_info));
 
         $payment = Payment::where('id','=',$payment_id)->first();

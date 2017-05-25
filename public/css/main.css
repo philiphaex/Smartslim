@@ -59,7 +59,14 @@ textarea {
 font-size:7em;
 }
 .loginHeader{
+    margin-bottom: 30px;
     text-align: center;
+
+}
+.loginWelcome{
+    text-align: center;
+    margin-bottom: 20px;
+
 }
 .loginFooter{
     padding-top:20px;
