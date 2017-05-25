@@ -9,6 +9,7 @@ use App\Business;
 use App\Payment;
 use Mollie\Laravel\Facades\Mollie;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Storage;
 use Illuminate\Http\Request;
 
 class SubscribeController extends Controller
@@ -16,7 +17,7 @@ class SubscribeController extends Controller
     //
     public function index()
     {
-        session()->forget('invoice');
+//        session()->forget('invoice');
         return view('subscription.subscribe');
 
     }
@@ -57,7 +58,7 @@ class SubscribeController extends Controller
         $user = User::where('id', '=', $user_id)->first();
         $test =session('invoice');
         if($test =='created'){
-            return redirect('subscribe/success');
+            return redirect('invoice/success');
         }
         if($test == null){
             $user->attachRole($role_id);
@@ -132,13 +133,7 @@ class SubscribeController extends Controller
         $user_id=session('user_id');
         $role_id=session('role_id');
         $user = User::where('id', '=', $user_id)->first();
-        $test =session('online_payment');
-        if($test=='success'){
-            return redirect('subscribe/success');
-        }
-        if($test == null){
-            $user->attachRole($role_id);
-        }
+        $user->attachRole($role_id);
         //Business registration
         $business = new Business;
         $business->user_id = $user_id;
@@ -175,13 +170,12 @@ class SubscribeController extends Controller
         $payment->amount = $amount;
         $payment->frequency = 1;
         $payment->status = 0;
-
         $payment->save();
+
 
         $role = Role::find($role_id);
 
 
-        session(['online_payment' => 'created']);
         session(['user' => $user]);
         session(['business' => $business]);
         session(['role' => $role]);
@@ -190,28 +184,21 @@ class SubscribeController extends Controller
        $pay_mollie = Mollie::api()->payments()->create([
             "amount"      => $amount,
             "description" => "Inschrijving SmartSlim",
-            "redirectUrl" => 'http://smartslim.dev/subscribe/success',
-            "webhookUrl" => url('banktransfer/success'),
+            "redirectUrl" =>  env('APP_URL').'/banktransfer/complete/'.$payment->id,
+           "webhookUrl" =>   env('APP_URL').'/banktransfer/success',
+           "metadata"=> array(
+               'order_id' => $payment->id),
         ]);
 
-        $pay_mollie = Mollie::api()->payments()->get($pay_mollie->id);
+        $payment->mollie_id = $pay_mollie->id;
+        $payment->save();
 
-        if ($pay_mollie->isPaid())
-        {
-            session(['online_payment' => 'success']);
-        }
-
-    /*    return view('subscription.success', [
-            'user'=>$user,
-            'business'=>$business,
-            'role'=>$role,
-            'payment'=>$payment,
-        ]);*/
+        return redirect(Mollie::api()->payments()->get($pay_mollie->id)->getPaymentUrl());
 
 
     }
 
-    public function finish()
+    public function completeInvoice()
     {
 
         return view('subscription.success', [
@@ -219,6 +206,64 @@ class SubscribeController extends Controller
             'business'=>session('business'),
             'role'=>session('role'),
             'payment'=>session('payment'),
-            ]);
+          ]);
+    }
+
+    public function completeBanktransfer($id)
+    {
+
+//        $payment_id = Mollie::api()->payments()->get()->id;
+        
+       /* $mollie_id = Mollie::api()->payments()->get($pay_mollie->id)->id;
+
+        $payment_id =  Mollie::api()->payments()->get($pay_mollie->id)->metadata;
+        $status =  Mollie::api()->payments()->get($pay_mollie->id)->status;
+
+        $payment = Payment::where('id','=',$payment_id)->first();
+        if($status == 'paid'){
+            $payment->status = $mollie_id;
+            $payment->save();
+        }*/
+
+
+        $payment = Payment::where('id','=',$id)->first();
+        $user_id = $payment->user_id;
+        $user = User::where('id','=',$user_id)->first();
+        $business = Business::where('user_id','=',$user_id)->first();
+        $query= DB::table('role_user')->select('role_id')->where('user_id','=',$user_id)->first();
+        $role_id = $query->role_id;
+        $role=Role::find($role_id);
+
+        return view('subscription.success',[
+            'user'=>$user,
+            'business'=>$business,
+            'role'=>$role,
+            'payment'=>$payment,
+        ]);
+
+    }
+
+    public function webhookBanktransfer()
+    {
+        //Storage::put('test.txt', file_get_contents('php://input'));
+
+        $mollie_id = $_POST['id'];
+        $mollie_payment_info =  Mollie::api()->payments()->get($mollie_id);
+        $payment_id =  Mollie::api()->payments()->get($mollie_id)->metadata->order_id;
+        $status =  Mollie::api()->payments()->get($mollie_id)->status;
+
+
+
+
+//        Storage::put('test.txt', serialize($mollie_payment_info));
+
+        $payment = Payment::where('id','=',$payment_id)->first();
+        if($status == 'paid' && $payment->mollie_id == $payment_id){
+            $payment->status = 1;
+            $payment->save();
+        }
+
+        return http_response_code(200);
+
     }
 }
