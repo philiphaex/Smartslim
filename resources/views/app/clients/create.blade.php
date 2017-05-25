@@ -44,6 +44,35 @@
                                     </span>
                                 @endif
                             </div>
+                            <div class="col-md-6 form-group">
+                                <label for="paymentOptions" class="control-label">Geslacht</label>
+                                <div class="row">
+                                <div class="col-md-4">
+                                    <div class="radio">
+                                        <label for="paymentOptions-0">
+                                            <input type="radio" name="checkboxes" id="sex-0" value="male">
+                                            Man
+                                        </label>
+                                    </div>
+                                </div>
+                                <div class="col-md-4">
+                                    <div class="radio">
+                                        <label for="paymentOptions-1">
+                                            <input type="radio" name="checkboxes" id="sex-1" value="female">
+                                            Vrouw
+                                        </label>
+                                    </div>
+                                </div>
+                                    <div class="col-md-4">
+                                        <div class="radio">
+                                            <label for="paymentOptions-1">
+                                                <input type="radio" name="checkboxes" id="sex-2" value="other">
+                                                Anders
+                                            </label>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
 
                             <div class="col-md-6 form-group{{ $errors->has('email') ? ' has-error' : '' }}">
                                 <label for="email" class=control-label">E-Mail</label>
