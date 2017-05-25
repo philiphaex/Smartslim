@@ -39,11 +39,11 @@ Route::get('/banktransfer/success','SubscribeController@webhookBanktransfer');
 Route::get('/banktransfer/complete/{id}', 'SubscribeController@completeBanktransfer');
 
 //Email
-Route::post('/send', 'EmailController@send');
+//Route::post('/send', 'EmailController@send');
 //Mail confirmation
-Route::get('/mail',[
+/*Route::get('/mail',[
     'uses' => 'EmailController@send'
-]);
+]);*/
 //User confirmation from mail
 Route::get('register/verify/{token}', 'Auth\RegisterController@verify');
 
@@ -55,4 +55,5 @@ Route::get('/dashboard', 'AppController@index');
 Route::get('/clients', 'AppController@index');
 
 
+Route::resource('clients', 'ClientController');
 

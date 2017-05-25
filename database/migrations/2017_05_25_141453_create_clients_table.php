@@ -22,11 +22,11 @@ class CreateClientsTable extends Migration
             $table->string('birthdate');
             $table->string('sex');
             $table->string('email')->nullable();
-            $table->string('street');
-            $table->string('street_number');
+            $table->string('street')->nullable();
+            $table->string('street_number')->nullable();
             $table->string('street_bus_number')->nullable();
-            $table->string('zipcode');
-            $table->integer('phone');
+            $table->string('zipcode')->nullable();
+            $table->integer('phone')->nullable();
             //Fysische gegevens
             $table->integer('length');
             $table->integer('weight');
