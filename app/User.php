@@ -4,6 +4,7 @@ namespace App;
 
 use App\Business;
 use App\Payment;
+use App\Client;
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Zizaco\Entrust\Traits\EntrustUserTrait;
@@ -47,5 +48,10 @@ class User extends Authenticatable
     public function payment()
     {
         return $this->hasMany(Payment::class);
+    }
+
+    public function clients()
+    {
+        return $this->belongsToMany(Client::class);
     }
 }
