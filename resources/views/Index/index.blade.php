@@ -42,13 +42,13 @@
                             <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
                                 {{ Auth::user()->firstname }} <span class="caret"></span>
                             </a>
-
                             <ul class="dropdown-menu" role="menu">
                                 <li>
 
                                 </li>
                             </ul>
                         </li>
+                        <li><a href="{{url('dashboard')}}">Dashboard</a></li>
                         <li><a href="{{ route('logout') }}"
                                onclick="event.preventDefault();
                                                      document.getElementById('logout-form').submit();">

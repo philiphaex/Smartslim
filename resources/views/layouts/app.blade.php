@@ -65,11 +65,11 @@
                 <ul class="nav navbar-nav">
                     <li><a href="{{url('/dashboard')}}">Dashboard</a></li>
                     @if(Auth::user()->hasRole('admin'))
-                    <li><a href="#">Accounts</a></li>
-                    <li><a href="#">Facturatie</a></li>
+                    <li><a href="{{url('/accounts')}}">Accounts</a></li>
+                    <li><a href="{{url('/orders')}}">Facturatie</a></li>
                     @endif
-                    <li><a href="#">Cliënten</a></li>
-                    <li><a href="#">Agenda</a></li>
+                    <li><a href="{{url('/clients')}}">Cliënten</a></li>
+                    <li><a href="{{url('/calendar')}}">Agenda</a></li>
                 </ul>
 
 

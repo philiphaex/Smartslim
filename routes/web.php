@@ -52,6 +52,7 @@ Route::get('/', 'IndexController@index');
 
 //Logged in
 Route::get('/dashboard', 'AppController@index');
+Route::get('/clients', 'AppController@index');
 
 
 
