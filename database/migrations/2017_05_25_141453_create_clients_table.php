@@ -34,6 +34,9 @@ class CreateClientsTable extends Migration
             $table->string('activity');
             $table->string('target_id');
             $table->string('info');
+            //Afspraakgegevens
+            $table->string('login')->unique();
+            $table->string('password');
 
         }); //
     }

@@ -26,7 +26,6 @@ class CreateUsersTable extends Migration
             $table->integer('phone');
             $table->boolean('confirmed')->default(0);
             $table->string('confirmation_code')->nullable();
-            $table->rememberToken();
             $table->timestamps();
         });
     }
