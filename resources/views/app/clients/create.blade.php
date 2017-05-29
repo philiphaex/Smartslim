@@ -3,6 +3,9 @@
 @section('content')
     <div class="container" >
         <div class="row">
+            @php
+            var_dump($targets[0]->name);
+            @endphp
             <div class="col-md-8 col-md-offset-2" >
                 <div class="panel panel-default" >
                     <div class="panel panel-heading">
@@ -45,28 +48,28 @@
                                 @endif
                             </div>
                             <div class="col-md-6 form-group">
-                                <label for="paymentOptions" class="control-label">Geslacht</label>
+                                <label for="sex" class="control-label">Geslacht</label>
                                 <div class="row">
                                 <div class="col-md-4">
                                     <div class="radio">
-                                        <label for="paymentOptions-0">
-                                            <input type="radio" name="checkboxes" id="sex-0" value="male">
+                                        <label for="sex-0">
+                                            <input type="radio" name="sex" id="sex-0" value="male">
                                             Man
                                         </label>
                                     </div>
                                 </div>
                                 <div class="col-md-4">
                                     <div class="radio">
-                                        <label for="paymentOptions-1">
-                                            <input type="radio" name="checkboxes" id="sex-1" value="female">
+                                        <label for="sex-1">
+                                            <input type="radio" name="sex" id="sex-1" value="female">
                                             Vrouw
                                         </label>
                                     </div>
                                 </div>
                                     <div class="col-md-4">
                                         <div class="radio">
-                                            <label for="paymentOptions-1">
-                                                <input type="radio" name="checkboxes" id="sex-2" value="other">
+                                            <label for="sex-2">
+                                                <input type="radio" name="sex" id="sex-2" value="other">
                                                 Anders
                                             </label>
                                         </div>
@@ -168,14 +171,23 @@
                                 @endif
                             </div>
                             <h4>Dieet gegevens</h4>
-                            <div class="col-md-12 form-group">
+                            <div class="col-md-6 form-group">
                                 <label for="target" class="control-label">Doel</label>
-                                <select id="target" name="target" class="form-control">
-                                    <option value="0">Normaal</option>
-                                    <option value="1">Vermageren</option>
-                                    <option value="2">Afvallen</option>
+                                <select id="target" name="target_id" class="form-control">
+                                    @foreach ($targets as $target)
+                                        <option value="{{$target->id}}">{{$target->name}}</option>
+                                    @endforeach
                                 </select>
+                            </div>
+                            <div class="col-md-6 form-group{{ $errors->has('activity') ? ' has-error' : '' }}">
+                                <label for="activity" class="col-md-3control-label">Bewegingsgraad</label>
+                                <input id="activity" type="text" class="form-control" name="activity">
 
+                                @if ($errors->has('activity'))
+                                    <span class="help-block">
+                                        <strong>{{ $errors->first('activity') }}</strong>
+                                    </span>
+                                @endif
                             </div>
                             <h4>Extra Info</h4>
                             <div class="col-md-12">

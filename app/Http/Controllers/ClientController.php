@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers;
 
+use App\TargetType;
+use App\Client;
 use Illuminate\Http\Request;
 
 class ClientController extends Controller
@@ -23,7 +25,11 @@ class ClientController extends Controller
      */
     public function create()
     {
-        return view('app.clients.create');
+        $targets = TargetType::all();
+
+        return view('app.clients.create',[
+            'targets'=>$targets,
+        ]);
     }
 
     /**
@@ -34,7 +40,28 @@ class ClientController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        dd($request);
+        $client = new Client;
+       $client->create([
+            'firstname' => $request->firstname,
+            'lastname' => $request->lastname,
+            'birthdate' => $request->birthdate,
+            'sex' => $request->sex,
+            'email' => $request->email,
+            'phone' => $request->phone,
+            'street' => $request->street,
+            'street_number' => $request->street_number,
+            'street_bus_number' => $request->street_bus_number,
+            'zipcode' => $request->zipcode,
+            'length' => $request->length,
+            'weight' => $request->weight,
+            'target_id' => $request->target_id,
+            'activity' => $request->activity,
+            'info' => $request->info,
+        ]);
+
+        $client->save();
+        return view('app.clients.index');
     }
 
     /**

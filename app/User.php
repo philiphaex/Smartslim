@@ -5,6 +5,8 @@ namespace App;
 use App\Business;
 use App\Payment;
 use App\Client;
+use App\User;
+
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Zizaco\Entrust\Traits\EntrustUserTrait;

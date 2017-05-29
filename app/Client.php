@@ -4,13 +4,14 @@ namespace App;
 
 use App\User;
 use App\Visit;
+use App\TargetType;
 use Illuminate\Database\Eloquent\Model;
 
 class Client extends Model
 {
     //
     protected $fillable = [
-        'firstname', 'lastname', 'birthdate','sex','email', 'street','street_number','street_bus_number','zipcode','phone','mobile','length','weight','physical_activity','target_id','info'
+        'firstname', 'lastname', 'birthdate','sex','email', 'street','street_number','street_bus_number','zipcode','phone','mobile','length','weight','activity','target_id','info'
     ];
 
     public function users()
@@ -21,5 +22,10 @@ class Client extends Model
     public function visits()
     {
         return $this->hasMany(Visit::class);
+    }
+
+    public function target()
+    {
+        return $this->hasOne(TargetType::class);
     }
 }

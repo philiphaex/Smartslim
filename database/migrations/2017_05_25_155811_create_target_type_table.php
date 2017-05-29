@@ -13,7 +13,7 @@ class CreateTargetTypeTable extends Migration
      */
     public function up()
     {
-        Schema::create('target_type', function (Blueprint $table) {
+        Schema::create('target_types', function (Blueprint $table) {
             $table->increments('id');
             $table->string('name')->unique();
             $table->string('description')->nullable();
@@ -28,6 +28,6 @@ class CreateTargetTypeTable extends Migration
      */
     public function down()
     {
-        Schema::drop('target_type');
+        Schema::drop('target_types');
     }
 }
