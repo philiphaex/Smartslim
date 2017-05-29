@@ -14,7 +14,7 @@
     <!-- Styles -->
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
-    <link href="{{ asset('css/center.css') }}" rel="stylesheet">
+    <link href="{{ asset('css/dashboard.css') }}" rel="stylesheet">
 
 
     <!-- Scripts -->
@@ -26,7 +26,7 @@
 </head>
 <body>
 <div id="app">
-    <nav class="navbar  navbar-fixed-top">
+    {{--<nav class="navbar  navbar-default">--}}
         <div  id="nav-top">
         <div class="container">
             <a class="navbar-top" href="{{url('/')}}" >SmartSlim</a>
@@ -44,9 +44,10 @@
             </div>
         </div>
         </div>
-    </nav>
-    </div>
-    <nav class="navbar navbar-default navbar-static-top" id="nav-dashboard">
+    {{--</nav>--}}
+</div>
+
+<nav class="navbar navbar-default" id="nav-dashboard">
         <div class="container">
             <div class="navbar-header">
 
@@ -62,7 +63,7 @@
 
             <div class="collapse navbar-collapse" id="app-navbar-collapse">
                 <!-- Left Side Of Navbar -->
-                <ul class="nav navbar-nav">
+                <ul class="nav navbar-nav" id="test">
                     <li><a href="{{url('/dashboard')}}">Dashboard</a></li>
                     @if(Auth::user()->hasRole('admin'))
                     <li><a href="{{url('/accounts')}}">Accounts</a></li>
@@ -76,7 +77,7 @@
             </div>
         </div>
     </nav>
-    <div id="content">
+<div id="content">
         @yield('content')
     </div>
 </div>

@@ -11,7 +11,7 @@
                     <div class="panel-body">
                         <form class="form" role="form" method="POST" action="{{ url('clients') }}">
                             {{ csrf_field() }}
-
+                            <h4>Basis gegevens</h4>
                             <div class="col-md-6 form-group{{ $errors->has('firstname') ? ' has-error' : '' }}">
                                 <label for="firstname" class="col-md-3control-label">Voornaam</label>
                                 <input id="firstname" type="text" class="form-control" name="firstname"  required autofocus>
@@ -146,9 +146,43 @@
                                     </span>
                                 @endif
                             </div>
+                            <h4>Fysische gegevens</h4>
+                            <div class="col-md-6 form-group{{ $errors->has('length') ? ' has-error' : '' }}">
+                                <label for="length" class="col-md-3control-label">Lengte</label>
+                                <input id="length" type="text" class="form-control" name="length"  required>
 
+                                @if ($errors->has('length'))
+                                    <span class="help-block">
+                                        <strong>{{ $errors->first('length') }}</strong>
+                                    </span>
+                                @endif
+                            </div>
+                            <div class="col-md-6 form-group{{ $errors->has('weight') ? ' has-error' : '' }}">
+                                <label for="weight" class="col-md-3control-label">Gewicht</label>
+                                <input id="weight" type="text" class="form-control" name="weight"  required>
 
+                                @if ($errors->has('weight'))
+                                    <span class="help-block">
+                                        <strong>{{ $errors->first('weight') }}</strong>
+                                    </span>
+                                @endif
+                            </div>
+                            <h4>Dieet gegevens</h4>
+                            <div class="col-md-12 form-group">
+                                <label for="target" class="control-label">Doel</label>
+                                <select id="target" name="target" class="form-control">
+                                    <option value="0">Normaal</option>
+                                    <option value="1">Vermageren</option>
+                                    <option value="2">Afvallen</option>
+                                </select>
 
+                            </div>
+                            <h4>Extra Info</h4>
+                            <div class="col-md-12">
+                                <div class="form-group">
+                                    <textarea class="form-control" rows="5" name="info"></textarea>
+                                </div>
+                            </div>
 
 
                             <div class="col-md-12 form-group">
