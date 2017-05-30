@@ -13,11 +13,11 @@ class SeedTargetTypeTable extends Migration
      */
     public function up()
     {
-        DB::table('target_type')->insert(
+        DB::table('target_types')->insert(
             array(
                 array('name' => 'normaal',
                     'description' =>'standaard begeleiding'),
-                array('name' => 'vermargeren',
+                array('name' => 'vermageren',
                     'description' =>'gewicht verliezen'),
                 array('name' => 'verdikken',
                     'description' =>'gewicht bijkomen'),

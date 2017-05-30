@@ -15,7 +15,6 @@ class CreateClientsTable extends Migration
     {
         Schema::create('clients', function (Blueprint $table) {
             $table->increments('id');
-            $table->timestamps();
             //Basisgegevens
             $table->string('firstname');
             $table->string('lastname');
@@ -37,6 +36,7 @@ class CreateClientsTable extends Migration
             //Afspraakgegevens
             $table->string('login')->unique();
             $table->string('password');
+            $table->timestamps();
 
         }); //
     }

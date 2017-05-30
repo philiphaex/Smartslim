@@ -4,6 +4,9 @@ namespace App\Http\Controllers;
 
 use App\TargetType;
 use App\Client;
+use App\User;
+use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Http\Request;
 
 class ClientController extends Controller
@@ -40,27 +43,38 @@ class ClientController extends Controller
      */
     public function store(Request $request)
     {
-        dd($request);
+//        dd($request);
         $client = new Client;
-       $client->create([
-            'firstname' => $request->firstname,
-            'lastname' => $request->lastname,
-            'birthdate' => $request->birthdate,
-            'sex' => $request->sex,
-            'email' => $request->email,
-            'phone' => $request->phone,
-            'street' => $request->street,
-            'street_number' => $request->street_number,
-            'street_bus_number' => $request->street_bus_number,
-            'zipcode' => $request->zipcode,
-            'length' => $request->length,
-            'weight' => $request->weight,
-            'target_id' => $request->target_id,
-            'activity' => $request->activity,
-            'info' => $request->info,
-        ]);
 
-        $client->save();
+        $login = str_random(5);
+        $password = bcrypt(str_random(5));
+
+        $client_id= $client->create([
+            'firstname' => $request->get('firstname'),
+            'lastname' => $request->get('lastname'),
+            'birthdate' => $request->get('birthdate'),
+            'sex' => $request->get('sex'),
+            'email' =>$request->get('email'),
+            'phone' => $request->get('phone'),
+            'street' => $request->get('street'),
+            'street_number' => $request->get('street_number'),
+            'street_bus_number' => $request->get('street_bus_number'),
+            'zipcode' => $request->get('zipcode'),
+            'length' => $request->get('length'),
+            'weight' => $request->get('weight'),
+            'target_id' => $request->get('target_id'),
+            'activity' =>$request->get('activity'),
+            'info' => $request->get('info'),
+            'login'=>$login,
+            'password'=>$password,
+        ])->id;
+
+
+        $id = Auth::id();
+        $user = User::find($id);
+        $user->clients()->attach($client_id);
+
+
         return view('app.clients.index');
     }
 

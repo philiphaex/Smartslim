@@ -5,7 +5,6 @@ namespace App;
 use App\Business;
 use App\Payment;
 use App\Client;
-use App\User;
 
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Foundation\Auth\User as Authenticatable;
@@ -23,7 +22,7 @@ class User extends Authenticatable
      * @var array
      */
     protected $fillable = [
-        'firstname', 'lastname', 'email', 'password','street','street_number','street_bus_number','zipcode','phone','mobile','confirmation_code'
+        'firstname', 'lastname', 'email', 'password','street','street_number','street_bus_number','zipcode','phone','mobile','confirmation_code',
     ];
 
     /**
@@ -54,6 +53,6 @@ class User extends Authenticatable
 
     public function clients()
     {
-        return $this->belongsToMany(Client::class);
+        return $this->belongsToMany(Client::class, 'client_user', 'user_id','client_id');
     }
 }
