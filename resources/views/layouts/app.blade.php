@@ -31,6 +31,7 @@
         <div class="container">
             <a class="navbar-top" href="{{url('/')}}" >SmartSlim</a>
             <div class="pull-right">
+                <a class="navbar-top" href="{{url('/')}}" >Help</a>
                 <a class="navbar-top" href="{{url('/')}}" >Instellingen</a>
                 <a class="navbar-top" href="{{ route('logout') }}"
                    onclick="event.preventDefault();
@@ -70,7 +71,6 @@
                     <li><a href="{{url('/orders')}}">Facturatie</a></li>
                     @endif
                     <li><a href="{{url('/clients')}}">Cliënten</a></li>
-                    <li><a href="{{url('/calendar')}}">Agenda</a></li>
                 </ul>
 
 

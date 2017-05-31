@@ -89,9 +89,12 @@ class ClientController extends Controller
     public function show($id)
     {
         $client = Client::findOrFail($id);
+        $target = TargetType::find($client->target_id)->first();
 
         return view('app.clients.profile',
-            ['client'=>$client]);
+            ['client'=>$client,
+             'target'=>$target->name,
+            ]);
     }
 
     /**
