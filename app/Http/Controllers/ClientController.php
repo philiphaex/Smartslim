@@ -75,7 +75,9 @@ class ClientController extends Controller
         $user->clients()->attach($client_id);
 
 
-        return view('app.clients.index');
+      /*  return view('app.clients.profile',
+            ['client'=>$client]);*/
+        return redirect('clients/'.$client_id);
     }
 
     /**
@@ -86,7 +88,10 @@ class ClientController extends Controller
      */
     public function show($id)
     {
-        //
+        $client = Client::findOrFail($id);
+
+        return view('app.clients.profile',
+            ['client'=>$client]);
     }
 
     /**

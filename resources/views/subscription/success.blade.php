@@ -78,7 +78,7 @@
                             <button  onClick="window.print()" class="btn btn-default">
                                 Print
                             </button>
-                            <a href="{{url('/login')}}" class="pull-right btn btn-primary">Login</a>
+                            <a href="{{route('login')}}" class="pull-right btn btn-primary">Login</a>
                         </div>
 
                         </form>
