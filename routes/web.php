@@ -55,6 +55,9 @@ Route::get('/dashboard', 'AppController@index');
 Route::get('/clients', 'AppController@index');
 //Visits
 Route::get('/clients/{client_id}/visits/create','VisitController@create');
+Route::post('/clients/{client_id}/visits/store/{visit_code}','VisitController@store');
+Route::post('clients/{client_id}/visits/items/store/{visit_code}','ItemController@store');
+Route::get('/items/list/{visit_code}','ItemController@showList');
 
 //Client CRUD
 Route::resource('clients', 'ClientController');

@@ -91,6 +91,37 @@
         crossorigin="anonymous"></script>
 <!-- Bootstrap Core JavaScript -->
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+<script type="text/javascript">
+    $(document).ready(function () {
+        console.log('ajax ready');
+        $('#add-item').on('click',function(e){
+            var $visit_code =  $('input[name=visit_code]').val();
+            e.preventDefault();
+            $.ajax({
+                url: 'items/store/'+$visit_code,
+                type: 'post',
+                data: {
+                    '_token': $('input[name=_token]').val(),
+                    'name': $('input[name=name]').val(),
+                    'title': $('input[name=title]').val(),
+                    'input': $('input[name=input]').val()
+                },
+                datatype: 'JSON',
+                success: function () {
+                    console.log("item is toegevoegd");
+                    /* var results = [];
+                     $.each(brands[0], function (key, value) {
+                     results.push(value['brand']);
+                     });
+                     console.log(results);
+                     for (var i = 0; i < results.length; i++) {
+                     $('#product-list-brand').append('<option value="' + results[i] + '">')
+                     }*/
+                }
+            })
+        });
+    });
 
+</script>
 </body>
 </html>

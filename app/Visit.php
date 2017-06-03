@@ -3,18 +3,22 @@
 namespace App;
 
 use App\Client;
-use App\Event;
+use App\Item;
 use Illuminate\Database\Eloquent\Model;
 
 class Visit extends Model
 {
+    protected $fillable = [
+        'client_id','weight','info','visit_code',
+    ];
+
     public function client()
     {
         return $this->belongsTo(Client::class);
     }
 
-    public function events()
+    public function items()
     {
-        return $this->hasMany(Event::class);
+        return $this->hasMany(Item::class);
     }
 }

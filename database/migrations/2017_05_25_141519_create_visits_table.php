@@ -14,11 +14,12 @@ class CreateVisitsTable extends Migration
     public function up()
     {
         Schema::create('visits', function (Blueprint $table) {
-        $table->increments('id');
-        $table->integer('client_id');
-        $table->integer('weight');
-        $table->string('info');
-        $table->timestamps();
+            $table->increments('id');
+            $table->integer('client_id');
+            $table->integer('weight');
+            $table->string('info');
+            $table->string('visit_code');
+            $table->timestamps();
         });
     }
 
