@@ -15,12 +15,12 @@ class SeedTargetTypeTable extends Migration
     {
         DB::table('target_types')->insert(
             array(
-                array('name' => 'normaal',
-                    'description' =>'standaard begeleiding'),
-                array('name' => 'vermageren',
-                    'description' =>'gewicht verliezen'),
-                array('name' => 'verdikken',
-                    'description' =>'gewicht bijkomen'),
+                array('name' => 'Normaal',
+                    'description' =>'Standaard begeleiding'),
+                array('name' => 'Vermageren',
+                    'description' =>'Gewicht verliezen'),
+                array('name' => 'Verdikken',
+                    'description' =>'Gewicht bijkomen'),
             ));
     }
 

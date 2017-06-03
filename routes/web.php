@@ -53,7 +53,10 @@ Route::get('/', 'IndexController@index');
 //Logged in
 Route::get('/dashboard', 'AppController@index');
 Route::get('/clients', 'AppController@index');
+//Visits
+Route::get('/clients/{client_id}/visits/create','VisitController@create');
 
-
+//Client CRUD
 Route::resource('clients', 'ClientController');
+
 

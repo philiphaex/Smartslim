@@ -8,13 +8,13 @@
                     <img class="profile-img" src="/img/logo.png"   alt="SmartSlim">
                     <h1 class="text-center login-title">Welkom bij SmartSlim</h1>
 
-                 {{--   <form class="form-signin" method="POST" action="{{ url('login') }}">
+                    <form class="form-signin" method="POST" action="{{ url('login') }}">
                         {{ csrf_field() }}
                         <input type="text" class="form-control" name="email" placeholder="Email" required autofocus>
                         <input type="password" class="form-control" name="password" placeholder="Password" required>
                         <button class="btn btn-lg btn-primary btn-block" type="submit">Login</button>
                         <a href="#" class="pull-right need-help">Help? </a><span class="clearfix"></span>
-                    </form>--}}
+                    </form>
 
                 </div>
                 <a href="{{url('/register')}}" class="text-center new-account">Nog geen account? Schrijf nu in </a>

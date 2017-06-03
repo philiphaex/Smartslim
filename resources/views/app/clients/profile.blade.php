@@ -5,10 +5,10 @@
         <div class="row">
             <div class="panel panel-default">
                 <div class="panel-heading">
-                    <div class="pull-right" style="padding-top: 18px;">
-                        <a href="#" class="btn btn-primary">Voeg bezoek toe</a>
+                    <div class="pull-right" style="padding-top: 5px;">
+                        <a href="{{url('clients/'.$client->id.'/visits/create')}}" class="btn btn-primary">Voeg bezoek toe</a>
                     </div>
-                    <h3 >Profiel - {{$client->lastname}} {{$client->firstname}}</h3>
+                    <h4 >Profiel - {{$client->lastname}} {{$client->firstname}}</h4>
                 </div>
 
            {{-- <div class="panel panel-default">
@@ -32,7 +32,7 @@
             <div class="col-md-6">
                 <div class="panel panel-default" >
                     <div class="panel-heading">
-                        <h4>Basisgegevens</h4>
+                        Basisgegevens
                     </div>
                     <div class="panel-body">
                         <div class="row">
@@ -93,7 +93,7 @@
             <div class="col-md-6">
                 <div class="panel panel-default" >
                     <div class="panel-heading">
-                        <h4>Contactgegevens</h4>
+                        Contactgegevens
                     </div>
                     <div class="panel-body">
 
@@ -134,7 +134,7 @@
             <div class="col-md-12">
                 <div class="panel panel-default" >
                     <div class="panel-heading">
-                        <h4>Extra info</h4>
+                        Extra info
                     </div>
                     <div class="panel-body">
                         <textarea class="col-md-12 form-control">{{$client->info}}</textarea>

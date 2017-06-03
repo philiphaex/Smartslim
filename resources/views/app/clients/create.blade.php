@@ -50,7 +50,7 @@
                                 <div class="col-md-4">
                                     <div class="radio">
                                         <label for="sex-0">
-                                            <input type="radio" name="sex" id="sex-0" value="male">
+                                            <input type="radio" name="sex" id="sex-0" value="Man">
                                             Man
                                         </label>
                                     </div>
@@ -58,7 +58,7 @@
                                 <div class="col-md-4">
                                     <div class="radio">
                                         <label for="sex-1">
-                                            <input type="radio" name="sex" id="sex-1" value="female">
+                                            <input type="radio" name="sex" id="sex-1" value="Vrouw">
                                             Vrouw
                                         </label>
                                     </div>
@@ -66,7 +66,7 @@
                                     <div class="col-md-4">
                                         <div class="radio">
                                             <label for="sex-2">
-                                                <input type="radio" name="sex" id="sex-2" value="other">
+                                                <input type="radio" name="sex" id="sex-2" value="Anders">
                                                 Anders
                                             </label>
                                         </div>

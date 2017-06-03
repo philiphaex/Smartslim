@@ -2,7 +2,7 @@
 
 <div class="panel panel-default">
     <div class="panel-heading">
-        Clients
+        Bezoeken
     </div>
 
     <div class="panel-body">
