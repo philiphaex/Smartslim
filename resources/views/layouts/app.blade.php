@@ -114,15 +114,17 @@
                     $.each(items, function (key, item) {
 //                            console.log(key);
 //                            console.log(item['title']);
-                        $('tbody').append('<tr><td class="table-text"><div>'+item['title']+'</div></td>' +
-                         '<td class="table-text"><div>'+item['input']+'</div></td><td><div class="btn-toolbar"><form>'+
-                         '<input name="id" value='+item['id']+' hidden>'+
-                        '{{ csrf_field() }}'+
-                        '<button class="btn btn-default edit-item"><i class="fa fa-pencil"></i></button></form>'+
-                        '<form><input name="id" value='+item['id']+' hidden>'+
-                        '{{ csrf_field() }}'+
-                        '<button class="btn btn-default delete-item"><i class="fa fa-trash"></i></button></form>'+
-                         '</div></td>')
+                        $('tbody').append('<tr id="row-item-'+item['id']+'"><td class="table-text"><div>'+item['title']+'</div></td>' +
+                                '<td class="table-text"><div>'+item['input']+'</div></td><td><div class="btn-toolbar">'+
+                                '<form role="form">'+
+                                '{{ csrf_field() }}'+
+                                '<input name="id" value='+item['id']+' hidden>'+
+                                '<button class="btn btn-default edit-item"><i class="fa fa-pencil"></i></button></form>'+
+                                '<form>'+
+                                '{{ csrf_field() }}'+
+                                '<input name="id" value='+item['id']+' hidden>'+
+                                '<button class="btn btn-default delete-item"><i class="fa fa-trash"></i></button></form>'+
+                                '</div></td>')
 
                     });
                     console.log("lijst met items is opgehaald");
@@ -130,9 +132,55 @@
                     $("input[name=title]").val('');
                     $("textarea[name=input]").val('');
 
-                /*    $('tbody').append('<tr><td class="table-text"><div>'+$("input[name=title]").val()+'</div></td>' +
-                            '<td class="table-text"><div>'+$("textarea[name=input]").val()+'</div></td>' +
-                            '<td class="table-text"><div>"buttons"</div></td></tr>')*/
+                    /*    $('tbody').append('<tr><td class="table-text"><div>'+$("input[name=title]").val()+'</div></td>' +
+                     '<td class="table-text"><div>'+$("textarea[name=input]").val()+'</div></td>' +
+                     '<td class="table-text"><div>"buttons"</div></td></tr>')*/
+                }
+            });
+
+        });
+        $('body').on('click','.edit-item' ,function (e) {
+            e.preventDefault();
+            console.log('werkt');
+            $.ajax({
+                url: 'items/edit/',
+                type: 'post',
+                data: {
+                    '_token': $('input[name=_token]').val(),
+                    'id': $('input[name=id]').val()
+                },
+                datatype: 'JSON',
+                success: function (item) {
+                    console.log(item[0]);
+                    $selector = "#row-item-"+item[0]['id'];
+                    $row = $($selector).closest("tr");
+                    console.log($selector);
+//                    console.log(e.offsetParent);
+//                 $.closest("tr").remove());
+                    $row.remove();
+                    $("input[name=title]").val(item[0]['title']);
+                    $("textarea[name=input]").val(item[0]['input']);
+
+                }
+            });
+
+        });
+        $('body').on('click','.delete-item' ,function (e) {
+            e.preventDefault();
+            console.log('werkt');
+            $.ajax({
+                url: 'items/delete/',
+                type: 'post',
+                data: {
+                    '_token': $('input[name=_token]').val(),
+                    'id': $('input[name=id]').val()
+                },
+                datatype: 'JSON',
+                success: function () {
+                    $selector = "#row-item-"+$('input[name=id]').val();
+                    $row = $($selector).closest("tr");
+                    $row.remove();
+
                 }
             });
 

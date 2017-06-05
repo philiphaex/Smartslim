@@ -56,11 +56,12 @@ Route::get('/clients', 'AppController@index');
 //Visits
 Route::get('/clients/{client_id}/visits/create','VisitController@create');
 Route::post('/clients/{client_id}/visits/store/{visit_code}','VisitController@store');
-Route::get('/items/list/{visit_code}','ItemController@showList');
-//Ajax Call visit item
-Route::post('clients/{client_id}/visits/items/store','ItemController@store');
-Route::get('clients/{client_id}/visits/items/list','ItemController@showList');
+Route::delete('/visits/delete/{visit_code}','VisitController@destroy');
 
+//Add item to visit (Ajax Call)
+Route::post('clients/{client_id}/visits/items/store','ItemController@store');
+Route::post('clients/{client_id}/visits/items/edit','ItemController@edit');
+Route::post('clients/{client_id}/visits/items/delete','ItemController@destroy');
 
 
 //Client CRUD

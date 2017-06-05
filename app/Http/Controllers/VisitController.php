@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Client;
 use App\Visit;
+use App\Item;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
 
@@ -40,4 +41,23 @@ class VisitController extends Controller
         return redirect('clients/'.$client_id);
 
     }
+
+    public function show($visit_code)
+    {
+
+    }
+
+
+    public function destroy(Request $request,$visit_code)
+    {
+        $visit= Visit::select('*')->where('visit_code','=',$visit_code);
+
+        $visit->delete();
+
+        $items = Item::select('*')->where('visit_code','=',$visit_code);
+        $items->delete();
+
+        return redirect('clients/'.$request->client_id);
+    }
+
 }

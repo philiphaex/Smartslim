@@ -31,9 +31,27 @@ class ItemController extends Controller
         }
     }
 
-    public function showList(Request $request)
+    public function edit(Request $request)
     {
+        $id = $request->id;
 
+        $data= Item::select('*')->where('id','=',$id)->get();
+        $item= Item::select('*')->where('id','=',$id);
+        $item->delete();
+
+        if ($data != null) {
+            return $data;
+        }
+    }
+
+    public function destroy(Request $request)
+    {
+        $id = $request->id;
+
+        $item= Item::select('*')->where('id','=',$id);
+        $item->delete();
+
+        
     }
 
 }

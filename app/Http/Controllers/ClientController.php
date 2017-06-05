@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\TargetType;
 use App\Client;
 use App\User;
+use App\Visit;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Http\Request;
@@ -91,9 +92,16 @@ class ClientController extends Controller
         $client = Client::findOrFail($id);
         $target = TargetType::find($client->target_id)->first();
 
+//        $visits = Visit::select('*')->where('client_id','=',$id)->get();
+        $visits = Visit::orderby('created_at','dsc')->where('client_id','=',$id)->get();
+
+
+
         return view('app.clients.profile',
             ['client'=>$client,
              'target'=>$target->name,
+             'visits'=>$visits,
+
             ]);
     }
 
