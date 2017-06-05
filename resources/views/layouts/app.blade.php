@@ -16,6 +16,7 @@
     {{--<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">--}}
     <link href="{{ asset('css/dashboard.css') }}" rel="stylesheet">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootswatch/3.3.7/paper/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+    <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
 
 
     <!-- Scripts -->
@@ -28,7 +29,7 @@
 <body>
 <div id="app">
     {{--<nav class="navbar  navbar-default">--}}
-        <div  id="nav-top">
+    <div  id="nav-top">
         <div class="container">
             <a class="navbar-top" href="{{url('/')}}" >SmartSlim</a>
             <div class="pull-right">
@@ -45,42 +46,42 @@
                 </form>
             </div>
         </div>
-        </div>
+    </div>
     {{--</nav>--}}
 </div>
 
 <nav class="navbar navbar-default" id="nav-dashboard">
-        <div class="container">
-            <div class="navbar-header">
+    <div class="container">
+        <div class="navbar-header">
 
-                <!-- Collapsed Hamburger -->
-                <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#app-navbar-collapse">
-                    <span class="sr-only">Toggle Navigation</span>
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                </button>
+            <!-- Collapsed Hamburger -->
+            <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#app-navbar-collapse">
+                <span class="sr-only">Toggle Navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
 
-            </div>
+        </div>
 
-            <div class="collapse navbar-collapse" id="app-navbar-collapse">
-                <!-- Left Side Of Navbar -->
-                <ul class="nav navbar-nav" id="test">
-                    <li><i class="fa fa-home"></i><a href="{{url('/dashboard')}}">Dashboard</a></li>
-                    @if(Auth::user()->hasRole('admin'))
+        <div class="collapse navbar-collapse" id="app-navbar-collapse">
+            <!-- Left Side Of Navbar -->
+            <ul class="nav navbar-nav" id="test">
+                <li><i class="fa fa-home"></i><a href="{{url('/dashboard')}}">Dashboard</a></li>
+                @if(Auth::user()->hasRole('admin'))
                     <li><a href="{{url('/accounts')}}">Accounts</a></li>
                     <li><a href="{{url('/orders')}}">Facturatie</a></li>
-                    @endif
-                    <li><a href="{{url('/clients')}}">Cliënten</a></li>
-                </ul>
+                @endif
+                <li><a href="{{url('/clients')}}">Cliënten</a></li>
+            </ul>
 
 
-            </div>
         </div>
-    </nav>
-<div id="content">
-        @yield('content')
     </div>
+</nav>
+<div id="content">
+    @yield('content')
+</div>
 </div>
 
 <!-- Scripts -->
@@ -94,31 +95,47 @@
 <script type="text/javascript">
     $(document).ready(function () {
         console.log('ajax ready');
-        $('#add-item').on('click',function(e){
-            var $visit_code =  $('input[name=visit_code]').val();
+        $('#add-item').on('click', function (e) {
             e.preventDefault();
             $.ajax({
-                url: 'items/store/'+$visit_code,
+                url: 'items/store/',
                 type: 'post',
                 data: {
                     '_token': $('input[name=_token]').val(),
-                    'name': $('input[name=name]').val(),
+                    'visit_code': $('input[name=visit_code]').val(),
                     'title': $('input[name=title]').val(),
-                    'input': $('input[name=input]').val()
+                    'input': $('textarea[name=input]').val()
                 },
                 datatype: 'JSON',
-                success: function () {
+                success: function (items) {
                     console.log("item is toegevoegd");
-                    /* var results = [];
-                     $.each(brands[0], function (key, value) {
-                     results.push(value['brand']);
-                     });
-                     console.log(results);
-                     for (var i = 0; i < results.length; i++) {
-                     $('#product-list-brand').append('<option value="' + results[i] + '">')
-                     }*/
+
+
+                    $.each(items, function (key, item) {
+//                            console.log(key);
+//                            console.log(item['title']);
+                        $('tbody').append('<tr><td class="table-text"><div>'+item['title']+'</div></td>' +
+                         '<td class="table-text"><div>'+item['input']+'</div></td><td><div class="btn-toolbar"><form>'+
+                         '<input name="id" value='+item['id']+' hidden>'+
+                        '{{ csrf_field() }}'+
+                        '<button class="btn btn-default edit-item"><i class="fa fa-pencil"></i></button></form>'+
+                        '<form><input name="id" value='+item['id']+' hidden>'+
+                        '{{ csrf_field() }}'+
+                        '<button class="btn btn-default delete-item"><i class="fa fa-trash"></i></button></form>'+
+                         '</div></td>')
+
+                    });
+                    console.log("lijst met items is opgehaald");
+                    console.log(items);
+                    $("input[name=title]").val('');
+                    $("textarea[name=input]").val('');
+
+                /*    $('tbody').append('<tr><td class="table-text"><div>'+$("input[name=title]").val()+'</div></td>' +
+                            '<td class="table-text"><div>'+$("textarea[name=input]").val()+'</div></td>' +
+                            '<td class="table-text"><div>"buttons"</div></td></tr>')*/
                 }
-            })
+            });
+
         });
     });
 

@@ -57,7 +57,7 @@
                             Bezoekgegevens
                         </div>
                         <div class="panel-body">
-                            <form class="form" role="form" method="POST" action="{{url('clients/'.$client->id.'/visits/store'.$visit_code)}}">
+                            <form class="form" role="form" method="POST" action="{{url('clients/'.$client->id.'/visits/store/'.$visit_code)}}">
                                 {{ csrf_field() }}
                             <div class="row">
                                 <div class="col-md-12 form-group{{ $errors->has('weight') ? ' has-error' : '' }}">

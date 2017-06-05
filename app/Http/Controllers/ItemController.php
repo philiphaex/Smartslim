@@ -11,28 +11,29 @@ class ItemController extends Controller
     //
 
 
-    public function store(Request $request, $visit_code)
+    public function store(Request $request)
     {
 
         $item = new Item;
 
-        $item->create([
-            'visit_code'=>$visit_code,
-            'title'=>$request->get('title'),
-            'input'=>$request->get('input'),
+        $item_id = $item->create([
+            'visit_code'=>$request->visit_code,
+            'title'=>$request->title,
+            'input'=>$request->input,
             'created_at'=>Carbon::now(),
             'updated_at'=>Carbon::now(),
-        ]);
+        ])->id;
 
-    }
-
-    public function showList($visit_code)
-    {
-        $data = Item::select('*')->where('visit_code','=',$visit_code)->get();
+        $data = Item::select('*')->where('id','=',$item_id)->get();
 
         if ($data != null) {
-            return response()->json([$data]);
+           return $data;
         }
+    }
+
+    public function showList(Request $request)
+    {
+
     }
 
 }

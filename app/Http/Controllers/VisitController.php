@@ -25,4 +25,19 @@ class VisitController extends Controller
             'visit_code'=>$visit_code,
         ]);
     }
+
+    public function store(Request $request, $client_id)
+    {
+        $visit = new Visit;
+
+        $visit->create([
+            'client_id'=>$client_id,
+            'weight'=>$request->weight,
+            'info'=>$request->info,
+            'visit_code'=>$request->visit_code,
+        ]);
+
+        return redirect('clients/'.$client_id);
+
+    }
 }
