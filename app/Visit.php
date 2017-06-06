@@ -9,7 +9,7 @@ use Illuminate\Database\Eloquent\Model;
 class Visit extends Model
 {
     protected $fillable = [
-        'client_id','weight','info','visit_code',
+        'client_id','weight','info','visit_code','created_at','updated_at',
     ];
 
     public function client()

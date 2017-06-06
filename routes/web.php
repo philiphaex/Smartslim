@@ -56,9 +56,13 @@ Route::get('/clients', 'AppController@index');
 //Visits
 Route::get('/clients/{client_id}/visits/create','VisitController@create');
 Route::post('/clients/{client_id}/visits/store/{visit_code}','VisitController@store');
-Route::delete('/visits/delete/{visit_code}','VisitController@destroy');
+Route::post('/visits/show/{visit_code}','VisitController@show');
 
-//Add item to visit (Ajax Call)
+//Delete visit from client profile (Ajax Call)
+//Route::delete('/visits/delete/{visit_code}','VisitController@destroy');
+Route::post('clients/visits/delete','VisitController@destroy');
+
+//Add item to visit (Ajax Calls)
 Route::post('clients/{client_id}/visits/items/store','ItemController@store');
 Route::post('clients/{client_id}/visits/items/edit','ItemController@edit');
 Route::post('clients/{client_id}/visits/items/delete','ItemController@destroy');

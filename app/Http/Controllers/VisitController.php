@@ -42,14 +42,35 @@ class VisitController extends Controller
 
     }
 
-    public function show($visit_code)
+    public function show(Request $request,$visit_code)
     {
+        $visit= Visit::select('*')->where('visit_code','=',$visit_code)->get();
+        $items = Item::select('*')->where('visit_code','=',$visit_code)->get();
 
+        $date = Carbon::parse($visit[0]->created_at)->format('d/m/Y');
+
+
+        return view('app.visits.index',[
+            'client_id' => $request->client_id,
+            'visit'=>$visit[0],
+            'items'=>$items,
+            'date'=>$date,
+        ]);
     }
 
 
-    public function destroy(Request $request,$visit_code)
+    public function destroy(Request $request)
     {
+        /*$visit= Visit::select('*')->where('visit_code','=',$visit_code);
+
+        $visit->delete();
+
+        $items = Item::select('*')->where('visit_code','=',$visit_code);
+        $items->delete();
+
+        return redirect('clients/'.$request->client_id);*/
+
+        $visit_code = $request->visit_code;
         $visit= Visit::select('*')->where('visit_code','=',$visit_code);
 
         $visit->delete();
@@ -57,7 +78,6 @@ class VisitController extends Controller
         $items = Item::select('*')->where('visit_code','=',$visit_code);
         $items->delete();
 
-        return redirect('clients/'.$request->client_id);
     }
 
 }

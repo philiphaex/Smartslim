@@ -185,6 +185,35 @@
             });
 
         });
+        $('.delete-modal').on('click' , function(e){
+            e.preventDefault();
+            var key = $(this).data('target');
+
+            console.log(key);
+            $('#'+key).modal();
+        });
+
+        $('.delete-visit').on('click',function (e) {
+            e.preventDefault();
+            console.log('werkt');
+            $.ajax({
+                url: 'visits/delete/',
+                type: 'post',
+                data: {
+                    '_token': $('input[name=_token]').val(),
+                    'visit_code': $('input[name=visit_code]').val()
+                },
+                datatype: 'JSON',
+                success: function () {
+                    $visit_code = $('input[name=visit_code]').val();
+                    $row = $("#row-visit-"+$visit_code).closest("tr");
+                    $row.remove();
+                    //Call to modal close button
+                    $('#Modal-delete-'+$visit_code+" .close").click()
+                }
+            });
+
+        });
     });
 
 </script>
