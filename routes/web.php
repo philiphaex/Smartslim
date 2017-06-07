@@ -12,7 +12,6 @@
 */
 
 
-
 //Auth::routes();
 //Auth routes
 Route::get('/login', 'Auth\LoginController@showLoginForm')->name('login');
@@ -71,4 +70,6 @@ Route::post('clients/{client_id}/visits/items/delete','ItemController@destroy');
 //Client CRUD
 Route::resource('clients', 'ClientController');
 
+//Roles - Permissions
+//Route::get('/dashboard', ['middleware' => ['role:admin'], 'uses' => 'AppController@index']);
 

@@ -7,8 +7,8 @@
                 <div class="panel panel-default" >
                     <div class="panel panel-heading">
                         <div class="pull-right" style="padding-top: 5px;">
-                            <a href="{{url('clients/'.$client->id)}}" class="btn btn-warning">Annuleren</a>
                             <a class="btn btn-default">Aanpassen</a>
+                            <a href="{{url('clients/'.$client->id)}}" class="btn btn-danger">Annuleren</a>
                         </div>
                         <h4 >Gegevens - {{$client->lastname}} {{$client->firstname}}</h4>
                     </div>
@@ -18,7 +18,7 @@
                             <h4>Basis gegevens</h4>
                             <div class="col-md-6 form-group{{ $errors->has('firstname') ? ' has-error' : '' }}">
                                 <label for="firstname" class="col-md-3control-label">Voornaam</label>
-                                <input id="firstname" type="text" class="form-control" name="firstname"  required autofocus>
+                                <input id="firstname" type="text" class="form-control" name="firstname" value="{{$client->firstname}}" disabled required autofocus>
 
                                 @if ($errors->has('firstname'))
                                     <span class="help-block">
@@ -29,7 +29,7 @@
 
                             <div class="col-md-6 form-group{{ $errors->has('lastname') ? ' has-error' : '' }}">
                                 <label for="lastname" class="col-md-3control-label">Achternaam</label>
-                                <input id="lastname" type="text" class="form-control" name="lastname"  required>
+                                <input id="lastname" type="text" class="form-control" name="lastname" value="{{$client->lastname}}" disabled required>
 
                                 @if ($errors->has('lastname'))
                                     <span class="help-block">
@@ -40,7 +40,7 @@
 
                             <div class="col-md-6 form-group{{ $errors->has('birthdate') ? ' has-error' : '' }}">
                                 <label for="birthdate" class="col-md-3control-label">Geboortedatum</label>
-                                <input id="birthdate" type="date" class="form-control" name="birthdate"  required>
+                                <input id="birthdate" type="date" class="form-control" name="birthdate" value="{{$client->birthdate}}" disabled required>
 
                                 @if ($errors->has('lastname'))
                                     <span class="help-block">
@@ -54,7 +54,11 @@
                                     <div class="col-md-4">
                                         <div class="radio">
                                             <label for="sex-0">
-                                                <input type="radio" name="sex" id="sex-0" value="Man">
+                                                @if($client->sex == 'Man')
+                                                <input type="radio" name="sex" id="sex-0" value="Man" disabled checked>
+                                                @else
+                                                <input type="radio" name="sex" id="sex-0" value="Man" disabled>
+                                                @endif
                                                 Man
                                             </label>
                                         </div>
@@ -62,7 +66,11 @@
                                     <div class="col-md-4">
                                         <div class="radio">
                                             <label for="sex-1">
-                                                <input type="radio" name="sex" id="sex-1" value="Vrouw">
+                                                @if($client->sex == 'Vrouw')
+                                                <input type="radio" name="sex" id="sex-1" value="Vrouw" checked disabled>
+                                                @else
+                                                <input type="radio" name="sex" id="sex-1" value="Vrouw" disabled>
+                                                @endif
                                                 Vrouw
                                             </label>
                                         </div>
@@ -70,7 +78,11 @@
                                     <div class="col-md-4">
                                         <div class="radio">
                                             <label for="sex-2">
-                                                <input type="radio" name="sex" id="sex-2" value="Anders">
+                                                @if($client->sex == 'Anders')
+                                                <input type="radio" name="sex" id="sex-2" value="Anders" checked disabled>
+                                                @else
+                                                <input type="radio" name="sex" id="sex-2" value="Anders" disabled>
+                                                @endif
                                                 Anders
                                             </label>
                                         </div>
@@ -81,7 +93,7 @@
                             <div class="col-md-6 form-group{{ $errors->has('email') ? ' has-error' : '' }}">
                                 <label for="email" class=control-label">E-Mail</label>
 
-                                <input id="email" type="email" class="form-control" name="email" required>
+                                <input id="email" type="email" class="form-control" name="email" value="{{$client->email}}" disabled required>
 
                                 @if ($errors->has('email'))
                                     <span class="help-block">
@@ -91,7 +103,7 @@
                             </div>
                             <div class="col-md-6 form-group{{ $errors->has('phone') ? ' has-error' : '' }}">
                                 <label for="phone" class="col-md-3control-label">Telefoon</label>
-                                <input id="phone" type="text" class="form-control" name="phone"  required>
+                                <input id="phone" type="text" class="form-control" name="phone" value="{{$client->phone}}" disabled required>
 
                                 @if ($errors->has('phone'))
                                     <span class="help-block">
@@ -102,7 +114,7 @@
 
                             <div class="col-md-6 form-group{{ $errors->has('street') ? ' has-error' : '' }}">
                                 <label for="street" class="col-md-3control-label">Straat</label>
-                                <input id="street" type="text" class="form-control" name="street"  required>
+                                <input id="street" type="text" class="form-control" name="street" value="{{$client->street}}" disabled required>
 
                                 @if ($errors->has('street'))
                                     <span class="help-block">
@@ -112,7 +124,7 @@
                             </div>
                             <div class="col-md-3 form-group{{ $errors->has('street_number') ? ' has-error' : '' }}">
                                 <label for="street_number" class="col-md-3control-label">Nummer</label>
-                                <input id="street_number" type="text" class="form-control" name="street_number"  required>
+                                <input id="street_number" type="text" class="form-control" name="street_number" disabled required>
 
                                 @if ($errors->has('street_number'))
                                     <span class="help-block">
@@ -122,7 +134,7 @@
                             </div>
                             <div class="col-md-3 form-group{{ $errors->has('street_bus_number') ? ' has-error' : '' }}">
                                 <label for="street_bus_number" class="col-md-3control-label">Bus</label>
-                                <input id="street_bus_number" type="text" class="form-control" name="street_bus_number">
+                                <input id="street_bus_number" type="text" class="form-control" name="street_bus_number" value="{{$client->street_bus_number}}" disabled>
 
                                 @if ($errors->has('street_bus_number'))
                                     <span class="help-block">
@@ -132,7 +144,7 @@
                             </div>
                             <div class="col-md-6 form-group{{ $errors->has('zipcode') ? ' has-error' : '' }}">
                                 <label for="zipcode" class="col-md-3control-label">Postcode</label>
-                                <input id="zipcode" type="text" class="form-control" name="zipcode"  required>
+                                <input id="zipcode" type="text" class="form-control" name="zipcode" value="{{$client->zipcode}}" disabled  required>
 
                                 @if ($errors->has('zipcode'))
                                     <span class="help-block">
@@ -142,7 +154,7 @@
                             </div>
                             <div class="col-md-6 form-group{{ $errors->has('city') ? ' has-error' : '' }}">
                                 <label for="city" class="col-md-3control-label">Stad</label>
-                                <input id="city" type="text" class="form-control" name="city"  required>
+                                <input id="city" type="text" class="form-control" name="city" disabled required>
 
                                 @if ($errors->has('city'))
                                     <span class="help-block">
@@ -153,7 +165,7 @@
                             <h4>Fysische gegevens</h4>
                             <div class="col-md-6 form-group{{ $errors->has('length') ? ' has-error' : '' }}">
                                 <label for="length" class="col-md-3control-label">Lengte</label>
-                                <input id="length" type="text" class="form-control" name="length"  required>
+                                <input id="length" type="text" class="form-control" name="length" value="{{$client->length}}" disabled required>
 
                                 @if ($errors->has('length'))
                                     <span class="help-block">
@@ -163,7 +175,7 @@
                             </div>
                             <div class="col-md-6 form-group{{ $errors->has('weight') ? ' has-error' : '' }}">
                                 <label for="weight" class="col-md-3control-label">Gewicht</label>
-                                <input id="weight" type="text" class="form-control" name="weight"  required>
+                                <input id="weight" type="text" class="form-control" name="weight" value="{{$client->weight}}" disabled required>
 
                                 @if ($errors->has('weight'))
                                     <span class="help-block">
@@ -174,7 +186,7 @@
                             <h4>Dieet gegevens</h4>
                             <div class="col-md-6 form-group">
                                 <label for="target" class="control-label">Doel</label>
-                                <select id="target" name="target_id" class="form-control">
+                                <select id="target" name="target_id" class="form-control" disabled>
                                     @foreach ($targets as $target)
                                         <option value="{{$target->id}}">{{$target->name}}</option>
                                     @endforeach
@@ -182,7 +194,7 @@
                             </div>
                             <div class="col-md-6 form-group{{ $errors->has('activity') ? ' has-error' : '' }}">
                                 <label for="activity" class="col-md-3control-label">Bewegingsgraad</label>
-                                <input id="activity" type="text" class="form-control" name="activity">
+                                <input id="activity" type="text" class="form-control" name="activity" value="{{$client->activity}}" disabled>
 
                                 @if ($errors->has('activity'))
                                     <span class="help-block">
@@ -193,7 +205,7 @@
                             <h4>Extra Info</h4>
                             <div class="col-md-12">
                                 <div class="form-group">
-                                    <textarea class="form-control" rows="5" name="info"></textarea>
+                                    <textarea class="form-control" rows="5" name="info" disabled>{{$client->info}}</textarea>
                                 </div>
                             </div>
 
