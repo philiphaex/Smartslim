@@ -6,6 +6,7 @@ use App\TargetType;
 use App\Client;
 use App\User;
 use App\Visit;
+use Carbon\Carbon;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Http\Request;
@@ -19,7 +20,35 @@ class ClientController extends Controller
      */
     public function index()
     {
-        return view('app.clients.index');
+        $user_id = Auth::id();
+
+
+        $query = 'select clients.id, clients.firstname, clients.lastname
+                  from clients
+                  inner join client_user on client_user.client_id = clients.id
+                  where client_user.user_id='.$user_id.
+                  ' order by clients.lastname asc';
+
+        $clients = DB::select(DB::Raw($query));
+
+        foreach ($clients as $client) {
+            $query = 'select max(visits.id), visits.created_at
+                      from visits 
+                      where visits.client_id='.$client->id.
+                      ' group by visits.id';
+
+            $visit_date = DB::select(DB::Raw($query));
+            $date = Carbon::parse( $visit_date[0]->created_at)->format('d/m/Y');
+
+
+            $client->visit=$date;
+        }
+        
+
+
+        return view('app.clients.index',[
+            'clients'=>$clients,
+        ]);
     }
 
     /**
@@ -76,8 +105,8 @@ class ClientController extends Controller
         $user->clients()->attach($client_id);
 
 
-      /*  return view('app.clients.profile',
-            ['client'=>$client]);*/
+        /*  return view('app.clients.profile',
+              ['client'=>$client]);*/
         return redirect('clients/'.$client_id);
     }
 
@@ -99,8 +128,8 @@ class ClientController extends Controller
 
         return view('app.clients.profile',
             ['client'=>$client,
-             'target'=>$target->name,
-             'visits'=>$visits,
+                'target'=>$target->name,
+                'visits'=>$visits,
 
             ]);
     }

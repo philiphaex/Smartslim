@@ -52,7 +52,7 @@ Route::get('/', 'IndexController@index');
 
 //Logged in
 Route::get('/dashboard', 'AppController@index');
-Route::get('/clients', 'AppController@index');
+Route::get('/clients', 'ClientController@index');
 //Visits
 Route::get('/clients/{client_id}/visits/create','VisitController@create');
 Route::post('/clients/{client_id}/visits/store/{visit_code}','VisitController@store');
