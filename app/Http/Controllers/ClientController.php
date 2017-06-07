@@ -22,7 +22,6 @@ class ClientController extends Controller
     {
         $user_id = Auth::id();
 
-
         $query = 'select clients.id, clients.firstname, clients.lastname
                   from clients
                   inner join client_user on client_user.client_id = clients.id
@@ -39,12 +38,8 @@ class ClientController extends Controller
 
             $visit_date = DB::select(DB::Raw($query));
             $date = Carbon::parse( $visit_date[0]->created_at)->format('d/m/Y');
-
-
             $client->visit=$date;
         }
-        
-
 
         return view('app.clients.index',[
             'clients'=>$clients,
@@ -142,7 +137,13 @@ class ClientController extends Controller
      */
     public function edit($id)
     {
-        //
+        $client = Client::findOrFail($id);
+        $targets = TargetType::all();
+
+        return view('app.clients.edit',[
+            'client'=>$client,
+            'targets'=>$targets,
+        ]);
     }
 
     /**

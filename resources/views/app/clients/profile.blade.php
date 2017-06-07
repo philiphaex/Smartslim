@@ -6,6 +6,7 @@
             <div class="panel panel-default">
                 <div class="panel-heading">
                     <div class="pull-right" style="padding-top: 5px;">
+                        <a href="{{url('clients/'.$client->id.'/edit')}}" class="btn btn-default">Gegevens updaten</a>
                         <a href="{{url('clients/'.$client->id.'/visits/create')}}" class="btn btn-primary">Voeg bezoek toe</a>
                     </div>
                     <h4 >Profiel - {{$client->lastname}} {{$client->firstname}}</h4>
@@ -120,7 +121,7 @@
                                     {{$client->street_number}}
                                     {{$client->street_bus_number}}
                                     {{$client->zipcode}}
-                                    {{--                            {{$city}}--}}
+                                    {{--{{$city}}--}}
                                 </div>
                             </div>
                         </div>
@@ -137,7 +138,7 @@
                         Extra info
                     </div>
                     <div class="panel-body">
-                        <textarea class="col-md-12 form-control">{{$client->info}}</textarea>
+                        <textarea class="col-md-12 form-control" disabled>{{$client->info}}</textarea>
 
                     </div>
 
