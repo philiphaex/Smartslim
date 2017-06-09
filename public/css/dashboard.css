@@ -26,3 +26,21 @@ body {
 textarea {
     resize: none;
 }
+.submenu-item{
+    width:120px;
+    text-align: center;
+    border-left:1px solid #D0D0D0;
+}
+.submenu-item-end{
+    width:120px;
+    text-align: center;
+    border-left:1px solid #D0D0D0;
+    border-right:1px solid #D0D0D0;
+}
+.submenu-item i, .submenu-item-end i{
+    padding-top: 10px;
+   font-size: 21px;
+}
+li.submenu-item a, li.submenu-item-end a{
+    padding-top: 4px;
+}

@@ -14,8 +14,8 @@
     <!-- Styles -->
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
     {{--<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">--}}
-    <link href="{{ asset('css/dashboard.css') }}" rel="stylesheet">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootswatch/3.3.7/paper/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+    <link href="{{ asset('css/dashboard.css') }}" rel="stylesheet">
     <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
 
 
@@ -66,14 +66,20 @@
 
         <div class="collapse navbar-collapse" id="app-navbar-collapse">
             <!-- Left Side Of Navbar -->
-            <ul class="nav navbar-nav" id="test">
-                <li><i class="fa fa-home"></i><a href="{{url('/dashboard')}}">Dashboard</a></li>
-                @if(Auth::user()->hasRole('admin'))
-                    <li><a href="{{url('/accounts')}}">Accounts</a></li>
-                    <li><a href="{{url('/orders')}}">Facturatie</a></li>
+            <ul class="nav navbar-nav">
+                <li class="submenu-item"><i class="fa fa-home"></i><a href="{{url('/dashboard')}}">Dashboard</a></li>
+                {{--Admin Menu--}}
+                @if(Auth::user()->hasRole('dietician'))
+                    <li class="submenu-item"><i class="fa fa-id-card-o"></i><a href="{{url('/accounts')}}">Accounts</a></li>
+                    <li class="submenu-item"><i class="fa fa-book"></i><a href="{{url('/orders')}}">Facturatie</a></li>
                 @endif
-                <li><a href="{{url('/clients')}}">Cliënten</a></li>
+                {{--Dietician menu--}}
+                @if(Auth::user()->hasRole('dietician'))
+                <li class="submenu-item-end"><i class="fa fa-users"></i><a href="{{url('/clients')}}">Cliënten</a></li>
+                @endif
+                {{--Client menu--}}
             </ul>
+
 
 
         </div>

@@ -18,6 +18,12 @@ class SeedRolesTable extends Migration
             array('name' => 'admin',
                   'display_name' =>'Admin',
                   'description' =>'Administrator toegang'),
+            array('name' => 'dietician',
+                'display_name' =>'Dietician',
+                'description' =>'Algemene diëtist toegang'),
+            array('name' => 'client',
+                'display_name' =>'Client',
+                'description' =>'Cliënt toegang'),
             array('name' => 'level3',
                 'display_name' =>'Professioneel',
                 'description' =>'Professioneel pakket, cliëntenlogboek, max 60 cliënten per maand' ),
@@ -27,6 +33,7 @@ class SeedRolesTable extends Migration
             array('name' => 'level1',
                 'display_name' =>'Start',
                 'description' =>'Gratis pakket, cliëntbeheer, max 10 cliënten per maand'),
+
         ));
     }
 
