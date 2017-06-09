@@ -214,6 +214,14 @@
             });
 
         });
+        $("#edit-profile").click(function(event){
+            event.preventDefault();
+            $('#edit-profile').remove();
+            $('input').prop("disabled", false); // Element(s) are now enabled.
+            $('select').prop("disabled", false); // Element(s) are now enabled.
+            $('textarea').prop("disabled", false); // Element(s) are now enabled.
+            $('#update-profile').prop("disabled", false); // Element(s) are now enabled.
+        });
     });
 
 </script>

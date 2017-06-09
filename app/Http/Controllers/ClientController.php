@@ -7,6 +7,7 @@ use App\Client;
 use App\User;
 use App\Visit;
 use Carbon\Carbon;
+use Illuminate\Support\Facades\Input;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Http\Request;
@@ -26,18 +27,24 @@ class ClientController extends Controller
                   from clients
                   inner join client_user on client_user.client_id = clients.id
                   where client_user.user_id='.$user_id.
-                  ' order by clients.lastname asc';
+            ' order by clients.lastname asc';
 
         $clients = DB::select(DB::Raw($query));
 
         foreach ($clients as $client) {
-            $query = 'select max(visits.id), visits.created_at
-                      from visits 
+            $visited = Visit::select('*')->where('client_id','=',$client->id)->get();
+            if ($visited->count() >0 ){
+                $query = 'select visits.created_at
+                      from visits
                       where visits.client_id='.$client->id.
-                      ' group by visits.id';
+                    ' order by visits.created_at desc 
+                      limit 1';
 
-            $visit_date = DB::select(DB::Raw($query));
-            $date = Carbon::parse( $visit_date[0]->created_at)->format('d/m/Y');
+                $visit_date = DB::select(DB::Raw($query));
+                $date = Carbon::parse( $visit_date[0]->created_at)->format('d/m/Y');
+            }else{
+                $date='Nog geen bezoek';
+            }
             $client->visit=$date;
         }
 
@@ -68,7 +75,6 @@ class ClientController extends Controller
      */
     public function store(Request $request)
     {
-//        dd($request);
         $client = new Client;
 
         $login = str_random(5);
@@ -138,11 +144,14 @@ class ClientController extends Controller
     public function edit($id)
     {
         $client = Client::findOrFail($id);
+
         $targets = TargetType::all();
+        $city = DB::table('zipcodes')->select('Gemeente')->where('zipcode','=',$client->zipcode)->get();
 
         return view('app.clients.edit',[
             'client'=>$client,
             'targets'=>$targets,
+            'city'=>$city[0]->Gemeente,
         ]);
     }
 
@@ -156,6 +165,11 @@ class ClientController extends Controller
     public function update(Request $request, $id)
     {
         //
+        $client = Client::findOrFail($id);
+        $client->fill(Input::all());
+        $client->save();
+
+        return redirect('clients/'.$client->id);
     }
 
     /**

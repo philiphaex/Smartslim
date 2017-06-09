@@ -7,14 +7,15 @@
                 <div class="panel panel-default" >
                     <div class="panel panel-heading">
                         <div class="pull-right" style="padding-top: 5px;">
-                            <a class="btn btn-default">Aanpassen</a>
+                            <a class="btn btn-default" id="edit-profile">Aanpassen</a>
                             <a href="{{url('clients/'.$client->id)}}" class="btn btn-danger">Annuleren</a>
                         </div>
                         <h4 >Gegevens - {{$client->lastname}} {{$client->firstname}}</h4>
                     </div>
                     <div class="panel-body">
-                        <form class="form" role="form" method="POST" action="{{ url('clients') }}">
+                        <form class="form" role="form" method="POST" action="{{ url('clients/'.$client->id) }}">
                             {{ csrf_field() }}
+                            {{method_field('PUT')}}
                             <h4>Basis gegevens</h4>
                             <div class="col-md-6 form-group{{ $errors->has('firstname') ? ' has-error' : '' }}">
                                 <label for="firstname" class="col-md-3control-label">Voornaam</label>
@@ -124,7 +125,7 @@
                             </div>
                             <div class="col-md-3 form-group{{ $errors->has('street_number') ? ' has-error' : '' }}">
                                 <label for="street_number" class="col-md-3control-label">Nummer</label>
-                                <input id="street_number" type="text" class="form-control" name="street_number" disabled required>
+                                <input id="street_number" type="text" class="form-control" name="street_number" value="{{$client->street_number}}"disabled required>
 
                                 @if ($errors->has('street_number'))
                                     <span class="help-block">
@@ -152,15 +153,11 @@
                                     </span>
                                 @endif
                             </div>
-                            <div class="col-md-6 form-group{{ $errors->has('city') ? ' has-error' : '' }}">
+                            <div class="col-md-6 form-group">
                                 <label for="city" class="col-md-3control-label">Stad</label>
-                                <input id="city" type="text" class="form-control" name="city" disabled required>
+                                <input id="city" type="text" class="form-control" value="{{$city}}" disabled required>
 
-                                @if ($errors->has('city'))
-                                    <span class="help-block">
-                                        <strong>{{ $errors->first('city') }}</strong>
-                                    </span>
-                                @endif
+
                             </div>
                             <h4>Fysische gegevens</h4>
                             <div class="col-md-6 form-group{{ $errors->has('length') ? ' has-error' : '' }}">
@@ -212,12 +209,13 @@
 
                             <div class="col-md-12 form-group">
 
-                                <button  class="pull-right btn btn-success">
+                                <button class="pull-right btn btn-success" id="update-profile" disabled>
                                     Update
                                 </button>
                             </div>
                         </form>
                     </div>
+
                 </div>
             </div>
         </div>
