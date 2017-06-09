@@ -95,6 +95,7 @@
 <script type="text/javascript">
     $(document).ready(function () {
         console.log('ajax ready');
+        //Item toevoegen in client bezoek
         $('#add-item').on('click', function (e) {
             e.preventDefault();
             $.ajax({
@@ -139,6 +140,7 @@
             });
 
         });
+        //edit item in client bezoek
         $('body').on('click','.edit-item' ,function (e) {
             e.preventDefault();
             console.log('werkt');
@@ -165,6 +167,7 @@
             });
 
         });
+        //delete item in client bezoek
         $('body').on('click','.delete-item' ,function (e) {
             e.preventDefault();
             console.log('werkt');
@@ -185,6 +188,7 @@
             });
 
         });
+        //delete modal aanroepen op delete click van item in client bezoek
         $('.delete-modal').on('click' , function(e){
             e.preventDefault();
             var key = $(this).data('target');
@@ -192,7 +196,7 @@
             console.log(key);
             $('#'+key).modal();
         });
-
+        //delete van bezoek in client profiel
         $('.delete-visit').on('click',function (e) {
             e.preventDefault();
             console.log('werkt');
@@ -214,6 +218,7 @@
             });
 
         });
+        //inputs beschikbaar maken in edit van client profiel
         $("#edit-profile").click(function(event){
             event.preventDefault();
             $('#edit-profile').remove();
@@ -222,6 +227,52 @@
             $('textarea').prop("disabled", false); // Element(s) are now enabled.
             $('#update-profile').prop("disabled", false); // Element(s) are now enabled.
         });
+        //zoeken op clienten overzicht
+        $('#search-client').on('keyup', function (e) {
+            e.preventDefault();
+            console.log(this.value.length);
+            if (this.value.length >= 1) {
+                console.log(this.value)
+                $.ajax({
+                    url: 'clients/search',
+                    type: 'post',
+                    data: {
+                        '_token': $('input[name=_token]').val(),
+                        'keyword': $('input[name=keyword]').val()
+                    },
+                    datatype: 'JSON',
+                    success: function (data) {
+                        console.log(data);
+
+                        $('tbody').html(data);
+                    }
+                });
+            }
+                if (this.value.length == 0) {
+                    $.ajax({
+                        url: 'clients',
+                        type: 'get',
+                        data: {
+                            '_token': $('input[name=_token]').val(),
+                        },
+                        datatype: 'JSON',
+                        success: function (data) {
+                            console.log(data)
+                            $('tbody').html(data);
+                        }
+                    })
+                    }
+
+            });
+
+
+
+
+
+
+
+
+
     });
 
 </script>

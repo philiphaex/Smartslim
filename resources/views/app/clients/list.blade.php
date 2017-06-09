@@ -18,7 +18,7 @@
                 </thead>
 
                 <!-- Table Body -->
-                <tbody>
+                <tbody id="client-list">
                 @foreach ($clients as $client)
                     <tr id="client-".{{$client->id}}>
 
@@ -39,8 +39,13 @@
                         </td>
                     </tr>
                 @endforeach
-                </tbody>
+                @else
+                    <div>
+                        Er werden nog geen cliënten geregistreerd.
+                    </div>
                 @endif
+                </tbody>
+
             </table>
         </div>
     </div>

@@ -14,16 +14,15 @@
             </div>
             <div class="col-md-9">
                 <div class="row">
-                    <form class="form" role="form" method="POST" action="{{ url('clients/search') }}">
+                    <form class="form" role="form" >
                         {{ csrf_field() }}
-                        <div class="col-md-9">
-                            <div class="form-group">
-                                <input id="searchname" type="text" class="form-control" name="keyword">
+                        <div class="col-md-12">
+                            <div class="form-group has-feedback">
+                                <input id="search-client" type="text" class="form-control" placeholder="Zoeken" name="keyword">
+                                <span class="form-control-feedback"> <i class="fa fa-search"></i></span>
                             </div>
                         </div>
-                        <div class="col-md-3">
-                        <button class="btn btn-default btn-block">Zoeken</button>
-                            </div>
+
                     </form>
                 </div>
             </div>

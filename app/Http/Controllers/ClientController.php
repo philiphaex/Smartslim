@@ -19,7 +19,7 @@ class ClientController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
         $user_id = Auth::id();
 
@@ -27,30 +27,48 @@ class ClientController extends Controller
                   from clients
                   inner join client_user on client_user.client_id = clients.id
                   where client_user.user_id='.$user_id.
-            ' order by clients.lastname asc';
+                 ' order by clients.lastname asc, clients.firstname ASC';
 
         $clients = DB::select(DB::Raw($query));
 
         foreach ($clients as $client) {
-            $visited = Visit::select('*')->where('client_id','=',$client->id)->get();
-            if ($visited->count() >0 ){
-                $query = 'select visits.created_at
-                      from visits
-                      where visits.client_id='.$client->id.
-                    ' order by visits.created_at desc 
-                      limit 1';
-
-                $visit_date = DB::select(DB::Raw($query));
-                $date = Carbon::parse( $visit_date[0]->created_at)->format('d/m/Y');
-            }else{
-                $date='Nog geen bezoek';
-            }
-            $client->visit=$date;
+            $client->visit=$this->getLastVisit($client);
         }
 
-        return view('app.clients.index',[
-            'clients'=>$clients,
-        ]);
+        if ($request->ajax()) {
+
+            $output = "";
+
+            if ($clients) {
+                foreach ($clients as $client) {
+                    $output .= '<tr id="client-' . $client->id . '">' .
+                        '<td class="table-text">' .
+                        '<div>' . $client->firstname . '</div>' .
+                        '</td>' .
+                        '<td class="table-text">' .
+                        '<div>' . $client->lastname . '</div>' .
+                        '</td>' .
+                        '<td class="table-text">' .
+                        '<div>' . $this->getLastVisit($client) . '</div>' .
+                        '</td>' .
+                        '<td class="table-text">' .
+                        '<a href="clients/' . $client->id . '" class="btn btn-success"> <i class="fa fa-check-circle-o"></i></a>' .
+                        '</td>' .
+                        '</tr>';
+
+
+                }
+                return response($output);
+            }else{
+                return '<div>Er werden nog geen cliënten geregistreerd.</div';
+            }
+        }else{
+            return view('app.clients.index',[
+                'clients'=>$clients,
+            ]);
+        }
+
+
     }
 
     /**
@@ -181,5 +199,76 @@ class ClientController extends Controller
     public function destroy($id)
     {
         //
+    }
+
+    public function search(Request $request)
+    {
+        if ($request->ajax()){
+            $output = "";
+         $keyword = $request->get('keyword');
+    /*     $clients = Client::where('lastname','LIKE','%'.$keyword.'%')
+             ->orWhere('firstname','LIKE','%'.$keyword.'%')
+             ->orderby('lastname','asc')
+             ->orderby('firstname','asc')
+             ->get();*/
+
+            $clients = Client::where(DB::raw('CONCAT_WS(" ", lastname, firstname)'),'like','%'.$keyword.'%')
+                ->orderby('lastname','asc')
+                ->orderby('firstname','asc')
+                ->get();
+
+
+
+            if (count($clients)>0)
+            {
+                foreach ($clients as $client){
+
+
+
+                    $output .= '<tr id="client-'.$client->id.'">'.
+                    '<td class="table-text">'.
+                    '<div>'.$client->firstname.'</div>'.
+                    '</td>'.
+                    '<td class="table-text">'.
+                    '<div>'.$client->lastname.'</div>'.
+                    '</td>'.
+                    '<td class="table-text">'.
+                    '<div>'.$this->getLastVisit($client).'</div>'.
+                    '</td>'.
+                    '<td class="table-text">'.
+                    '<a href="clients/'.$client->id .'" class="btn btn-success"> <i class="fa fa-check-circle-o"></i></a>'.
+                     '</td>'.
+                    '</tr>';
+
+
+                }
+                return response($output);
+            }else{
+                $output = '<div>Er werd geen overeenkomstige cliënt gevonden</div>';
+                return response($output);
+
+            }
+
+
+        }
+    }
+
+    public function getLastVisit($client)
+    {
+        $visited = Visit::select('*')->where('client_id','=',$client->id)->get();
+        if ($visited->count() >0 ){
+            $query = 'select visits.created_at
+                      from visits
+                      where visits.client_id='.$client->id.
+                ' order by visits.created_at desc 
+                      limit 1';
+
+            $visit_date = DB::select(DB::Raw($query));
+            $date = Carbon::parse( $visit_date[0]->created_at)->format('d/m/Y');
+        }else{
+            $date='Nog geen bezoek';
+        }
+
+        return $client->visit=$date;
     }
 }
