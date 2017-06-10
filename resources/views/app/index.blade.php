@@ -17,7 +17,7 @@
                 <div class="row">
                     <div class="col-md-12">
                         <div class="progress">
-                            <div class="progress-bar" style="width: {{$amount}}%">
+                            <div class="progress-bar" style="width: {{$percent}}%">
                                 <span class="sr-only">60% Complete</span>
                             </div>
                         </div>
