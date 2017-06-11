@@ -21,6 +21,8 @@ class SeedPaymentStatusTable extends Migration
                     'description' =>'betaling werd ontvangen'),
                 array('name' => 'error',
                     'description' =>'betalingstatus wordt onderzocht'),
+                array('name' => 'stop',
+                    'description' =>'account is stopgezet'),
             ));
     }
 

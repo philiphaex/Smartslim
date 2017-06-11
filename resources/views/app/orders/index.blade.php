@@ -27,7 +27,7 @@
                 <th>Voornaam</th>
                 <th>Achternaam</th>
                 <th>Bedrijf</th>
-                <th>Accountstatus</th>
+                <th>Betalingsmethode</th>
 
                 <th>&nbsp;</th>
                 </thead>
@@ -53,7 +53,7 @@
                             <div>{{  $user['business'] }}</div>
                         </td>
                         <td class="table-text">
-                            <div>{{  $user['confirmation'] }}</div>
+                            <div>{{  $user['paymentType'] }}</div>
                         </td>
 
 
