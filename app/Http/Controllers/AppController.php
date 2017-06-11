@@ -40,19 +40,28 @@ class AppController extends Controller
 		$query = 'select clients.id, clients.firstname, clients.lastname,clients.created_at
                   from clients
                   inner join client_user on client_user.client_id = clients.id
-                  where client_user.user_id='.$user_id. ' and clients.created_at >="'. $prev_date.'" and clients.created_at < "'.$next_date.'"';
+                  where client_user.user_id='.$user_id. ' and clients.created_at >="'. $prev_date.'" and clients.created_at < "'.$next_date.'"'.
+				  'order by clients.created_at desc';
 
 		$clients = DB::select(DB::Raw($query));
 
 
 		$amount = count($clients);
-		$percent = ($amount/10)*100;
+		$query= 'SELECT permissions.display_name
+				 FROM homestead.permissions
+				 inner join permission_role on permission_role.permission_id = permissions.id
+				 inner join role_user on role_user.role_id = permission_role.role_id
+				 where role_user.user_id='.$user_id;
+		$limit =DB::select(DB::Raw($query));
+		$percent = ($amount/ $limit[0]->display_name)*100;
 
-		return view('app.index',[
+		return view('app.dashboard.index',[
+			'clients' => $clients,
 			'amount' =>$amount,
-			'percent'=>$percent
+			'percent'=>$percent,
+			'limit'=> $limit[0]->display_name,
 		]);
-
+		
 	}
 
 	public function index_admin()

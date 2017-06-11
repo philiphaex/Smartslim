@@ -29,7 +29,6 @@
         </div>
 
 
-{{--        @include('app.clients.list', ['clients' => $clients])--}}
         @include('app.clients.list')
 
     </div>
