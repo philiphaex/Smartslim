@@ -62,6 +62,8 @@ class SubscribeController extends Controller
         }
         if($test == null){
             $user->attachRole($role_id);
+            //'dietician' role toevoegen
+            $user->attachRole(5);
         }
         //Business registration
         $business = new Business;
@@ -104,7 +106,7 @@ class SubscribeController extends Controller
         $payment->payment_option = 'invoice';
         $payment->amount = $amount;
         $payment->frequency = $frequency;
-        $payment->status = 0;
+        $payment->status = 1;
 
         $payment->save();
 

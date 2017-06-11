@@ -71,6 +71,13 @@ Route::post('clients/{client_id}/visits/items/delete','ItemController@destroy');
 Route::resource('clients', 'ClientController');
 Route::post('clients/search','ClientController@search');
 
+//Accounts
+route::resource('accounts','UserController');
+
+//Orders
+route::get('orders','OrderController@index');
+
+
 //Roles - Permissions
 Route::get('/dashboard', ['middleware' => ['role:admin'], 'uses' => 'AppController@index_admin']);
 Route::get('/dashboard', ['middleware' => ['role:dietician'], 'uses' => 'AppController@index_dietician']);
