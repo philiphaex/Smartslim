@@ -75,7 +75,7 @@
                 @endif
                 {{--Dietician menu--}}
                 @if(Auth::user()->hasRole('dietician'))
-                <li class="submenu-item-end"><i class="fa fa-users"></i><a href="{{url('/clients')}}">Cliënten</a></li>
+                    <li class="submenu-item-end"><i class="fa fa-users"></i><a href="{{url('/clients')}}">Cliënten</a></li>
                 @endif
                 {{--Client menu--}}
             </ul>
@@ -219,7 +219,8 @@
                     $row = $("#row-visit-"+$visit_code).closest("tr");
                     $row.remove();
                     //Call to modal close button
-                    $('#Modal-delete-'+$visit_code+" .close").click()
+                    $('#Modal-delete-'+$visit_code).modal('toggle');
+                    $('.modal-backdrop').remove();
                 }
             });
 
@@ -254,23 +255,56 @@
                     }
                 });
             }
-                if (this.value.length == 0) {
-                    $.ajax({
-                        url: 'clients',
-                        type: 'get',
-                        data: {
-                            '_token': $('input[name=_token]').val(),
-                        },
-                        datatype: 'JSON',
-                        success: function (data) {
-                            console.log(data)
-                            $('tbody').html(data);
-                        }
-                    })
+            if (this.value.length == 0) {
+                $.ajax({
+                    url: 'clients',
+                    type: 'get',
+                    data: {
+                        '_token': $('input[name=_token]').val(),
+                    },
+                    datatype: 'JSON',
+                    success: function (data) {
+                        console.log(data)
+                        $('tbody').html(data);
                     }
+                })
+            }
 
+        });
+        //Betaling bevestigsmodal aanroepen in facturatie
+        $('.confirm-modal').on('click' , function(e){
+            e.preventDefault();
+            var key = $(this).data('target');
+
+            console.log(key);
+            $('#'+key).modal();
+
+        });
+        //delete van bezoek in client profiel
+        $('.confirm-payment').on('click',function (e) {
+            e.preventDefault();
+            console.log($('input[name=payment_id]').val());
+            $.ajax({
+                url: 'orders/confirm',
+                type: 'post',
+                data: {
+                    '_token': $('input[name=_token]').val(),
+                    'payment_id': $('input[name=payment_id]').val()
+                },
+                datatype: 'JSON',
+                success: function (data) {
+                    console.log(data);
+                    $payment_id = $('input[name=payment_id]').val();
+                    $row = $("#payment-"+$payment_id).closest("tr");
+                    $row.remove();
+                    //Call to modal close button
+                    $('#Modal-confirm-'+$payment_id).modal('toggle');
+                    $('.modal-backdrop').remove();
+
+                }
             });
 
+        });
 
 
 

@@ -76,7 +76,7 @@ route::resource('accounts','UserController');
 
 //Orders
 route::get('orders','OrderController@index');
-
+route::post('orders/confirm','OrderController@confirm');
 
 //Roles - Permissions
 Route::get('/dashboard', ['middleware' => ['role:admin'], 'uses' => 'AppController@index_admin']);

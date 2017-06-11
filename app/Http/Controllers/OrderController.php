@@ -39,13 +39,23 @@ where roles.name = "dietician"';
             $data[$i]['business'] = $business[0]->name;
             $data[$i]['paymentType'] = $payment[0]->payment_option;
             $data[$i]['dateOfPayment'] = $dateOfPayment;
-            $data[$i]['payment'] = $payment[0]->status;
-            $data[$i]['dueDate'] = Carbon::parse($dueDate)->format('d/m/Y');;
+            $data[$i]['paymentStatus'] = $payment[0]->status;
+            $data[$i]['dueDate'] = Carbon::parse($dueDate)->format('d/m/Y');
+            $data[$i]['payment_id'] = $payment[0]->id;
             $i++;
         }
-//        dd($data);
         return view('app.orders.index',[
             'users'=>$data,
         ]);
+    }
+
+    public function confirm(Request $request)
+    {
+        $payment_id = $request->payment_id;
+        $query = Payment::where('id','=',$payment_id)->get();
+        $payment = $query[0];
+        $payment_status = DB::table('payment_status')->select('*')->where('name','=','completed')->get();
+        $payment->status = $payment_status[0]->id;
+        $payment->save();
     }
 }

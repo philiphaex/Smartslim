@@ -99,7 +99,6 @@
 
 
                     </tr>
-                    {{--delete modal--}}
 
                 @endforeach
                 </tbody>
