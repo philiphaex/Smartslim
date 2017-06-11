@@ -13,13 +13,18 @@ class OrderController extends Controller
     //
     public function index()
     {
+        //Alle diëtisten worden opgehaald
+        //Voor elke diëtist wordt de laatste betaling opgehaald
+        //Deze info wordt doorgegeven aan de view
 
         $query = 'SELECT * FROM users
-inner join role_user on role_user.user_id = users.id
-inner join roles on roles.id = role_user.role_id
-where roles.name = "dietician"';
+        inner join role_user on role_user.user_id = users.id
+        inner join roles on roles.id = role_user.role_id
+        where roles.name = "dietician"';
 
         $dieticians = DB::select(DB::Raw($query));
+
+
 
         $i = 0;
         $data = [];
@@ -51,6 +56,9 @@ where roles.name = "dietician"';
 
     public function confirm(Request $request)
     {
+        //Ajax order confirmatie
+        //Order krijgt status completed
+
         $payment_id = $request->payment_id;
         $query = Payment::where('id','=',$payment_id)->get();
         $payment = $query[0];
