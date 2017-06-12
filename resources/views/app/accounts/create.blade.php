@@ -132,7 +132,15 @@
                                             Facturatie
                                     </div>
                                 </div>
-
+                            <div class="col-md-12 form-group">
+                                <label for="frequency" class="control-label">Facturatie periode</label>
+                                <select id="frequency" name="frequency" class="form-control">
+                                    <option value="0">Gratis</option>
+                                    <option value="1">Maandelijks</option>
+                                    <option value="3">Kwartaal</option>
+                                    <option value="12">Jaarbasis</option>
+                                </select>
+                            </div>
                             <div class="col-md-12 form-group">
                                 <label for="business" class=control-label">Bedrijfsnaam</label>
                                 <input id="business" type="text" class="form-control" name="business" required>
@@ -144,29 +152,29 @@
                             <div class="col-md-12 form-group">
                                 <label><input type="checkbox" name="address_business"> De adresgegevens van de geregistreerde gebruiker komen overeen met de locatie van het bedrijf</label>
                             </div>
-                            <div class="col-md-6 form-group{{ $errors->has('street') ? ' has-error' : '' }}">
-                                <label for="street" class="col-md-3control-label">Straat</label>
-                                <input id="street" type="text" class="form-control" name="street">
+                            <div class="col-md-6 form-group{{ $errors->has('b_street') ? ' has-error' : '' }}">
+                                <label for="b_street" class="col-md-3 control-label">Straat</label>
+                                <input id="b_street" type="text" class="form-control" name="b_street">
 
                                 @if ($errors->has('street'))
                                     <span class="help-block">
-                                        <strong>{{ $errors->first('street') }}</strong>
+                                        <strong>{{ $errors->first('b_street') }}</strong>
                                     </span>
                                 @endif
                             </div>
-                            <div class="col-md-3 form-group{{ $errors->has('street_number') ? ' has-error' : '' }}">
-                                <label for="street_number" class="col-md-3control-label">Nummer</label>
-                                <input id="street_number" type="text" class="form-control" name="street_number">
+                            <div class="col-md-3 form-group{{ $errors->has('b_street_number') ? ' has-error' : '' }}">
+                                <label for="b_street_number" class="col-md-3control-label">Nummer</label>
+                                <input id="b_street_number" type="text" class="form-control" name="b_street_number">
 
-                                @if ($errors->has('street_number'))
+                                @if ($errors->has('b_street_number'))
                                     <span class="help-block">
-                                        <strong>{{ $errors->first('street_number') }}</strong>
+                                        <strong>{{ $errors->first('b_street_number') }}</strong>
                                     </span>
                                 @endif
                             </div>
-                            <div class="col-md-3 form-group{{ $errors->has('street_bus_number') ? ' has-error' : '' }}">
-                                <label for="street_bus_number" class="col-md-3control-label">Bus</label>
-                                <input id="street_bus_number" type="text" class="form-control" name="street_bus_number">
+                            <div class="col-md-3 form-group{{ $errors->has('b_street_bus_number') ? ' has-error' : '' }}">
+                                <label for="b_street_bus_number" class="col-md-3control-label">Bus</label>
+                                <input id="b_street_bus_number" type="text" class="form-control" name="b_street_bus_number">
 
                                 @if ($errors->has('street_bus_number'))
                                     <span class="help-block">
@@ -174,23 +182,23 @@
                                     </span>
                                 @endif
                             </div>
-                            <div class="col-md-6 form-group{{ $errors->has('zipcode') ? ' has-error' : '' }}">
-                                <label for="zipcode" class="col-md-3control-label">Postcode</label>
-                                <input id="zipcode" type="text" class="form-control" name="zipcode">
+                            <div class="col-md-6 form-group{{ $errors->has('b_zipcode') ? ' has-error' : '' }}">
+                                <label for="b_zipcode" class="col-md-3control-label">Postcode</label>
+                                <input id="b_zipcode" type="text" class="form-control" name="b_zipcode">
 
-                                @if ($errors->has('zipcode'))
+                                @if ($errors->has('b_zipcode'))
                                     <span class="help-block">
-                                        <strong>{{ $errors->first('zipcode') }}</strong>
+                                        <strong>{{ $errors->first('b_zipcode') }}</strong>
                                     </span>
                                 @endif
                             </div>
-                            <div class="col-md-6 form-group{{ $errors->has('city') ? ' has-error' : '' }}">
-                                <label for="city" class="col-md-3control-label">Stad</label>
-                                <input id="city" type="text" class="form-control" name="city">
+                            <div class="col-md-6 form-group{{ $errors->has('b_city') ? ' has-error' : '' }}">
+                                <label for="b_city" class="col-md-3 control-label">Stad</label>
+                                <input id="b_city" type="text" class="form-control" name="b_city">
 
-                                @if ($errors->has('city'))
+                                @if ($errors->has('b_city'))
                                     <span class="help-block">
-                                        <strong>{{ $errors->first('city') }}</strong>
+                                        <strong>{{ $errors->first('b_city') }}</strong>
                                     </span>
                                 @endif
                             </div>
