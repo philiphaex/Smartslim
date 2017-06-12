@@ -12,21 +12,7 @@
                     <h4 >Profiel - {{$client->lastname}} {{$client->firstname}}</h4>
                 </div>
 
-           {{-- <div class="panel panel-default">
-                <div class="panel-heading clearfix" >
-                    <span class="pull-right">
-                        <!-- Tabs -->
 
-                          <button class="btn btn-default">Toon gegevens</button>
-
-                    </span>
-
-
-                    <h3>Profiel - {{$client->lastname}} {{$client->firstname}}</h3>
-                    --}}{{--  <div class="pull-right ">
-                      </div>--}}{{--
-                </div>
-            </div>--}}
         </div>
         <div class="row" id="profile-data">
 

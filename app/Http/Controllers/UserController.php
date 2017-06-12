@@ -53,7 +53,7 @@ class UserController extends Controller
             $data[$i]['id'] =  $user_id;
             $data[$i]['date'] =  $dateOfRegistration;
             $data[$i]['firstname'] =  $dietician->firstname;
-            $data[$i]['lastname'] =  $dietician->firstname;
+            $data[$i]['lastname'] =  $dietician->lastname;
             $data[$i]['business'] =  $business[0]->name;
             $data[$i]['role'] =  $role[0]->display_name;
             $data[$i]['clients'] =  count($clients);
@@ -170,7 +170,37 @@ class UserController extends Controller
      */
     public function show($id)
     {
-        //
+        $user = User::find($id);
+        $business = Business::where('user_id','=',$user->id)->get();
+        $query = 'select clients.id, clients.firstname, clients.lastname
+                      from clients
+                      inner join client_user on client_user.client_id = clients.id
+                       where client_user.user_id='.$user->id;
+
+        $clients = DB::select(DB::Raw($query));
+        $payments = Payment::where('user_id','=',$user->id)->get();
+
+        $zipcode_user =$user->zipcode;
+        $zipcode_business = $business[0]->zipcode;
+
+        $city_user = DB::table('zipcodes')->select('Gemeente')->where('zipcode','=',$zipcode_user)->get();
+        $city_business = DB::table('zipcodes')->select('Gemeente')->where('zipcode','=',$zipcode_business)->get();
+
+        $query = 'SELECT * FROM homestead.roles
+                      inner join role_user on role_user.role_id = roles.id
+                      where role_user.user_id ='.$user->id;
+
+        $role =DB::select(DB::Raw($query));
+
+        return view('app.accounts.profile',[
+            'user'=>$user,
+            'business'=>$business[0],
+            'clients'=>$clients,
+            'payments'=>$payments,
+            'city_user'=>$city_user[0]->Gemeente,
+            'city_business'=>$city_business[0]->Gemeente,
+            'role'=>$role[0]->display_name
+        ]);
     }
 
     /**
