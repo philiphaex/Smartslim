@@ -87,8 +87,8 @@ class SubscribeController extends Controller
         }
         $business->save();
 
-        $price_info = Price::where('role_id','=',$role_id)->first();
-        $price = $price_info->price;
+        $price_info = Price::where('role_id','=',$role_id)->get();
+        $price = $price_info[0]->price;
 
         //payment registratie
         //Amount on invoice

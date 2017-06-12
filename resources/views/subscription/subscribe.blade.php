@@ -41,6 +41,18 @@
                                     </div>
                                 </div>
                             </div>
+
+                            <div class="col-md-12 form-group">
+                                <label for="frequency" class="control-label">Facturatie periode</label>
+                                <select id="frequency" name="frequency" class="form-control">
+                                    <option value="0">Gratis</option>
+                                    <option value="1">Maandelijks</option>
+                                    <option value="3">Kwartaal</option>
+                                    <option value="12">Jaarbasis</option>
+                                </select>
+                            </div>
+
+
                             <div class="col-md-12 form-group">
                                 <a href="{{url('/')}}" class="btn btn-default">Annuleer</a>
 

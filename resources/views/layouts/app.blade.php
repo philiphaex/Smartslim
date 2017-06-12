@@ -280,7 +280,7 @@
             $('#'+key).modal();
 
         });
-        //delete van bezoek in client profiel
+        //Payment confirmeren van user
         $('.confirm-payment').on('click',function (e) {
             e.preventDefault();
             console.log($('input[name=payment_id]').val());
@@ -306,6 +306,40 @@
 
         });
 
+        //Account bevestigsmodal aanroepen in accounts
+        $('.account-modal').on('click' , function(e){
+            e.preventDefault();
+            var key = $(this).data('target');
+
+            console.log(key);
+            $('#'+key).modal();
+
+        });
+        //Account confirmeren van user
+        $('.confirm-account').on('click',function (e) {
+            e.preventDefault();
+            console.log($('input[name=user_id]').val());
+            $.ajax({
+                url: 'accounts/confirm',
+                type: 'post',
+                data: {
+                    '_token': $('input[name=_token]').val(),
+                    'user_id': $('input[name=user_id]').val()
+                },
+                datatype: 'JSON',
+                success: function (data) {
+                    console.log(data);
+                    $user_id = $('input[name=user_id]').val();
+                    $row = $("#account-"+$user_id).closest("tr");
+                    $row.remove();
+                    //Call to modal close button
+                    $('#Modal-confirm-'+$user_id).modal('toggle');
+                    $('.modal-backdrop').remove();
+
+                }
+            });
+
+        });
 
 
 
