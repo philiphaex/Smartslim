@@ -2,23 +2,29 @@
 
 @section('content')
     <div class="container">
-        @if(Session::has('success'))
-            <div class="alert alert-success">
-                <h2>{{ Session::get('success') }}</h2>
-            </div>
-        @endif
-            @if(Session::has('unconfirmed'))
-                <div class="alert alert-warning">
-                    <h2>{{ Session::get('unconfirmed') }}</h2>
-                </div>
-            @endif
-            @if(Session::has('danger'))
-                <div class="alert alert-danger">
-                    <h2>{{ Session::get('danger') }}</h2>
-                </div>
-            @endif
+
+
         <div class="row">
             <div class="col-sm-6 col-md-4 col-md-offset-4">
+                @if(Session::has('unconfirmed'))
+                    <div class="alert alert-warning">
+
+
+                        <h5>{{ Session::get('unconfirmed') }}
+
+                        </h5>
+
+                    </div>
+                @endif
+                @if(Session::has('danger'))
+                    <div class="alert alert-danger">
+                        <h5>{{ Session::get('danger') }}
+
+                        </h5>
+
+
+                    </div>
+                @endif
                 <div class="account-wall">
                     <img class="profile-img" src="/img/logo.png"   alt="SmartSlim">
                     <h1 class="text-center login-title">Welkom bij SmartSlim</h1>
