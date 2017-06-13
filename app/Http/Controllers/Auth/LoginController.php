@@ -1,7 +1,9 @@
 <?php
 
 namespace App\Http\Controllers\Auth;
-
+use Illuminate\Support\Facades\Session;
+use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Hash;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Illuminate\Foundation\Auth\AuthenticatesUsers;
@@ -39,10 +41,36 @@ class LoginController extends Controller
     }
     public function credentials(Request $request)
     {
+
         return [
             'email' => $request->email,
             'password' => $request->password,
             'confirmed' => 1,
         ];
     }
+
+    public function login(Request $request)
+    {
+        $user = DB::table('users')->select('*')->where('email','=',$request->email)->get();
+        if (!isset($user[0])){
+            Session::flash('danger','Gebruikersnaam of wachtwoord is incorrect.');
+            return back();
+
+        }else{
+            $password = Hash::check($request->password, $user[0]->password);
+            if(!$password){
+                Session::flash('danger','Gebruikersnaam of wachtwoord is incorrect.');
+                return back();
+            }
+        }
+            if( ! $user[0]->confirmed)
+            {
+                Session::flash('unconfirmed','Dit e-mailadres werd nog niet geconfirmeerd. Gelieve uw e-mail na te kijken.');
+                return back();
+            }
+
+        Session::flash('success','U werd succesvol ingelogd');
+        return redirect('dashboard');
+    }
+
 }

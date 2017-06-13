@@ -136,6 +136,8 @@ class SubscribeController extends Controller
         $role_id=session('role_id');
         $user = User::where('id', '=', $user_id)->first();
         $user->attachRole($role_id);
+        $user->attachRole(5);
+
         //Business registration
         $business = new Business;
         $business->user_id = $user_id;
@@ -186,8 +188,8 @@ class SubscribeController extends Controller
        $pay_mollie = Mollie::api()->payments()->create([
             "amount"      => $amount,
             "description" => "Inschrijving SmartSlim",
-            "redirectUrl" =>  env('APP_URL').'/banktransfer/complete/'.$payment->id,
-           "webhookUrl" =>   env('APP_URL').'/banktransfer/success',
+            "redirectUrl" =>  'http://6a9e08d6.ngrok.io'.'/banktransfer/complete/'.$payment->id,
+           "webhookUrl" =>   'http://6a9e08d6.ngrok.io'.'/banktransfer/success',
            "metadata"=> array(
                'order_id' => $payment->id),
         ]);

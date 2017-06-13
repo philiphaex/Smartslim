@@ -31,7 +31,7 @@ class EmailVerification extends Mailable
     public function build()
     {
         return $this->from('info@smartslim.dev')
-                    ->view('emails.verification')
+                    ->view('emails.verification',['confirmation_code'=>$this->user->confirmation_code,])
                     ->subject('Bevestig uw e-mailadres - SmartSlim');
     }
 }
