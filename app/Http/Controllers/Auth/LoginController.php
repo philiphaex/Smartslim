@@ -5,6 +5,7 @@ use Illuminate\Support\Facades\Session;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use App\Http\Controllers\Controller;
 use Illuminate\Foundation\Auth\AuthenticatesUsers;
 
@@ -69,6 +70,16 @@ class LoginController extends Controller
                 return back();
             }
 
+        $credentials =  [
+            'email' => $request->email,
+            'password' => $request->password,
+            'confirmed' => 1,
+        ];
+
+        if( Auth::attempt($credentials, true) ){
+
+            Session::put('user', Auth::user());
+        }
         Session::flash('success','U werd succesvol ingelogd');
         return redirect('dashboard');
     }

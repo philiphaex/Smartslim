@@ -26,7 +26,7 @@
                     </div>
                 @endif
                 <div class="account-wall">
-                    <img class="profile-img" src="/img/logo.png"   alt="SmartSlim">
+                    <a href="{{url('/')}}"><img class="profile-img" src="/img/logo.png"   alt="SmartSlim"></a>
                     <h1 class="text-center login-title">Welkom bij SmartSlim</h1>
 
                     <form class="form-signin" method="POST" action="{{ url('login') }}">
