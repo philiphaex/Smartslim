@@ -121,7 +121,7 @@ class RegisterController extends Controller
             */
 
             session(['user_id' => $user->id]);
-            return redirect('/subscribe');
+            return view('subscription.subscribe');
         }
         catch(Exception $e)
         {

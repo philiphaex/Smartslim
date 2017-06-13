@@ -52,19 +52,23 @@ class SubscribeController extends Controller
     public function invoice(Request $request)
     {
 
+
         //Attaching role to user
         $user_id=session('user_id');
         $role_id=session('role_id');
         $user = User::where('id', '=', $user_id)->first();
-        $test =session('invoice');
-        if($test =='created'){
-            return redirect('invoice/success');
-        }
-        if($test == null){
+        $roles = DB::table('role_user')->select('*')->where('user_id','=',$user_id)->get();
+
+        
+
+        if(!isset($roles[0])){
             $user->attachRole($role_id);
             //'dietician' role toevoegen
             $user->attachRole(5);
         }
+
+
+
         //Business registration
         $business = new Business;
         $business->user_id = $user_id;

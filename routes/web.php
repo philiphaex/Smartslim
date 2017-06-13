@@ -25,7 +25,6 @@ Route::get('/register', 'Auth\RegisterController@showRegistrationForm')->name('r
 Route::post('/register', 'Auth\RegisterController@register');
 
 //Subscription
-Route::get('/subscribe', 'SubscribeController@index');
 Route::post('/subscribe/payment', 'SubscribeController@subscribe');
 
 Route::post('/invoice', 'SubscribeController@invoice');
