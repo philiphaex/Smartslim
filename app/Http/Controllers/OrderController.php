@@ -25,7 +25,6 @@ class OrderController extends Controller
         $dieticians = DB::select(DB::Raw($query));
 
 
-
         $i = 0;
         $data = [];
         foreach ($dieticians as $dietician){
@@ -49,6 +48,7 @@ class OrderController extends Controller
             $data[$i]['payment_id'] = $payment[0]->id;
             $i++;
         }
+
         return view('app.orders.index',[
             'users'=>$data,
         ]);

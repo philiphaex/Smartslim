@@ -7,9 +7,9 @@ use App\Role;
 use App\Price;
 use App\Business;
 use App\Payment;
+use Illuminate\Support\Facades\Log;
 use Mollie\Laravel\Facades\Mollie;
 use Illuminate\Support\Facades\DB;
-use Illuminate\Support\Facades\Storage;
 use Illuminate\Http\Request;
 
 class SubscribeController extends Controller
@@ -192,13 +192,14 @@ class SubscribeController extends Controller
        $pay_mollie = Mollie::api()->payments()->create([
             "amount"      => $amount,
             "description" => "Inschrijving SmartSlim",
-            "redirectUrl" =>  'http://6a9e08d6.ngrok.io'.'/banktransfer/complete/'.$payment->id,
-           "webhookUrl" =>   'http://6a9e08d6.ngrok.io'.'/banktransfer/success',
+            "redirectUrl" =>  config('app.url').'/banktransfer/complete/'.$payment->id,
+           "webhookUrl" =>   config('app.url').'/banktransfer/success',
            "metadata"=> array(
                'order_id' => $payment->id),
         ]);
 
         $payment->mollie_id = $pay_mollie->id;
+        $payment->status = 1;
         $payment->save();
 
         return redirect(Mollie::api()->payments()->get($pay_mollie->id)->getPaymentUrl());
@@ -235,6 +236,8 @@ class SubscribeController extends Controller
 
 
         $payment = Payment::where('id','=',$id)->first();
+
+        if($payment->status == 2){
         $user_id = $payment->user_id;
         $user = User::where('id','=',$user_id)->first();
         $business = Business::where('user_id','=',$user_id)->first();
@@ -248,7 +251,16 @@ class SubscribeController extends Controller
             'role'=>$role,
             'payment'=>$payment,
         ]);
+        }
+        
+        if($payment->status == 3){
+            $user_id = $payment->user_id;
+            User::where('id','=',$user_id)->delete();
+            Business::where('user_id','=',$user_id)->delete();
+            DB::table('role_user')->select('role_id')->where('user_id','=',$user_id)->delete();
 
+            return view('subscription.error');
+        }
     }
 
     public function webhookBanktransfer()
@@ -259,15 +271,23 @@ class SubscribeController extends Controller
         $status =  Mollie::api()->payments()->get($mollie_id)->status;
 
 
-
+        log::info( $mollie_id );
+        log::info( $payment_id );
+        log::info( $status);
 
 //        Storage::put('test.txt', file_get_contents('php://input'));
 //        $mollie_payment_info =  Mollie::api()->payments()->get($mollie_id);
 //        Storage::put('test.txt', serialize($mollie_payment_info));
 
+//        $payment = Payment::where('id','=',$payment_id)->first();
         $payment = Payment::where('id','=',$payment_id)->first();
-        if($status == 'paid' && $payment->mollie_id == $payment_id){
-            $payment->status = 1;
+        if($status == 'paid'){
+            log::info('werkt');
+            $payment->status = 2;
+            $payment->save();
+        }
+        if($status == 'cancelled'){
+            $payment->status = 3;
             $payment->save();
         }
 
