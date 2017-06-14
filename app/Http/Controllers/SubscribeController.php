@@ -7,6 +7,7 @@ use App\Role;
 use App\Price;
 use App\Business;
 use App\Payment;
+use Carbon\Carbon;
 use Illuminate\Support\Facades\Log;
 use Mollie\Laravel\Facades\Mollie;
 use Illuminate\Support\Facades\DB;
@@ -24,24 +25,30 @@ class SubscribeController extends Controller
 
     public function subscribe(Request $request)
     {
-        $subscription = $request->get('subscription');
+        $subscription_id = $request->get('subscription');
+        $subscription  = Role::find($subscription_id);
+
+        if($subscription->name = 'level1'){
+            return view('subscription.free',[
+                'sub'=>$subscription,
+            ]);
+        }
         $payment_option = $request->get('checkboxes');
 
-        $subscription_info = Role::find($subscription);
-        $price_info = Price::where('role_id','=',$subscription)->first();
+        $price_info = Price::where('role_id','=',$subscription_id)->first();
 
-        session(['role_id' => $subscription]);
+        session(['role_id' => $subscription_id]);
 
 
         if ($payment_option == 'invoice'){
             return view('subscription.invoice',[
-                'sub'=>$subscription_info,
+                'sub'=>$subscription,
                 'price'=>$price_info,
             ]);
         }
         if ($payment_option == 'bank'){
             return view('subscription.bank',[
-                'sub'=>$subscription_info,
+                'sub'=>$subscription,
                 'price'=>$price_info,
 
             ]);
@@ -115,6 +122,23 @@ class SubscribeController extends Controller
         $payment->save();
 
         $role = Role::find($role_id);
+
+        $date = Carbon::now();
+        if($payment->frequency == 1){
+            $dt = $date->addYear();
+            $payment->dateSubscription =  $dt->toDateTimeString();
+            $payment->save();
+        }
+        if($payment->frequency == 4){
+            $dt = $date->addDays(90);
+            $payment->dateSubscription =   $dt->toDateTimeString();
+            $payment->save();
+        }
+        if($payment->frequency == 12){
+            $dt =  $date->addDays(30);
+            $payment->dateSubscription = $dt->toDateTimeString();
+            $payment->save();
+        }
 
 
         session(['invoice' => 'created']);
@@ -210,6 +234,7 @@ class SubscribeController extends Controller
     public function completeInvoice()
     {
 
+
         return view('subscription.success', [
             'user'=>session('user'),
             'business'=>session('business'),
@@ -237,7 +262,28 @@ class SubscribeController extends Controller
 
         $payment = Payment::where('id','=',$id)->first();
 
+
+
         if($payment->status == 2){
+
+            $date = Carbon::now();
+            if($payment->frequency == 1){
+                $dt = $date->addYear();
+                $payment->dateSubscription = $dt->toDateTimeString();
+                $payment->save();
+            }
+            if($payment->frequency == 4){
+                $dt = $date->addDays(90);
+                $payment->dateSubscription =$dt->toDateTimeString();
+                $payment->save();
+            }
+            if($payment->frequency == 12){
+                $dt =  $date->addDays(30);
+                $payment->dateSubscription = $dt->toDateTimeString();
+                $payment->save();
+            }
+
+
         $user_id = $payment->user_id;
         $user = User::where('id','=',$user_id)->first();
         $business = Business::where('user_id','=',$user_id)->first();
@@ -271,9 +317,6 @@ class SubscribeController extends Controller
         $status =  Mollie::api()->payments()->get($mollie_id)->status;
 
 
-        log::info( $mollie_id );
-        log::info( $payment_id );
-        log::info( $status);
 
 //        Storage::put('test.txt', file_get_contents('php://input'));
 //        $mollie_payment_info =  Mollie::api()->payments()->get($mollie_id);
