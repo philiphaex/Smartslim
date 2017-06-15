@@ -45,6 +45,9 @@ Route::get('register/verify/{token}', 'Auth\RegisterController@verify');
 
 //Index
 Route::get('/', 'IndexController@index');
+//Contact form
+Route::post('/send/contact','IndexController@contact');
+
 
 //Logged in
 Route::get('/dashboard', 'AppController@index');

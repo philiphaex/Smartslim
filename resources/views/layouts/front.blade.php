@@ -45,7 +45,32 @@
                 }else{
                     $('#paymentOptions').show();
                 }
-            })
+            });
+
+            $('#send-contact').on('click', function (e) {
+                e.preventDefault();
+                $.ajax({
+                    url: 'send/contact',
+                    type: 'post',
+                    data: {
+                        '_token': $('input[name=_token]').val(),
+                        'contactName': $('input[name=contactName]').val(),
+                        'contactMail': $('input[name=contactMail]').val(),
+                        'contactMessage': $('textarea[name=contactMessage]').val()
+                    },
+                    datatype: 'JSON',
+                    success: function () {
+                        console.log("mail is verzonden");
+
+
+
+
+                    }
+                });
+                $("input[name=contactName]").val('');
+                $("input[name=contactMail]").val('');
+                $("textarea[name=contactMessage]").val('');
+            });
 
         })
     </script>
