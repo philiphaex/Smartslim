@@ -21,8 +21,16 @@ class SeedPaymentStatusTable extends Migration
                     'description' =>'betaling werd ontvangen'),
                 array('name' => 'error',
                     'description' =>'betalingstatus wordt onderzocht'),
+                array('name' => 'free',
+                    'description' =>'gratis geen betaling'),
                 array('name' => 'stop',
                     'description' =>'account is stopgezet'),
+                array('name' => 'overdue',
+                    'description' =>'late betaling abonnement verlopen '),
+                array('name' => 'upgrade',
+                    'description' =>'abonnement wordt omhoog aangepast'),
+                array('name' => 'downgrade',
+                    'description' =>'abonnement wordt omhoog aangepast'),
             ));
     }
 

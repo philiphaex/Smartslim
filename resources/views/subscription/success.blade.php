@@ -51,14 +51,14 @@
                         </div>
 
                         <div class="col-md-12 form-group">
-                            <h5>Betalingsgegevens</h5>
+                            <h5>Abonnement</h5>
                             <div class="row">
-                                <p>Pakket</p>
                                 <div class="col-md-2">{{$role->display_name}}</div>
                                 <div class="col-md-10">{{$role->discription}}</div>
                             </div>
+                            @if(isset($payment))
                             <div class="row">
-                                <p>Betaling</p>
+                                <p>Betalingsgegevens</p>
                                 <div class="col-md-3">{{$payment->payment_option}}</div>
                                 <div class="col-md-3">{{$payment->amount}} €</div>
                                 @if($payment->frequency == 12)
@@ -71,6 +71,7 @@
                                     <div class="col-md-3">Jaarlijkse factuur</div>
                                 @endif
                             </div>
+                                @endif
                         </div>
 
                         <div class="col-md-12 form-group">

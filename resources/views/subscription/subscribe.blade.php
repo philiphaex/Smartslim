@@ -13,9 +13,9 @@
                             <div class="col-md-12 form-group">
                                 <label for="subscription" class="control-label">Formule</label>
                                 <select id="subscription" name="subscription" class="form-control">
-                                    <option value="4">Starter</option>
-                                    <option value="3">Basis</option>
                                     <option value="2">Professioneel</option>
+                                    <option value="3">Basis</option>
+                                    <option value="4">Starter</option>
                                 </select>
 
                             </div>
@@ -24,8 +24,8 @@
                                 <h5>Samenvatting van gekozen optie</h5>
                             </div>
 
-                            <div class="col-md-12 form-group">
-                                <label for="paymentOptions" class="control-label">Betalingsmethode</label>
+                            <div class="col-md-12 form-group" id="paymentOptions">
+                                <label  class="control-label">Betalingsmethode</label>
                                 <div class="col-md-12">
                                     <div class="radio">
                                         <label for="paymentOptions-0">
@@ -41,16 +41,6 @@
                                     </div>
                                 </div>
                             </div>
-
-                           {{-- <div class="col-md-12 form-group">
-                                <label for="frequency" class="control-label">Facturatie periode</label>
-                                <select id="frequency" name="frequency" class="form-control">
-                                    <option value="0">Gratis</option>
-                                    <option value="1">Maandelijks</option>
-                                    <option value="3">Kwartaal</option>
-                                    <option value="12">Jaarbasis</option>
-                                </select>
-                            </div>--}}
 
 
                             <div class="col-md-12 form-group">

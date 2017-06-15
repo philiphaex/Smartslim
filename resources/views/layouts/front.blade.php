@@ -35,6 +35,20 @@
 
     <!-- Scripts -->
     <script src="{{ asset('js/app.js') }}"></script>
+    <script>
+        $(document).ready(function () {
+            $('#subscription').on('change',function(){
+                $subscription = $('#subscription option:selected').text();
+                console.log('$subscription')
+                if($subscription == 'Starter'){
+                    $('#paymentOptions').hide();
+                }else{
+                    $('#paymentOptions').show();
+                }
+            })
+
+        })
+    </script>
     <!-- jQuery -->
     <script src="https://code.jquery.com/jquery-3.1.1.min.js"
             integrity="sha256-hVVnYaiADRTO2PzUGmuLJr8BLUSjGIZsDYGmIJLv2b8="

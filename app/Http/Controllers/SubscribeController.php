@@ -28,9 +28,14 @@ class SubscribeController extends Controller
         $subscription_id = $request->get('subscription');
         $subscription  = Role::find($subscription_id);
 
-        if($subscription->name = 'level1'){
-            return view('subscription.free',[
-                'sub'=>$subscription,
+        if($subscription->name = 'level1') {
+
+            $price_info = Price::where('role_id', '=', $subscription_id)->first();
+
+            session(['role_id' => $subscription_id]);
+            return view('subscription.free', [
+                'sub' => $subscription,
+                'price' => $price_info,
             ]);
         }
         $payment_option = $request->get('checkboxes');
@@ -336,5 +341,84 @@ class SubscribeController extends Controller
 
         return http_response_code(200);
 
+    }
+
+    public function free(Request $request)
+    {
+        //Attaching role to user
+        $user_id=session('user_id');
+        $role_id=session('role_id');
+        $user = User::where('id', '=', $user_id)->first();
+        $roles = DB::table('role_user')->select('*')->where('user_id','=',$user_id)->get();
+
+
+
+        if(!isset($roles[0])){
+            $user->attachRole($role_id);
+            //'dietician' role toevoegen
+            $user->attachRole(5);
+        }
+
+
+
+        //Business registration
+        $business = new Business;
+        $business->user_id = $user_id;
+        $business->name = $request->business;
+        $business->vat = $request->vat;
+        $business->paymentconditions = false;
+
+        if ($request->address_business == 'on'){
+            $business->street = $user->street;
+            $business->street_number = $user->street_number;
+            $business->street_bus_number = $user->street_bus_number;
+            $business->zipcode = $user->zipcode;
+        }else{
+            $business->street = $request->street;
+            $business->street_number = $request->street_number;
+            $business->street_bus_number = $request->street_bus_number;
+            $business->zipcode = $request->zipcode;
+        }
+        $business->save();
+
+        $price_info = Price::where('role_id','=',$role_id)->get();
+        $price = $price_info[0]->price;
+
+
+        $role = Role::find($role_id);
+
+
+
+        //payment registratie
+        //Amount on invoice
+        if($price>0){
+
+            $frequency =   12 / $request->frequency;
+        }else{
+            $frequency = 0;
+        }
+
+        $payment = new Payment;
+        $payment->user_id = $user_id;
+        $payment->payment_option = 'free';
+        $payment->amount = 0;
+        $payment->frequency = 0;
+        $payment->status = 4;
+        $payment->dateSubscription = null;
+
+        $payment->save();
+
+
+        session(['invoice' => 'created']);
+        session(['user' => $user]);
+        session(['business' => $business]);
+        session(['role' => $role]);
+
+
+        return view('subscription.success', [
+            'user'=>$user,
+            'business'=>$business,
+            'role'=>$role,
+        ]);
     }
 }

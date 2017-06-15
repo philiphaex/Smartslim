@@ -22,6 +22,7 @@ class CreatePaymentsTable extends Migration
             $table->integer('status');
             $table->string('mollie_id')->nullable();
             $table->timestamps();
+            $table->timestamp('dateSubscription')->nullable();
 
         });
     }
