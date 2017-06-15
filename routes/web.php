@@ -43,7 +43,7 @@ Route::post('/subscribe/free','SubscribeController@free');
 //User confirmation from mail
 Route::get('register/verify/{token}', 'Auth\RegisterController@verify');
 
-//Front
+//Index
 Route::get('/', 'IndexController@index');
 
 //Logged in
@@ -75,6 +75,8 @@ route::post('accounts/confirm','UserController@confirm');
 //Orders
 route::get('orders','OrderController@index');
 route::post('orders/confirm','OrderController@confirm');
+route::get('orders/edit/{id}','OrderController@edit');
+route::post('orders/update/{id}','OrderController@update');
 
 //Roles - Permissions
 Route::get('/dashboard', ['middleware' => ['role:admin'], 'uses' => 'AppController@index_admin']);

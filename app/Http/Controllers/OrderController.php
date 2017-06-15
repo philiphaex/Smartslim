@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Business;
 use App\Payment;
+use App\User;
 use Illuminate\Support\Facades\DB;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
@@ -36,7 +37,6 @@ class OrderController extends Controller
             $date = $payment[0]->created_at;
             $dateOfPayment = Carbon::parse($date)->format('d/m/Y');
             $dueDate =  $date->addDays(30);
-//            dd($dateOfPayment);
             $data[$i]['id'] =  $user_id;
             $data[$i]['firstname'] =  $dietician->firstname;
             $data[$i]['lastname'] =  $dietician->lastname;
@@ -65,5 +65,31 @@ class OrderController extends Controller
         $payment_status = DB::table('payment_status')->select('*')->where('name','=','completed')->get();
         $payment->status = $payment_status[0]->id;
         $payment->save();
+    }
+
+    public function edit($id)
+    {
+        $payment = Payment::find($id);
+        $user = User::find($payment->user_id);
+        $status = DB::table('payment_status')->get();
+
+        return view('app.orders.edit',[
+           'payment'=>$payment,
+            'user'=>$user,
+            'stats'=>$status,
+        ]);
+    }
+
+    public function update(Request $request, $id)
+    {
+        $payment = Payment::find($id);
+        $payment->payment_option = $request->payment_option;
+        $payment->frequency = $request->frequency;
+        $payment->amount = $request->amount;
+        $payment->dateSubscription = $request->dateSubscription;
+        $payment->status = $request->status;
+        $payment->save();
+
+        return redirect('/orders');
     }
 }

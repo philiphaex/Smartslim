@@ -1,4 +1,3 @@
-    <div class="container">
 
 
         @if ($unconfirmed > 0)
@@ -88,6 +87,5 @@
                 </table>
             </div>
         </div>
-    </div>
     @endif
 

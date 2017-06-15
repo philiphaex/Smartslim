@@ -105,5 +105,72 @@
                 </table>
             </div>
         </div>
+
+        <div class="panel panel-default">
+            <div class="panel-heading">
+                Foutief verlopen betalingen
+            </div>
+
+            <div class="panel-body">
+                <table class="table table-striped task-table">
+                @if (count($users) > 0)
+
+                    <!-- Table Headings -->
+                        <thead>
+                        <th>Factuurdatum</th>
+                        <th>Voornaam</th>
+                        <th>Achternaam</th>
+                        <th>Bedrijf</th>
+                        <th>Betalingsmethode</th>
+
+                        <th>&nbsp;</th>
+                        </thead>
+
+                        <!-- Table Body -->
+                        <tbody id="client-list">
+                        @foreach ($users as $user)
+                            @if($user['paymentStatus']==2)
+                                <tr id="payment-{{$user['payment_id']}}">
+                                    <td class="table-text">
+                                        <div>{{  $user['dateOfPayment'] }}</div>
+                                    </td>
+                                    <td class="table-text">
+                                        <div>{{ $user['firstname'] }}</div>
+                                    </td>
+                                    <td class="table-text">
+                                        <div>{{  $user['lastname'] }}</div>
+                                    </td>
+                                    <td class="table-text">
+                                        <div>{{  $user['business'] }}</div>
+                                    </td>
+                                    <td class="table-text">
+                                        <div>{{  $user['paymentType'] }}</div>
+                                    </td>
+
+
+                                    <td>
+                                        <div class="btn-toolbar">
+                                            <!-- Select Button -->
+                                            <a href="{{url('/orders/edit/'.$user['payment_id'])}}" class="btn btn-success">
+                                                Betaling wijzigen
+                                            </a>
+
+                                        </div>
+                                    </td>
+                                </tr>
+                            @endif
+
+                        @endforeach
+                        @else
+                            <div>
+                                Er werden nog geen gebruikers geregistreerd.
+                            </div>
+                        @endif
+                        </tbody>
+                        {{--Confirm modal--}}
+
+                </table>
+            </div>
+        </div>
     </div>
 @endsection
