@@ -67,6 +67,10 @@
 
                     }
                 });
+                $("#success").show();
+
+                setTimeout(function() { $("#success").hide(); }, 3000);
+
                 $("input[name=contactName]").val('');
                 $("input[name=contactMail]").val('');
                 $("textarea[name=contactMessage]").val('');
