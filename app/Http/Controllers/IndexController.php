@@ -5,6 +5,8 @@ namespace App\Http\Controllers;
 use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Http\Request;
+use Response;
+use Cookie;
 use App\Http\Controllers\Controller;
 
 
@@ -17,16 +19,10 @@ class IndexController extends Controller
 
 	public function contact(Request $request)
 	{
-		Log::info($request);
 
 		$name = $request->contactName;
 		$email = $request->contactMail;
 		$message = $request->contactMessage;
-
-		Log::info($name);
-		Log::info($email);
-		Log::info($message);
-
 
 		$to = 'philip.haex@gmail.com';
 
@@ -36,5 +32,14 @@ class IndexController extends Controller
 			$m->to($to)->subject('Contactvraag SmartSlim');
 		});
 		
+	}
+
+	public function acceptCookie()
+	{
+		$time = 43200;
+		$cookie = cookie('smartslim', 'visited', $time);
+
+		return response('cookie set')->cookie($cookie);
+
 	}
 }

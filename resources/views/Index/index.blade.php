@@ -182,32 +182,33 @@
     <section id="contact">
         <div class="container">
             <div class="row">
-                <form>
+                <div class="alert alert-success" id="success" hidden>Uw vraag werd verzonden.</div>
+                <form class="form" role="form" id="form-contact">
+                    {{ csrf_field() }}
                     <div class="col-md-3">
                         <div class="form-group">
-                            <label for="inputName">Naam</label>
-                            <input type="text" class="form-control" id ="inputName" placeholder="Naam">
+                            <label for="contactName">Naam</label>
+                            <input type="text" class="form-control" name ="contactName" placeholder="Naam" required>
                         </div>
                         <div class="form-group">
-                            <label for="inputEmail">Email</label>
-                            <input type="email" class="form-control" id ="inputEmail" placeholder="Email">
+                            <label for="contactMail">Email</label>
+                            <input type="email" class="form-control" name ="contactMail" placeholder="E-mail" required>
                         </div>
                     </div>
                     <div class="col-md-6">
                         <div class="form-group">
-                            <label for="inputMessage">Bericht</label>
-                            <textarea class="form-control" rows="5" id="inputMessage"></textarea>
+                            <label for="contactMessage">Bericht</label>
+                            <textarea class="form-control" rows="5" name="contactMessage" required></textarea>
                         </div>
-                        <button type="submit" class="btn btn-primary pull-right">Verzenden</button>
+                        <button type="submit" class="btn btn-primary pull-right" id="send-contact">Verzenden</button>
                     </div>
 
                 </form>
             </div>
         </div>
     </section>
-    @component('index.cookieConsent')
+    @include('index.cookieConsent')
 
-    @endcomponent
     <footer>
         <div class="container">
             <p> Copyright &copy; Philip Haex</p>
@@ -215,18 +216,8 @@
     </footer>
 
     <!-- Google Analytics -->
-    <script>
-        (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
-                    (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
-                m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
-        })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
 
-        ga('create', 'UA-96123323-1', 'auto');
-        ga('send', 'pageview');
 
-    </script>
-
-    <!-- Theme JavaScript -->
 
     </div>
 
