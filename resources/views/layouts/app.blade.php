@@ -330,7 +330,7 @@
                 success: function (data) {
                     console.log(data);
                     $user_id = $('input[name=user_id]').val();
-                    $row = $("#account-"+$user_id).closest("tr");
+                    $row = $("#account-unconfirmed-"+$user_id).closest("tr");
                     $row.remove();
                     //Call to modal close button
                     $('#Modal-confirm-'+$user_id).modal('toggle');

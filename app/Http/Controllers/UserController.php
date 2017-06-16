@@ -28,6 +28,7 @@ class UserController extends Controller
 
         $dieticians = DB::select(DB::Raw($query));
 
+        $overdue = 0;
         $unconfirmed = 0;
         $i = 0;
         $data = [];
@@ -50,6 +51,10 @@ class UserController extends Controller
                       where role_user.user_id ='.$user_id;
 
             $role =DB::select(DB::Raw($query));
+
+            $payment =Payment::where('user_id','=',$user_id)->orderby('created_at','desc')->get();
+
+
             $data[$i]['id'] =  $user_id;
             $data[$i]['date'] =  $dateOfRegistration;
             $data[$i]['firstname'] =  $dietician->firstname;
@@ -58,9 +63,15 @@ class UserController extends Controller
             $data[$i]['role'] =  $role[0]->display_name;
             $data[$i]['clients'] =  count($clients);
             $data[$i]['confirmed'] =  $dietician->confirmed;
+            $data[$i]['dateStartSubscription'] =  Carbon::parse($payment[0]->created_at)->format('d/m/Y');
+            $data[$i]['dateEndSubscription'] =  Carbon::parse($payment[0]->dateSubscription)->format('d/m/Y');
+            $data[$i]['payment_status'] =  $payment[0]->status;
 
             if($dietician->confirmed == 0 ){
                 $unconfirmed++;
+            }
+            if($payment[0]->status == 5 ){
+                $overdue++;
             }
             $i++;
         }
@@ -68,6 +79,7 @@ class UserController extends Controller
 
         return view('app.accounts.index',[
             'unconfirmed' => $unconfirmed,
+            'overdue' => $overdue,
             'users'=>$data,
         ]);
         

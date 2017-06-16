@@ -404,7 +404,10 @@ class SubscribeController extends Controller
         $payment->amount = 0;
         $payment->frequency = 0;
         $payment->status = 4;
-        $payment->dateSubscription = null;
+
+        $date = Carbon::now();
+        $dt = $date->addYear();
+        $payment->dateSubscription = $dt->toDateTimeString();
 
         $payment->save();
 
