@@ -70,14 +70,15 @@ class OrderController extends Controller
     public function edit($id)
     {
         $payment = Payment::find($id);
-        
         $user = User::find($payment->user_id);
         $status = DB::table('payment_status')->get();
 
+       
         return view('app.orders.edit',[
            'payment'=>$payment,
             'user'=>$user,
             'stats'=>$status,
+            
         ]);
     }
 

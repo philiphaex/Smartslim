@@ -340,9 +340,15 @@
             });
 
         });
+        //inputs beschikbaar maken in edit van account profiel
+        $("#edit-account").click(function(event) {
+            event.preventDefault();
+            $('#edit-account').remove();
+            $('input').prop("disabled", false); // Element(s) are now enabled.
+            $('select').prop("disabled", false); // Element(s) are now enabled.
+            $('#update-account').prop("disabled", false); // Element(s) are now enabled.
 
-
-
+        });
 
 
 

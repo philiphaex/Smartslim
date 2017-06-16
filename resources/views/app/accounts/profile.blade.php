@@ -7,6 +7,7 @@
             <div class="panel panel-default">
                 <div class="panel-heading">
                     <div class="pull-right" style="padding-top: 5px;">
+                        <a href="{{url('accounts')}}" class="btn btn-default">Terug</a>
                         <a href="{{url('accounts/'.$user->id.'/edit')}}" class="btn btn-default">Gegevens updaten</a>
                     </div>
                     <h4 >Account - {{$user->lastname}} {{$user->firstname}}</h4>
@@ -168,7 +169,7 @@
                         </div>
                         <div class="panel-body">
                             <div class="row">
-                                <div class="col-md-6 form-group">
+                                <div class="col-md-4 form-group">
                                     <label class="control-label">Aantal cliënten</label>
                                     <div>
                                         @php
@@ -176,10 +177,19 @@
                                         @endphp
                                     </div>
                                 </div>
-                                <div class="col-md-6 form-group">
+                                <div class="col-md-4 form-group">
                                     <label class="control-label">Abonnementsformule</label>
                                     <div>
                                         {{$role}}
+                                    </div>
+                                </div>
+                                <div class="col-md-4 form-group">
+                                    <label class="control-label">Einde abonnement</label>
+                                    <div>
+                                        @php
+                                        $dt = strtotime($payments[0]->dateSubscription);
+                                        echo date('d-m-Y',$dt);
+                                        @endphp
                                     </div>
                                 </div>
                             </div>

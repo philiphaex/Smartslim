@@ -190,7 +190,7 @@ class UserController extends Controller
                        where client_user.user_id='.$user->id;
 
         $clients = DB::select(DB::Raw($query));
-        $payments = Payment::where('user_id','=',$user->id)->get();
+        $payments = Payment::where('user_id','=',$user->id)->orderby('created_at','desc')->get();
 
         $zipcode_user =$user->zipcode;
         $zipcode_business = $business[0]->zipcode;
@@ -223,7 +223,25 @@ class UserController extends Controller
      */
     public function edit($id)
     {
-        //
+        $user = User::find($id);
+        $city = DB::table('zipcodes')->select('gemeente')->where('zipcode','=',$user->zipcode)->get();
+        $role_id = DB::table('role_user')->select('*')->where('user_id','=',$id)->get();
+//        $role = DB::table('roles')->select('*')->where('id','=',$role_id[0]->role_id)->get();
+        $payment = Payment::where('user_id','=',$id)->orderby('created_at','desc')->get();
+        $business = Business::where('user_id','=',$id)->get();
+        $b_city = DB::table('zipcodes')->select('gemeente')->where('zipcode','=',$business[0]->zipcode)->get();
+
+        $date = Carbon::parse($payment[0]->dateSubscription)->format('d/m/Y');
+        return view ('app.accounts.edit',[
+            'user'=>$user,
+            'city'=>$city[0]->gemeente,
+            'b_city'=>$b_city[0]->gemeente,
+            'role_id'=>$role_id[0]->role_id,
+            'payment'=>$payment[0],
+            'business'=>$business[0],
+            'dateSubscription'=>$date,
+
+        ]);
     }
 
     /**
@@ -235,7 +253,39 @@ class UserController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $user = User::findOrFail($id);
+        $user->firstname = $request->firstname;
+         $user->lastname = $request->lastname;
+           $user->email = $request->email;
+            $user->street = $request->street;
+            $user->street_number = $request->street_number;
+            $user->street_bus_number = $request->street_bus_number;
+            $user->zipcode = $request->zipcode;
+            $user->phone= $request->phone;
+            $user->updated_at= Carbon::now();
+        $user->save();
+        $payment = Payment::where('user_id','=',$id)->orderby('created_at','desc')->get();
+        $payment[0]->payment_option = 'invoice';
+        $payment[0]->frequency = $request->frequency;
+        $payment[0]->status = 1;
+        $payment[0]->updated_at = Carbon::now();
+        $payment[0]->dateSubscription = $request->dateSubscription;
+        $price = DB::table('prices')->select('*')->where('role_id','=',$request->subscription)->get();
+        $payment[0]->amount = $price[0]->price * $request->frequency;
+        $payment[0]->save();
+
+        $business = Business::where('user_id','=',$id)->get();
+        $business[0]->name = $request->business;
+        $business[0]->vat = $request->vat;
+        $business[0]->street = $request->b_street;
+        $business[0]->street_number = $request->b_street_number;
+        $business[0]->street_bus_number = $request->b_street_bus_number;
+        $business[0]->zipcode = $request->zipcode;
+        $business[0]->save();
+
+        DB::table('role_user')->select('*')->where('user_id','=',$id)->where('role_id','<','5')->delete();
+        $user->attachRole($request->subscription);
+        return redirect('accounts/'.$id);
     }
 
     /**
