@@ -26,7 +26,7 @@ class SeedPaymentStatusTable extends Migration
                 array('name' => 'stop',
                     'description' =>'account is stopgezet'),
                 array('name' => 'overdue',
-                    'description' =>'late betaling abonnement verlopen '),
+                    'description' =>'geen tijdige betaling gedaan'),
                 array('name' => 'upgrade',
                     'description' =>'abonnement wordt omhoog aangepast'),
                 array('name' => 'downgrade',
