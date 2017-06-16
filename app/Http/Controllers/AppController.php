@@ -68,4 +68,9 @@ class AppController extends Controller
 	{
 
 	}
+
+	public function settings()
+	{
+		return view ('app.settings');
+	}
 }

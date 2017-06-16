@@ -268,6 +268,7 @@ class UserController extends Controller
         $payment[0]->payment_option = 'invoice';
         $payment[0]->frequency = $request->frequency;
         $payment[0]->status = 1;
+        $payment[0]->created_at = Carbon::now();
         $payment[0]->updated_at = Carbon::now();
         $payment[0]->dateSubscription = $request->dateSubscription;
         $price = DB::table('prices')->select('*')->where('role_id','=',$request->subscription)->get();

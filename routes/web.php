@@ -53,6 +53,8 @@ Route::get('/privacy/accept','IndexController@acceptCookie');
 //Logged in
 Route::get('/dashboard', 'AppController@index');
 Route::get('/clients', 'ClientController@index');
+//Settings
+Route::get('/settings','AppController@settings');
 //Visits
 Route::get('/clients/{client_id}/visits/create','VisitController@create');
 Route::post('/clients/{client_id}/visits/store/{visit_code}','VisitController@store');

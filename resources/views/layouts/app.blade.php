@@ -34,7 +34,7 @@
             <a class="navbar-top" href="{{url('/')}}" >SmartSlim</a>
             <div class="pull-right">
                 <a class="navbar-top" href="{{url('/')}}" >Help</a>
-                <a class="navbar-top" href="{{url('/')}}" >Instellingen</a>
+                <a class="navbar-top" href="{{url('/settings')}}" >Instellingen</a>
                 <a class="navbar-top" href="{{ route('logout') }}"
                    onclick="event.preventDefault();
                                                      document.getElementById('logout-form').submit();">
