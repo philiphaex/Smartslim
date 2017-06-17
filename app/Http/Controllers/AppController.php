@@ -8,7 +8,6 @@ use App\Visit;
 use App\Payment;
 use App\Business;
 use Carbon\Carbon;
-use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -118,7 +117,6 @@ class AppController extends Controller
     public function updateBusiness(Request $request, $id)
     {
         $business = Business::findOrFail($id);
-        Log::info($business);
 
         $business->name = $request->business;
         $business->vat = $request->vat;

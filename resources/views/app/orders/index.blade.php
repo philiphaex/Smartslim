@@ -100,7 +100,6 @@
                             </div>
                         @endif
                         </tbody>
-                        {{--Confirm modal--}}
 
                 </table>
             </div>
@@ -167,7 +166,6 @@
                             </div>
                         @endif
                         </tbody>
-                        {{--Confirm modal--}}
 
                 </table>
             </div>

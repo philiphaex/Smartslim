@@ -34,6 +34,24 @@ class IndexController extends Controller
 		
 	}
 
+	public function help(Request $request)
+	{
+		$firstname = $request->firstname;
+		$lastname = $request->lastname;
+		$email = $request->email;
+		$subject = $request->helpSubject;
+		$message = $request->helpMessage;
+
+		$to = 'philip.haex@gmail.com';
+
+		Mail::send('emails.help', ['firstname' => $firstname, 'lastname' => $lastname, 'email'=>$email, 'subject' => $subject, 'text' => $message], function ($m) use ($to) {
+			$m->from('philip.haex@gmail.com', 'Smartslim');
+
+			$m->to($to)->subject('Help request');
+		});
+	}
+
+
 	public function acceptCookie()
 	{
 		$time = 43200;
@@ -42,4 +60,5 @@ class IndexController extends Controller
 		return response('cookie set')->cookie($cookie);
 
 	}
+
 }

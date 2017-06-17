@@ -33,14 +33,13 @@
         <div class="container">
             <a class="navbar-top" href="{{url('/')}}" >SmartSlim</a>
             <div class="pull-right">
-                <a class="navbar-top" href="{{url('/')}}" >Help</a>
+                <a class="navbar-top help-modal"  data-toggle="modal" data-target="Modal-help" >Help</a>
                 <a class="navbar-top" href="{{url('/settings')}}" >Instellingen</a>
                 <a class="navbar-top" href="{{ route('logout') }}"
                    onclick="event.preventDefault();
                                                      document.getElementById('logout-form').submit();">
                     Logout
                 </a>
-
                 <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
                     {{ csrf_field() }}
                 </form>
@@ -85,6 +84,37 @@
         </div>
     </div>
 </nav>
+
+{{--Help modal--}}
+<div id="Modal-help" class="modal">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                <h4 class="modal-title">Help</h4>
+            </div>
+            <div class="modal-body">
+                <form class="form" role="form">
+                    {{ csrf_field() }}
+                        <div class="form-group">
+                            <label for="contactName">Onderwerp</label>
+                            <input type="text" class="form-control" name ="helpSubject"  required>
+                        </div>
+                        <div class="form-group">
+                            <label for="contactMessage">Bericht</label>
+                            <textarea class="form-control" rows="5" name="helpMessage" required></textarea>
+                        </div>
+                        <input name="email" value="{{Auth::user()->email}}" hidden>
+                        <input name="firstname" value="{{Auth::user()->firstname}}" hidden>
+                        <input name="lastname" value="{{Auth::user()->lastname}}" hidden>
+                        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+
+                        <button type="submit" class="btn btn-primary pull-right" id="send-help">Verzenden</button>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
 <div id="content">
     @yield('content')
 </div>
@@ -364,7 +394,38 @@
             $('.business').prop("disabled", false); // Element(s) are now enabled.
             $('#update-settings-business').prop("disabled", false); // Element(s) are now enabled.
         })
+        //Helpmodal
+        $('.help-modal').on('click' , function(e){
+            e.preventDefault();
+            var key = $(this).data('target');
 
+            console.log(key);
+            $('#'+key).modal();
+        });
+        $('#send-help').on('click', function (e) {
+            e.preventDefault();
+            $.ajax({
+                url: 'send/help',
+                type: 'post',
+                data: {
+                    '_token': $('input[name=_token]').val(),
+                    'firstname': $('input[name=firstname]').val(),
+                    'lastname': $('input[name=lastname]').val(),
+                    'email': $('input[name=email]').val(),
+                    'helpSubject': $('input[name=helpSubject]').val(),
+                    'helpMessage': $('textarea[name=helpMessage]').val(),
+                },
+                datatype: 'JSON',
+                success: function () {
+                    $("input[name=helpSubject]").val('');
+                    $("textarea[name=helpMessage]").val('');
+                    $('#Modal-help').modal('toggle');
+                    $('.modal-backdrop').remove();
+
+
+                }
+            });
+            });
 
     });
 

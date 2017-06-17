@@ -2,5 +2,6 @@
 
 <p>Van: {{$name}}</p>
 <p>Email: {{$email}}</p>
-
+</br>
+<p>Bericht:</p>
 <p>{{$text}}</p>

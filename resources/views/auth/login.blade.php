@@ -34,7 +34,7 @@
                         <input type="text" class="form-control" name="email" placeholder="Email" required autofocus>
                         <input type="password" class="form-control" name="password" placeholder="Password" required>
                         <button class="btn btn-lg btn-primary btn-block" type="submit">Login</button>
-                        <a href="#" class="pull-right need-help">Help? </a><span class="clearfix"></span>
+                        <a href="#" class="pull-right help-modal"  data-toggle="modal" data-target="Modal-help" >Help? </a><span class="clearfix"></span>
                     </form>
 
                 </div>
