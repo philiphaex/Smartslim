@@ -4,7 +4,7 @@
         <div class="pull-right" style="padding-top: 5px;">
             <a href="{{url('clients/create')}}" class="btn btn-primary ">Cliënt toevoegen</a>
         </div>
-        <h4>Overzicht recente registraties</h4>
+        <h5>Overzicht recente registraties</h5>
     </div>
 
     <div class="panel-body">

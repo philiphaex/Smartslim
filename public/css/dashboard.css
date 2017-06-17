@@ -1,6 +1,6 @@
 body {
     background-color: white;
-
+    font-size: 14px;
 }
 #nav-top{
     background-color: #9C68E3;
@@ -15,7 +15,13 @@ body {
     color:white;
     padding-top:5px;
     height:22px;
+    padding-right: 30px;
 }
+a{
+    color:inherit;
+
+}
+
 #navbar-brand{
     color:white;
 }

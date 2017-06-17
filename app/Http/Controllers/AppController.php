@@ -14,8 +14,9 @@ use Illuminate\Support\Facades\Auth;
 
 class AppController extends Controller
 {
-	public function index_dietician()
+	public function index()
 	{
+        if(Auth::user()->hasRole('dietician')){
 		$user_id = Auth::id();
 		$start = User::findOrFail($user_id);
 		$start_date_prev = $start->created_at;
@@ -63,12 +64,17 @@ class AppController extends Controller
 			'percent'=>$percent,
 			'limit'=> $limit[0]->display_name,
 		]);
-		
-	}
+        }
+        if(Auth::user()->hasRole('admin')){
+            return view('app.dashboard.index');
+
+
+        }
+        }
 
 	public function index_admin()
 	{
-
+        return view('app.dashboard.index');
 	}
 
 	public function settings()

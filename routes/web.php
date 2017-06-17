@@ -91,6 +91,12 @@ route::get('orders/edit/{id}','OrderController@edit');
 route::post('orders/update/{id}','OrderController@update');
 
 //Roles - Permissions
-Route::get('/dashboard', ['middleware' => ['role:admin'], 'uses' => 'AppController@index_admin']);
-Route::get('/dashboard', ['middleware' => ['role:dietician'], 'uses' => 'AppController@index_dietician']);
+//Route::group(['middleware' => ['role:admin']],function(){
+//    Route::get('/dashboard', 'AppController@index_admin');
+//});
+Route::get('/dashboard', 'AppController@index');
+//Route::get('/dashboard', ['middleware' => ['role:dietician'], 'uses' => 'AppController@index_dietician']);
 
+//Admin registratie
+Route::get('/admin','AdminController@register');
+Route::post('/admin/create','AdminController@create');
