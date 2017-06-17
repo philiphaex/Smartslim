@@ -4,7 +4,7 @@
     <div class="container">
         <div class="row">
             <div class="panel panel-heading" style="background-color: whitesmoke">
-                <h3>Account beheer</h3>
+                <h4>Account beheer</h4>
             </div>
 
         </div>

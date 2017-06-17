@@ -31,10 +31,12 @@
     {{--<nav class="navbar  navbar-default">--}}
     <div  id="nav-top">
         <div class="container">
-            <a class="navbar-top" href="{{url('/')}}" >SmartSlim</a>
+            <a class="brand navbar-top" href="{{url('/')}}" >SmartSlim</a>
             <div class="pull-right">
+                @if(Auth::user()->hasRole('dietician'))
                 <a class="navbar-top help-modal"  data-toggle="modal" data-target="Modal-help" >Help</a>
                 <a class="navbar-top" href="{{url('/settings')}}" >Instellingen</a>
+                @endif
                 <a class="navbar-top" href="{{ route('logout') }}"
                    onclick="event.preventDefault();
                                                      document.getElementById('logout-form').submit();">
@@ -66,15 +68,36 @@
         <div class="collapse navbar-collapse" id="app-navbar-collapse">
             <!-- Left Side Of Navbar -->
             <ul class="nav navbar-nav">
-                <li class="submenu-item"><i class="fa fa-home"></i><a href="{{url('/dashboard')}}">Dashboard</a></li>
+                <li class="submenu-item {{Request::is('dashboard*') ? 'active' : null }}">
+
+                    <a href="{{url('/dashboard')}}">
+                    <div class="row"> <i class="fa fa-home"></i></div>
+                    <div class="row">Dashboard</div>
+                   </a>
+                </li>
                 {{--Admin Menu--}}
                 @if(Auth::user()->hasRole('admin'))
-                    <li class="submenu-item"><i class="fa fa-id-card-o"></i><a href="{{url('/accounts')}}">Accounts</a></li>
-                    <li class="submenu-item-end"><i class="fa fa-book"></i><a href="{{url('/orders')}}">Facturatie</a></li>
+                    <li class="submenu-item {{Request::is('accounts*') ? 'active' : null }}">
+                        <a href="{{url('/accounts')}}">
+                        <div class="row"><i class="fa fa-id-card-o"></i></div>
+                        <div class="row">Accounts</div>
+                        </a>
+                    </li>
+                    <li class="submenu-item-end {{Request::is('orders*') ? 'active' : null }}">
+                        <a href="{{url('/orders')}}">
+                        <div class="row"> <i class="fa fa-book"></i></div>
+                        <div class="row">Facturatie</div>
+                       </a>
+                    </li>
                 @endif
                 {{--Dietician menu--}}
                 @if(Auth::user()->hasRole('dietician'))
-                    <li class="submenu-item-end"><i class="fa fa-users"></i><a href="{{url('/clients')}}">Cliënten</a></li>
+                    <li class="submenu-item-end {{Request::is('clients*') ? 'active' : null }}">
+                        <a href="{{url('/clients')}}">
+                        <div class="row">  <i class="fa fa-users"></i></div>
+                        <div class="row">Cliënten</div>
+                        </a>
+                    </li>
                 @endif
                 {{--Client menu--}}
             </ul>

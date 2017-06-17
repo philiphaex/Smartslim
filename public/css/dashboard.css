@@ -1,6 +1,12 @@
 body {
     background-color: white;
-    font-size: 14px;
+    font-size: 13px;
+}
+.brand{
+    font-size:16px;
+}
+table{
+    font-size:15px;
 }
 #nav-top{
     background-color: #9C68E3;

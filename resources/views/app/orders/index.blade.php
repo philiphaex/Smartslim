@@ -6,7 +6,7 @@
     <div class="container">
         <div class="row">
             <div class="panel panel-heading" style="background-color: whitesmoke">
-                <h3>Overzicht facturatie</h3>
+                <h4>Overzicht facturatie</h4>
             </div>
 
         </div>
