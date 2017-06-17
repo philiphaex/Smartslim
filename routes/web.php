@@ -55,6 +55,9 @@ Route::get('/dashboard', 'AppController@index');
 Route::get('/clients', 'ClientController@index');
 //Settings
 Route::get('/settings','AppController@settings');
+Route::post('/settings/update/user/{id}','AppController@updateUser');
+Route::post('/settings/update/business/{id}','AppController@updateBusiness');
+
 //Visits
 Route::get('/clients/{client_id}/visits/create','VisitController@create');
 Route::post('/clients/{client_id}/visits/store/{visit_code}','VisitController@store');

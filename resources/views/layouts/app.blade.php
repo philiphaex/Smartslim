@@ -349,8 +349,21 @@
             $('#update-account').prop("disabled", false); // Element(s) are now enabled.
 
         });
+        //inputs beschikbaar maken in setting van gebruikers profiel
+        $("#edit-settings-user").click(function(event) {
+            event.preventDefault();
+            $('#edit-settings-user').remove();
+            $('.user').prop("disabled", false); // Element(s) are now enabled.
+            $('#update-settings-user').prop("disabled", false); // Element(s) are now enabled.
 
-
+        });
+        //inputs beschikbaar maken in setting van business profiel
+        $("#edit-settings-business").click(function(event) {
+            event.preventDefault();
+            $('#edit-settings-business').remove();
+            $('.business').prop("disabled", false); // Element(s) are now enabled.
+            $('#update-settings-business').prop("disabled", false); // Element(s) are now enabled.
+        })
 
 
     });

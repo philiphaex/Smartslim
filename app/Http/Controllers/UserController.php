@@ -272,7 +272,7 @@ class UserController extends Controller
         $payment[0]->updated_at = Carbon::now();
         $payment[0]->dateSubscription = $request->dateSubscription;
         $price = DB::table('prices')->select('*')->where('role_id','=',$request->subscription)->get();
-        $payment[0]->amount = $price[0]->price * $request->frequency;
+        $payment[0]->amount = $price[0]->price * (12/$request->frequency);
         $payment[0]->save();
 
         $business = Business::where('user_id','=',$id)->get();

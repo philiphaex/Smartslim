@@ -5,7 +5,10 @@ namespace App\Http\Controllers;
 use App\Client;
 use App\User;
 use App\Visit;
+use App\Payment;
+use App\Business;
 use Carbon\Carbon;
+use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -71,6 +74,60 @@ class AppController extends Controller
 
 	public function settings()
 	{
-		return view ('app.settings');
+		$user = Auth::user();
+		$id = Auth::id();
+		$city = DB::table('zipcodes')->select('gemeente')->where('zipcode','=',$user->zipcode)->get();
+		$role_id = DB::table('role_user')->select('*')->where('user_id','=',$id)->get();
+		$role = DB::table('roles')->select('*')->where('id','=',$role_id[0]->role_id)->get();
+		$payment = Payment::where('user_id','=',$id)->orderby('created_at','desc')->get();
+		$business = Business::where('user_id','=',$id)->get();
+		$b_city = DB::table('zipcodes')->select('gemeente')->where('zipcode','=',$business[0]->zipcode)->get();
+		$dateSubscription = Carbon::parse($payment[0]->dateSubscription)->format('d/m/Y');
+        $today = Carbon::now();
+		return view ('app.settings',[
+			'user'=>$user,
+			'city'=>$city[0]->gemeente,
+			'b_city'=>$b_city[0]->gemeente,
+			'role_id'=>$role_id[0]->role_id,
+			'role'=>$role[0],
+			'payment'=>$payment[0],
+			'business'=>$business[0],
+            'today'=>$today,
+			'dateSubscription'=>$dateSubscription,
+
+		]);
 	}
+
+    public function updateUser(Request $request, $id)
+    {
+       $user = User::findOrFail($id);
+        $user->firstname = $request->firstname;
+        $user->lastname = $request->lastname;
+        $user->email = $request->email;
+        $user->street = $request->street;
+        $user->street_number = $request->street_number;
+        $user->street_bus_number = $request->street_bus_number;
+        $user->zipcode = $request->zipcode;
+        $user->phone= $request->phone;
+        $user->updated_at= Carbon::now();
+        $user->save();
+
+        return redirect('/settings');
+    }
+
+    public function updateBusiness(Request $request, $id)
+    {
+        $business = Business::findOrFail($id);
+        Log::info($business);
+
+        $business->name = $request->business;
+        $business->vat = $request->vat;
+        $business->street = $request->b_street;
+        $business->street_number = $request->b_street_number;
+        $business->street_bus_number = $request->b_street_bus_number;
+        $business->zipcode = $request->b_zipcode;
+        $business->save();
+
+        return redirect('/settings');
+    }
 }
