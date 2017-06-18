@@ -1,5 +1,5 @@
-body {
-
+body, html {
+    height:100%;
     background-color: white;
     /*padding-top: 30px;*/
 
@@ -9,10 +9,19 @@ section{
     margin-top: 20px;
     padding-bottom: 20px;
 }
+.hero-unit{
+    padding-top:0px;
+    border-bottom: 1px solid #EDEEEF;
+    padding-bottom: 20px;
+}
+
 
 .navbar{
     background-color: white;
+    padding-bottom:0px;
+
 }
+
 .navbar-default .navbar-nav > li > a{
     /*color: #009688;*/
 }
@@ -35,10 +44,11 @@ section{
 
 
 .hero-unit{
-    height: 400px;
+    height: 500px;
     /*background-color: white;*/
-    /*background-image: url('../img/hero.png');*/
-    background-size:800px;
+    /*background-image: url('../img/hero.jpg');*/
+    /*background-size:800px;*/
+    background-size: 100% 100%;
     background-position: center;
     background-repeat:no-repeat;
 }
@@ -50,7 +60,6 @@ textarea {
     resize: none;
 }
 /*Login Form*/
-
 .form-signin
 {
     max-width: 330px;
@@ -123,3 +132,4 @@ textarea {
     display: block;
     margin-top: 10px;
 }
+/*einde login form*/
