@@ -93,7 +93,7 @@
                             </div>
                             <div class="col-md-6 form-group{{ $errors->has('city') ? ' has-error' : '' }}">
                                 <label for="city" class="col-md-3control-label">Stad</label>
-                                <input id="city" type="text" class="form-control" name="city" value="{{$city}}" disabled>
+                                <input id="city" type="text" class="form-control" name="city" value="{{$user->city}}" disabled>
 
                                 @if ($errors->has('city'))
                                     <span class="help-block">
@@ -219,7 +219,7 @@
                             </div>
                             <div class="col-md-6 form-group{{ $errors->has('b_city') ? ' has-error' : '' }}">
                                 <label for="b_city" class="col-md-3 control-label">Stad</label>
-                                <input id="b_city" type="text" class="form-control" name="b_city"  value="{{$b_city}}" disabled>
+                                <input id="b_city" type="text" class="form-control" name="b_city"  value="{{$business->city}}" disabled>
 
                                 @if ($errors->has('b_city'))
                                     <span class="help-block">

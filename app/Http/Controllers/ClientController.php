@@ -109,6 +109,7 @@ class ClientController extends Controller
             'street_number' => $request->get('street_number'),
             'street_bus_number' => $request->get('street_bus_number'),
             'zipcode' => $request->get('zipcode'),
+            'city' => $request->get('city'),
             'length' => $request->get('length'),
             'weight' => $request->get('weight'),
             'target_id' => $request->get('target_id'),
@@ -164,12 +165,12 @@ class ClientController extends Controller
         $client = Client::findOrFail($id);
 
         $targets = TargetType::all();
-        $city = DB::table('zipcodes')->select('Gemeente')->where('zipcode','=',$client->zipcode)->get();
+//        $city = DB::table('zipcodes')->select('Gemeente')->where('zipcode','=',$client->zipcode)->get();
 
         return view('app.clients.edit',[
             'client'=>$client,
             'targets'=>$targets,
-            'city'=>$city[0]->Gemeente,
+//            'city'=>$city[0]->Gemeente,
         ]);
     }
 

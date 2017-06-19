@@ -145,8 +145,8 @@
                                 @endif
                             </div>
                             <div class="col-md-6 form-group{{ $errors->has('city') ? ' has-error' : '' }}">
-                                <label for="city" class="col-md-3control-label">Stad</label>
-                                <input id="city" type="text" class="form-control user" name="city" value="{{$city}}" disabled>
+                                <label for="city" class="col-md-3control-label">Woonplaats</label>
+                                <input id="city" type="text" class="form-control user" name="city" value="{{$user->city}}" disabled>
 
                                 @if ($errors->has('city'))
                                     <span class="help-block">
@@ -240,8 +240,8 @@
                             @endif
                         </div>
                         <div class="col-md-6 form-group{{ $errors->has('b_city') ? ' has-error' : '' }}" >
-                            <label for="b_city" class="col-md-3 control-label">Stad</label>
-                            <input id="b_city" type="text" class="form-control business" name="b_city"  value="{{$b_city}}" disabled>
+                            <label for="b_city" class="col-md-3 control-label">Plaats</label>
+                            <input id="b_city" type="text" class="form-control business" name="b_city"  value="{{$business->city}}" disabled>
 
                             @if ($errors->has('b_city'))
                                 <span class="help-block">

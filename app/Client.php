@@ -11,7 +11,7 @@ class Client extends Model
 {
     //
     protected $fillable = [
-        'firstname', 'lastname', 'birthdate','sex','email', 'street','street_number','street_bus_number','zipcode','phone','mobile','length','weight','activity','target_id','info','login','password',
+        'firstname', 'lastname', 'birthdate','sex','email', 'street','street_number','street_bus_number','zipcode', 'city','phone','mobile','length','weight','activity','target_id','info','login','password',
     ];
 
     public function users()

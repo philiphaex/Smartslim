@@ -69,8 +69,13 @@
             <!-- Left Side Of Navbar -->
             <ul class="nav navbar-nav">
                 <li class="submenu-item {{Request::is('dashboard*') ? 'active' : null }}">
+                    @if(Auth::user()->hasRole('admin'))
 
-                    <a href="{{url('/dashboard')}}">
+                    <a href="{{url('/admin/dashboard')}}">
+                        @endif
+                        @if(Auth::user()->hasRole('dietician'))
+                        <a href="{{url('/dashboard')}}">
+                            @endif
                     <div class="row"> <i class="fa fa-home"></i></div>
                     <div class="row">Dashboard</div>
                    </a>
@@ -449,6 +454,33 @@
                 }
             });
             });
+        $('#search-zipcode').on('keyup', function (e) {
+            e.preventDefault();
+            console.log(this.value.length);
+            if (this.value.length = 4) {
+                console.log(this.value)
+                $.ajax({
+                    url: 'zipcode/search',
+                    type: 'post',
+                    data: {
+                        '_token': $('input[name=_token]').val(),
+                        'zipcode': $('input[name=zipcode]').val()
+                    },
+                    datatype: 'JSON',
+                    success: function (response) {
+                        console.log(response);
+                    if(response == 'error'){
+                        $('#alert-zipcode').show();
+                    }else{
+                        $('#alert-zipcode').hide();
+                    }
+
+                    }
+                });
+            }
+
+
+        });
 
     });
 

@@ -72,7 +72,14 @@
     </div>
 
     <!-- Scripts -->
-    <script src="{{ asset('js/app.js') }}"></script>
+{{--    <script src="{{ asset('js/app.js') }}"></script>--}}
+    <!-- jQuery -->
+    <script src="https://code.jquery.com/jquery-3.1.1.min.js"
+            integrity="sha256-hVVnYaiADRTO2PzUGmuLJr8BLUSjGIZsDYGmIJLv2b8="
+            crossorigin="anonymous"></script>
+    <!-- Bootstrap Core JavaScript -->
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+
     <script>
         $(document).ready(function () {
             $('#subscription').on('change',function(){
@@ -84,7 +91,7 @@
                     $('#paymentOptions').show();
                 }
             });
-
+            //Contactmodal
             $('#send-contact').on('click', function (e) {
                 e.preventDefault();
                 $.ajax({
@@ -99,10 +106,6 @@
                     datatype: 'JSON',
                     success: function () {
                         console.log("mail is verzonden");
-
-
-
-
                     }
                 });
                 $("#success").show();
@@ -149,8 +152,6 @@
                         $("textarea[name=helpMessage]").val('');
                         $('#Modal-help').modal('toggle');
                         $('.modal-backdrop').remove();
-
-
                     }
                 });
             });
@@ -166,12 +167,6 @@
         ga('send', 'pageview');
 
     </script>
-    <!-- jQuery -->
-    <script src="https://code.jquery.com/jquery-3.1.1.min.js"
-            integrity="sha256-hVVnYaiADRTO2PzUGmuLJr8BLUSjGIZsDYGmIJLv2b8="
-            crossorigin="anonymous"></script>
-    <!-- Bootstrap Core JavaScript -->
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
 
 </body>
 </html>

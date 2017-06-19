@@ -9,8 +9,7 @@
                 <div class="panel panel-default" >
                     <div class="panel-body">
                         <h4>Bedrijfgegevens</h4>
-                        <p>{{$sub}}</p>
-                        <p>{{$price}}</p>
+
                         <form class="form" role="form" method="POST" action="{{ url('subscribe/free') }}">
                             {{ csrf_field() }}
 

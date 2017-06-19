@@ -22,6 +22,7 @@ class CreateBusinessesTable extends Migration
             $table->string('street_number');
             $table->string('street_bus_number')->nullable();
             $table->string('zipcode');
+            $table->string('city');
             $table->boolean('paymentconditions');
             $table->timestamps();
 

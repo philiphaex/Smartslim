@@ -25,6 +25,7 @@ class CreateClientsTable extends Migration
             $table->string('street_number')->nullable();
             $table->string('street_bus_number')->nullable();
             $table->string('zipcode')->nullable();
+            $table->string('city')->nullable();
             $table->integer('phone')->nullable();
             //Fysische gegevens
             $table->integer('length');

@@ -15,10 +15,8 @@ use Illuminate\Http\Request;
 
 class SubscribeController extends Controller
 {
-    //
     public function index()
     {
-//        session()->forget('invoice');
         return view('subscription.subscribe');
 
     }
@@ -27,8 +25,7 @@ class SubscribeController extends Controller
     {
         $subscription_id = $request->get('subscription');
         $subscription  = Role::find($subscription_id);
-
-        if($subscription->name = 'level1') {
+        if($subscription->name == 'level1') {
 
             $price_info = Price::where('role_id', '=', $subscription_id)->first();
 
@@ -71,15 +68,11 @@ class SubscribeController extends Controller
         $user = User::where('id', '=', $user_id)->first();
         $roles = DB::table('role_user')->select('*')->where('user_id','=',$user_id)->get();
 
-        
-
         if(!isset($roles[0])){
             $user->attachRole($role_id);
             //'dietician' role toevoegen
             $user->attachRole(5);
         }
-
-
 
         //Business registration
         $business = new Business;
@@ -95,11 +88,13 @@ class SubscribeController extends Controller
             $business->street_number = $user->street_number;
             $business->street_bus_number = $user->street_bus_number;
             $business->zipcode = $user->zipcode;
+            $business->city = $user->city;
         }else{
             $business->street = $request->street;
             $business->street_number = $request->street_number;
             $business->street_bus_number = $request->street_bus_number;
             $business->zipcode = $request->zipcode;
+            $business->city = $request->city;
         }
         $business->save();
 
@@ -185,11 +180,13 @@ class SubscribeController extends Controller
             $business->street_number = $user->street_number;
             $business->street_bus_number = $user->street_bus_number;
             $business->zipcode = $user->zipcode;
+            $business->city = $user->city;
         }else{
             $business->street = $request->street;
             $business->street_number = $request->street_number;
             $business->street_bus_number = $request->street_bus_number;
             $business->zipcode = $request->zipcode;
+            $business->city = $request->city;
         }
         $business->save();
 
@@ -250,24 +247,7 @@ class SubscribeController extends Controller
 
     public function completeBanktransfer($id)
     {
-
-//        $payment_id = Mollie::api()->payments()->get()->id;
-        
-       /* $mollie_id = Mollie::api()->payments()->get($pay_mollie->id)->id;
-
-        $payment_id =  Mollie::api()->payments()->get($pay_mollie->id)->metadata;
-        $status =  Mollie::api()->payments()->get($pay_mollie->id)->status;
-
-        $payment = Payment::where('id','=',$payment_id)->first();
-        if($status == 'paid'){
-            $payment->status = $mollie_id;
-            $payment->save();
-        }*/
-
-
         $payment = Payment::where('id','=',$id)->first();
-
-
 
         if($payment->status == 2){
 
@@ -287,7 +267,6 @@ class SubscribeController extends Controller
                 $payment->dateSubscription = $dt->toDateTimeString();
                 $payment->save();
             }
-
 
         $user_id = $payment->user_id;
         $user = User::where('id','=',$user_id)->first();
@@ -321,13 +300,6 @@ class SubscribeController extends Controller
         $payment_id =  Mollie::api()->payments()->get($mollie_id)->metadata->order_id;
         $status =  Mollie::api()->payments()->get($mollie_id)->status;
 
-
-
-//        Storage::put('test.txt', file_get_contents('php://input'));
-//        $mollie_payment_info =  Mollie::api()->payments()->get($mollie_id);
-//        Storage::put('test.txt', serialize($mollie_payment_info));
-
-//        $payment = Payment::where('id','=',$payment_id)->first();
         $payment = Payment::where('id','=',$payment_id)->first();
         if($status == 'paid'){
             log::info('werkt');
@@ -373,31 +345,20 @@ class SubscribeController extends Controller
             $business->street_number = $user->street_number;
             $business->street_bus_number = $user->street_bus_number;
             $business->zipcode = $user->zipcode;
+            $business->city = $user->city;
         }else{
             $business->street = $request->street;
             $business->street_number = $request->street_number;
             $business->street_bus_number = $request->street_bus_number;
             $business->zipcode = $request->zipcode;
+            $business->city = $request->city;
         }
         $business->save();
-
-        $price_info = Price::where('role_id','=',$role_id)->get();
-        $price = $price_info[0]->price;
 
 
         $role = Role::find($role_id);
 
-
-
         //payment registratie
-        //Amount on invoice
-        if($price>0){
-
-            $frequency =   12 / $request->frequency;
-        }else{
-            $frequency = 0;
-        }
-
         $payment = new Payment;
         $payment->user_id = $user_id;
         $payment->payment_option = 'free';

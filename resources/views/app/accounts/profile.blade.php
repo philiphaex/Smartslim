@@ -84,9 +84,9 @@
                                     </div>
                                 </div>
                                 <div class="col-md-6 form-group">
-                                    <label class="control-label">Gemeente</label>
+                                    <label class="control-label">Woonplaats</label>
                                     <div>
-                                        {{$city_user}}
+                                        {{$user->city}}
                                     </div>
                                 </div>
                             </div>
@@ -150,9 +150,9 @@
                                     </div>
                                 </div>
                                 <div class="col-md-6 form-group">
-                                    <label class="control-label">Gemeente</label>
+                                    <label class="control-label">Plaats</label>
                                     <div>
-                                        {{$city_business}}
+                                        {{$business->city}}
                                     </div>
                                 </div>
                             </div>

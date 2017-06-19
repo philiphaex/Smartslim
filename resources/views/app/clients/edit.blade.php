@@ -154,8 +154,8 @@
                                 @endif
                             </div>
                             <div class="col-md-6 form-group">
-                                <label for="city" class="col-md-3control-label">Stad</label>
-                                <input id="city" type="text" class="form-control" value="{{$city}}" disabled required>
+                                <label for="city" class="col-md-3control-label">Woonplaats</label>
+                                <input id="city" type="text" class="form-control" value="{{$client->city}}" disabled required>
 
 
                             </div>

@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Item;
 use Carbon\Carbon;
+use Illuminate\Support\Facades\Log;
 use Illuminate\Http\Request;
 
 class ItemController extends Controller
@@ -20,11 +21,13 @@ class ItemController extends Controller
             'visit_code'=>$request->visit_code,
             'title'=>$request->title,
             'input'=>$request->input,
-            'created_at'=>Carbon::now(),
-            'updated_at'=>Carbon::now(),
+//            'created_at'=>Carbon::now(),
+//            'updated_at'=>Carbon::now(),
         ])->id;
+        Log::info($item);
 
         $data = Item::select('*')->where('id','=',$item_id)->get();
+        Log::info($data);
 
         if ($data != null) {
            return $data;

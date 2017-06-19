@@ -16,7 +16,7 @@ class AppController extends Controller
 {
 	public function index()
 	{
-        if(Auth::user()->hasRole('dietician')){
+       if(Auth::user()->hasRole('dietician')){
 		$user_id = Auth::id();
 		$start = User::findOrFail($user_id);
 		$start_date_prev = $start->created_at;
@@ -48,14 +48,14 @@ class AppController extends Controller
 
 		$clients = DB::select(DB::Raw($query));
 
-
-		$amount = count($clients);
-		$query= 'SELECT permissions.display_name
+           $amount = count($clients);
+           $query= 'SELECT permissions.display_name
 				 FROM homestead.permissions
 				 inner join permission_role on permission_role.permission_id = permissions.id
 				 inner join role_user on role_user.role_id = permission_role.role_id
 				 where role_user.user_id='.$user_id;
 		$limit =DB::select(DB::Raw($query));
+//           dd($limit);
 		$percent = ($amount/ $limit[0]->display_name)*100;
 
 		return view('app.dashboard.index',[
@@ -65,7 +65,7 @@ class AppController extends Controller
 			'limit'=> $limit[0]->display_name,
 		]);
         }
-        if(Auth::user()->hasRole('admin')){
+       /* if(Auth::user()->hasRole('admin')){
             $query ='SELECT * FROM homestead.users
                     inner join role_user on users.id = role_user.user_id
                     where role_user.role_id = 5 and users.confirmed=0';
@@ -95,8 +95,10 @@ class AppController extends Controller
                 'users'=>$users,
             ]);
 
+       }*/
 
-        }
+
+
         }
 
 	public function index_admin()
@@ -161,4 +163,6 @@ class AppController extends Controller
 
         return redirect('/settings');
     }
+
+
 }

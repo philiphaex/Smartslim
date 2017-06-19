@@ -8,8 +8,6 @@
                 <div class="panel panel-default" >
                     <div class="panel-body">
                         <h4>Facturatie</h4>
-                        <p>{{$sub}}</p>
-                        <p>{{$price}}</p>
                         <form class="form" role="form" method="POST" action="{{ url('invoice') }}">
                             {{ csrf_field() }}
 

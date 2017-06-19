@@ -8,8 +8,6 @@
                 <div class="panel panel-default" >
                     <div class="panel-body">
                         <h4>Online betaling</h4>
-                        <p>{{$sub}}</p>
-                        <p>{{$price}}</p>
                         <form class="form" role="form" method="POST" action="{{ url('banktransfer') }}">
                             {{ csrf_field() }}
 
@@ -65,7 +63,7 @@
                                 @endif
                             </div>
                             <div class="col-md-6 form-group{{ $errors->has('city') ? ' has-error' : '' }}">
-                                <label for="city" class="col-md-3control-label">Stad</label>
+                                <label for="city" class="col-md-3control-label">Woonplaats</label>
                                 <input id="city" type="text" class="form-control" name="city">
 
                                 @if ($errors->has('city'))

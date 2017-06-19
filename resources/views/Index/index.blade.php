@@ -15,8 +15,8 @@
 
                 <!-- Branding Image -->
                 <a class="navbar-brand" href="{{ url('/') }}" >
-                <img alt="Brand" src="/img/logo-navbar30.png" style="border-radius:50%">
-{{--                {{ config('app.name', 'SmartSlim') }}--}}
+                    <img alt="Brand" src="/img/logo-navbar30.png" style="border-radius:50%">
+                    {{--                {{ config('app.name', 'SmartSlim') }}--}}
                 </a>
 
             </div>
@@ -38,8 +38,12 @@
                         <li><a href="{{ route('login') }}">Login</a></li>
                         <li><a href="{{ route('register') }}">Register</a></li>
                     @else
-
+                        @if(Auth::user()->hasRole('admin'))
+                        <li><a href="{{url('/admin/dashboard')}}">Dashboard</a></li>
+                        @endif
+                        @if(Auth::user()->hasRole('dietician'))
                         <li><a href="{{url('dashboard')}}">Dashboard</a></li>
+                            @endif
                         <li><a href="{{ route('logout') }}"
                                onclick="event.preventDefault();
                                                      document.getElementById('logout-form').submit();">
@@ -55,22 +59,40 @@
             </div>
         </div>
     </nav>
-    <section class="hero-unit">
-    </section>
+    <div class="hero-unit">
+    </div>
 
 
     <section id="product">
         <div class="container">
             <div class="row">
+                <div class="col-md-6"></div>
+                <div class="col-md-offset-6 col-md-6">
+                    <div class="row">
+                        <h4><strong>Beheer uw cliëntdossiers in de cloud</strong></h4>
+                        <h4 style="color:#A271E4;">Altijd toegankelijk</h4>
+                        <p class="col-md-7">Met de druk van een knop kan u alle cliënten info raadplegen. SmartSlim bundelt alle informatie per klant in een overzichtelijk profielpagina. </p>
+                    </div>
+                    <div class="row">
 
+                        <ul>
+                            <li>Creëer onmiddelijk een professioneel opvolging </li>
+                            <li></li>
+                            <li></li>
+                        </ul>
+                    </div>
+                </div>
             </div>
         </div>
     </section>
 
-    <section id="missie">
+    <section id="missie" style="background-color: #464646;height:400px;">
         <div class="container">
-            <div class="row">
-
+            <div class="row" >
+                <div class="col-md-6">
+                    <h4><strong  style="color: white";>Missie</strong></h4>
+                </div>
+                <div class="col-md-offset-6 col-md-6"></div>
             </div>
         </div>
     </section>

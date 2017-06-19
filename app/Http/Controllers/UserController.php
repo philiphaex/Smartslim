@@ -115,6 +115,7 @@ class UserController extends Controller
             'street_number' => $request->street_number,
             'street_bus_number' => $request->street_bus_number,
             'zipcode' => $request->zipcode,
+            'city' => $request->city,
             'phone' =>$request->phone,
             'confirmed'=>1,
             'created_at'=>Carbon::now(),
@@ -137,11 +138,12 @@ class UserController extends Controller
             $business->street_number = $user->street_number;
             $business->street_bus_number = $user->street_bus_number;
             $business->zipcode = $user->zipcode;
+            $business->city = $user->city;
         }else{
             $business->street = $request->b_street;
             $business->street_number = $request->b_street_number;
             $business->street_bus_number = $request->b_street_bus_number;
-            $business->zipcode = $request->b_zipcode;
+            $business->city = $request->b_city;
         }
         $business->save();
 
@@ -195,8 +197,6 @@ class UserController extends Controller
         $zipcode_user =$user->zipcode;
         $zipcode_business = $business[0]->zipcode;
 
-        $city_user = DB::table('zipcodes')->select('Gemeente')->where('zipcode','=',$zipcode_user)->get();
-        $city_business = DB::table('zipcodes')->select('Gemeente')->where('zipcode','=',$zipcode_business)->get();
 
         $query = 'SELECT * FROM homestead.roles
                       inner join role_user on role_user.role_id = roles.id
@@ -209,8 +209,6 @@ class UserController extends Controller
             'business'=>$business[0],
             'clients'=>$clients,
             'payments'=>$payments,
-            'city_user'=>$city_user[0]->Gemeente,
-            'city_business'=>$city_business[0]->Gemeente,
             'role'=>$role[0]->display_name
         ]);
     }
@@ -224,18 +222,14 @@ class UserController extends Controller
     public function edit($id)
     {
         $user = User::find($id);
-        $city = DB::table('zipcodes')->select('gemeente')->where('zipcode','=',$user->zipcode)->get();
         $role_id = DB::table('role_user')->select('*')->where('user_id','=',$id)->get();
 //        $role = DB::table('roles')->select('*')->where('id','=',$role_id[0]->role_id)->get();
         $payment = Payment::where('user_id','=',$id)->orderby('created_at','desc')->get();
         $business = Business::where('user_id','=',$id)->get();
-        $b_city = DB::table('zipcodes')->select('gemeente')->where('zipcode','=',$business[0]->zipcode)->get();
 
         $date = Carbon::parse($payment[0]->dateSubscription)->format('d/m/Y');
         return view ('app.accounts.edit',[
             'user'=>$user,
-            'city'=>$city[0]->gemeente,
-            'b_city'=>$b_city[0]->gemeente,
             'role_id'=>$role_id[0]->role_id,
             'payment'=>$payment[0],
             'business'=>$business[0],
@@ -261,6 +255,7 @@ class UserController extends Controller
             $user->street_number = $request->street_number;
             $user->street_bus_number = $request->street_bus_number;
             $user->zipcode = $request->zipcode;
+            $user->city = $request->city;
             $user->phone= $request->phone;
             $user->updated_at= Carbon::now();
         $user->save();
@@ -282,6 +277,7 @@ class UserController extends Controller
         $business[0]->street_number = $request->b_street_number;
         $business[0]->street_bus_number = $request->b_street_bus_number;
         $business[0]->zipcode = $request->zipcode;
+        $business[0]->city = $request->city;
         $business[0]->save();
 
         DB::table('role_user')->select('*')->where('user_id','=',$id)->where('role_id','<','5')->delete();

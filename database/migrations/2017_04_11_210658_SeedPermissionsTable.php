@@ -15,9 +15,18 @@ class SeedPermissionsTable extends Migration
     {
         DB::table('permissions')->insert(
             array(
-                array('name' => 'client-index',
-                      'display_name' =>'Display all clients',
-                      'description' =>'Shows a list of clients'),
+                array('name' => 'level1',
+                    'display_name' =>'10',
+                    'description' =>'clients/month'),
+                array('name' => 'level2',
+                    'display_name' =>'30',
+                    'description' =>'clients/month'),
+                array('name' => 'level3',
+                    'display_name' =>'60',
+                    'description' =>'clients/month'),
+                /*array('name' => 'client-index',
+                    'display_name' =>'Display all clients',
+                    'description' =>'Shows a list of clients'),
                 array('name' => 'client-create',
                     'display_name' =>'Create client',
                     'description' =>'Create a new client'),
@@ -26,10 +35,7 @@ class SeedPermissionsTable extends Migration
                     'description' =>'Edit client'),
                 array('name' => 'client-delete',
                     'display_name' =>'Delete client',
-                    'description' =>'Delete client'),
-                array('name' => 'client-archive',
-                    'display_name' =>'Archive client',
-                    'description' =>'Archive client'),
+                    'description' =>'Delete client'),*/
             ));
     }
 

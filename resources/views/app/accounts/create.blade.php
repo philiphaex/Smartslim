@@ -97,7 +97,7 @@
                                 @endif
                             </div>
                             <div class="col-md-6 form-group{{ $errors->has('city') ? ' has-error' : '' }}">
-                                <label for="city" class="col-md-3control-label">Stad</label>
+                                <label for="city" class="col-md-3control-label">Woonplaats</label>
                                 <input id="city" type="text" class="form-control" name="city"  required>
 
                                 @if ($errors->has('city'))
@@ -193,7 +193,7 @@
                                 @endif
                             </div>
                             <div class="col-md-6 form-group{{ $errors->has('b_city') ? ' has-error' : '' }}">
-                                <label for="b_city" class="col-md-3 control-label">Stad</label>
+                                <label for="b_city" class="col-md-3 control-label">Plaats</label>
                                 <input id="b_city" type="text" class="form-control" name="b_city">
 
                                 @if ($errors->has('b_city'))

@@ -23,8 +23,9 @@ class CreateUsersTable extends Migration
             $table->string('street_number');
             $table->string('street_bus_number')->nullable();
             $table->string('zipcode');
+            $table->string('city');
             $table->integer('phone');
-            $table->boolean('confirmed')->default(0);
+            $table->boolean('confirmed')->default(false);
             $table->string('confirmation_code')->nullable();
             $table->rememberToken();
             $table->timestamps();

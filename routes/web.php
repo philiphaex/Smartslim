@@ -94,9 +94,12 @@ route::post('orders/update/{id}','OrderController@update');
 //Route::group(['middleware' => ['role:admin']],function(){
 //    Route::get('/dashboard', 'AppController@index_admin');
 //});
+//Route::get('/dashboard', 'AppController@index');
+//Route::get('/dashboard', ['middleware' => ['role:dietician'], 'uses' => 'AppController@index']);
 Route::get('/dashboard', 'AppController@index');
-//Route::get('/dashboard', ['middleware' => ['role:dietician'], 'uses' => 'AppController@index_dietician']);
+Route::get('/admin/dashboard', ['middleware' => ['role:admin'], 'uses' => 'AdminController@index']);
 
 //Admin registratie
 Route::get('/admin','AdminController@register');
 Route::post('/admin/create','AdminController@create');
+

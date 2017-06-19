@@ -84,6 +84,7 @@ class RegisterController extends Controller
             'street_number' => $data['street_number'],
             'street_bus_number' => $data['street_bus_number'],
             'zipcode' => $data['zipcode'],
+            'city' => $data['city'],
             'phone' => $data['phone'],
             'confirmation_code' => str_random(30),
         ]);
@@ -110,7 +111,6 @@ class RegisterController extends Controller
             $email = new EmailVerification(new User(['confirmation_code' => $user->confirmation_code, 'firstname' => $user->firstname]));
             Mail::to($user->email)->send($email);
             DB::commit();
-            Session::flash('message', 'Een bevestigings-email werd verstuurd');
 //            return back();
 
 

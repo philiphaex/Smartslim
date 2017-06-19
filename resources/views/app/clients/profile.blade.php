@@ -107,7 +107,7 @@
                                     {{$client->street_number}}
                                     {{$client->street_bus_number}}
                                     {{$client->zipcode}}
-                                    {{--{{$city}}--}}
+                                    {{$client->city}}
                                 </div>
                             </div>
                         </div>

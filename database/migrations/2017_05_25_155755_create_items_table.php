@@ -18,6 +18,8 @@ class CreateItemsTable extends Migration
             $table->string('visit_code');
             $table->string('title');
             $table->string('input');
+            $table->timestamps();
+
         });
     }
 

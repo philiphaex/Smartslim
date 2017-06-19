@@ -36,6 +36,8 @@
                                 <div class="col-md-4">{{$user->street}}</div>
                                 <div class="col-md-2">{{$user->street_number}}</div>
                                 <div class="col-md-2">{{$user->street_bus_number}}</div>
+                                <div class="col-md-1">{{$user->zipcode}}</div>
+                                <div class="col-md-3">{{$user->city}}</div>
                             </div>
                             <div class="row">
                                 <p>Bedrijf</p>
@@ -47,6 +49,8 @@
                                 <div class="col-md-4">{{$business->street}}</div>
                                 <div class="col-md-2">{{$business->street_number}}</div>
                                 <div class="col-md-2">{{$business->street_bus_number}}</div>
+                                <div class="col-md-1">{{$business->zipcode}}</div>
+                                <div class="col-md-3">{{$business->city}}</div>
                             </div>
                         </div>
 
@@ -79,7 +83,7 @@
                             <button  onClick="window.print()" class="btn btn-default">
                                 Print
                             </button>
-                            <a href="{{route('login')}}" class="pull-right btn btn-primary">Login</a>
+                            <a href="{{url('/login')}}" class="pull-right btn btn-primary">Login</a>
                         </div>
 
                         </form>

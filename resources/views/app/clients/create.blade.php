@@ -128,8 +128,7 @@
                             </div>
                             <div class="col-md-6 form-group{{ $errors->has('zipcode') ? ' has-error' : '' }}">
                                 <label for="zipcode" class="col-md-3control-label">Postcode</label>
-                                <input id="zipcode" type="text" class="form-control" name="zipcode"  required>
-
+                                    <input id="zipcode" type="text" class="form-control" name="zipcode"  required>
                                 @if ($errors->has('zipcode'))
                                     <span class="help-block">
                                         <strong>{{ $errors->first('zipcode') }}</strong>
@@ -137,7 +136,7 @@
                                 @endif
                             </div>
                             <div class="col-md-6 form-group{{ $errors->has('city') ? ' has-error' : '' }}">
-                                <label for="city" class="col-md-3control-label">Stad</label>
+                                <label for="city" class="col-md-3control-label">Woonplaats</label>
                                 <input id="city" type="text" class="form-control" name="city"  required>
 
                                 @if ($errors->has('city'))
