@@ -61,4 +61,9 @@ class IndexController extends Controller
 
 	}
 
+	public function privacy()
+	{
+		return view('index.privacypolicy');
+	}
+
 }

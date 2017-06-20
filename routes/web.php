@@ -49,7 +49,7 @@ Route::get('/', 'IndexController@index');
 Route::post('/send/contact','IndexController@contact');
 //Cookie
 Route::get('/privacy/accept','IndexController@acceptCookie');
-
+Route::get('/privacy','IndexController@privacy');
 //Logged in
 Route::get('/dashboard', 'AppController@index');
 Route::get('/clients', 'ClientController@index');
