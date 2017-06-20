@@ -2,7 +2,6 @@
 
 namespace App\Http\Controllers;
 
-use App\Client;
 use App\User;
 use App\Business;
 use App\Payment;
@@ -194,8 +193,7 @@ class UserController extends Controller
         $clients = DB::select(DB::Raw($query));
         $payments = Payment::where('user_id','=',$user->id)->orderby('created_at','desc')->get();
 
-        $zipcode_user =$user->zipcode;
-        $zipcode_business = $business[0]->zipcode;
+
 
 
         $query = 'SELECT * FROM homestead.roles
@@ -307,4 +305,126 @@ class UserController extends Controller
         $user->confirmed = 1;
         $user->save();
     }
+    public function search(Request $request)
+    {
+        if ($request->ajax()){
+            $output = "";
+            $keyword = $request->get('keyword');
+
+
+            $users = User::where(DB::raw('CONCAT_WS(" ", lastname, firstname)'),'like','%'.$keyword.'%')
+                ->orderby('lastname','asc')
+                ->orderby('firstname','asc')
+                ->get();
+
+
+
+            if (count($users)>0)
+            {
+                foreach ($users as $user){
+
+                    $query = 'SELECT * FROM homestead.roles
+                      inner join role_user on role_user.role_id = roles.id
+                      where role_user.user_id ='.$user->id;
+
+                    $role =DB::select(DB::Raw($query));
+
+                    $query = 'select clients.id, clients.firstname, clients.lastname
+                      from clients
+                      inner join client_user on client_user.client_id = clients.id
+                       where client_user.user_id='.$user->id;
+
+                    $clients = DB::select(DB::Raw($query));
+
+                    $business = Business::where('user_id','=',$user->id)->get();
+
+
+                    $output .= '<tr id="account-'.$user->id.'">'.
+                        '<td class="table-text">'.
+                        '<div>'.$user->firstname.'</div>'.
+                        '</td>'.
+                        '<td class="table-text">'.
+                        '<div>'.$user->lastname.'</div>'.
+                        '</td>'.
+                        '<td class="table-text">'.
+                        '<div>'.$business[0]->name.'</div>'.
+                        '</td>'.
+                        '<td class="table-text">'.
+                        '<div>'.$role[0]->display_name.'</div>'.
+                        '</td>'.
+                        '<td class="table-text">'.
+                        '<div>'.count($clients).'</div>'.
+                        '</td>'.
+                        '<td class="table-text">'.
+                        '<a href="accounts/'.$user->id .'" class="btn btn-success">Toon gegevens</a>'.
+                        '</td>'.
+                        '</tr>';
+
+
+                }
+                return response($output);
+            }else{
+                $output = '<div>Er werd geen overeenkomstige account gevonden</div>';
+                return response($output);
+
+            }
+
+
+        }
+        }
+
+        public function all()
+        {
+            $output = "";
+            $query = 'SELECT * FROM users
+        inner join role_user on role_user.user_id = users.id
+        inner join roles on roles.id = role_user.role_id
+        where roles.name = "dietician"';
+
+            $dieticians = DB::select(DB::Raw($query));
+
+            foreach ($dieticians as $dietician){
+                $user_id = $dietician->user_id;
+                $user = User::find($user_id);
+
+                $business = Business::where('user_id','=',$user_id)->get();
+
+                $query = 'select clients.id, clients.firstname, clients.lastname
+                      from clients
+                      inner join client_user on client_user.client_id = clients.id
+                       where client_user.user_id='.$user_id;
+
+                $clients = DB::select(DB::Raw($query));
+
+                $query = 'SELECT * FROM homestead.roles
+                      inner join role_user on role_user.role_id = roles.id
+                      where role_user.user_id ='.$user_id;
+
+                $role =DB::select(DB::Raw($query));
+
+                $output .= '<tr id="account-'.$user_id.'">'.
+                    '<td class="table-text">'.
+                    '<div>'.$dietician->firstname.'</div>'.
+                    '</td>'.
+                    '<td class="table-text">'.
+                    '<div>'.$dietician->lastname.'</div>'.
+                    '</td>'.
+                    '<td class="table-text">'.
+                    '<div>'.$business[0]->name.'</div>'.
+                    '</td>'.
+                    '<td class="table-text">'.
+                    '<div>'.$role[0]->display_name.'</div>'.
+                    '</td>'.
+                    '<td class="table-text">'.
+                    '<div>'.count($clients).'</div>'.
+                    '</td>'.
+                    '<td class="table-text">'.
+                    '<a href="accounts/'.$user_id .'" class="btn btn-success"> <i class="fa fa-check-circle-o"></i></a>'.
+                    '</td>'.
+                    '</tr>';
+
+            }
+            return response($output);
+        }
+
 }

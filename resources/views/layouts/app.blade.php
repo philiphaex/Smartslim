@@ -454,34 +454,44 @@
                 }
             });
             });
-        $('#search-zipcode').on('keyup', function (e) {
+
+        //zoeken op account overzicht
+        $('#search-account').on('keyup', function (e) {
             e.preventDefault();
             console.log(this.value.length);
-            if (this.value.length = 4) {
+            if (this.value.length >= 1) {
                 console.log(this.value)
                 $.ajax({
-                    url: 'zipcode/search',
+                    url: 'accounts/search',
                     type: 'post',
                     data: {
                         '_token': $('input[name=_token]').val(),
-                        'zipcode': $('input[name=zipcode]').val()
+                        'keyword': $('input[name=keyword]').val()
                     },
                     datatype: 'JSON',
-                    success: function (response) {
-                        console.log(response);
-                    if(response == 'error'){
-                        $('#alert-zipcode').show();
-                    }else{
-                        $('#alert-zipcode').hide();
-                    }
+                    success: function (data) {
+                        console.log(data);
 
+                        $('#account-list').html(data);
                     }
                 });
             }
-
+            if (this.value.length == 0) {
+                $.ajax({
+                    url: 'accounts/all',
+                    type: 'post',
+                    data: {
+                        '_token': $('input[name=_token]').val(),
+                    },
+                    datatype: 'JSON',
+                    success: function (data) {
+                        console.log(data)
+                        $('#account-list').html(data);
+                    }
+                })
+            }
 
         });
-
     });
 
 </script>

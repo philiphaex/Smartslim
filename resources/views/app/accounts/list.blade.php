@@ -20,7 +20,7 @@
                 </thead>
 
                 <!-- Table Body -->
-                <tbody id="client-list">
+                <tbody id="account-unconfirmed-list">
                 @foreach ($users as $user)
                     @if($user['confirmed']==0)
                         <tr id="account-unconfirmed-{{$user['id']}}">
@@ -164,7 +164,7 @@
             </thead>
 
             <!-- Table Body -->
-            <tbody id="client-list">
+            <tbody id="account-list">
             @foreach ($users as $user)
                 <tr id="account-{{$user['id']}}">
 

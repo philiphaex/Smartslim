@@ -76,6 +76,9 @@ Route::post('clients/search', ['middleware' => ['role:dietician'], 'uses' => 'Cl
 //Accounts
 route::resource('accounts','UserController');
 route::post('accounts/confirm',['middleware' => ['role:admin'], 'uses' => 'UserController@confirm']);
+Route::post('accounts/search', ['middleware' => ['role:admin'], 'uses' => 'UserController@search']);
+Route::post('accounts/all', ['middleware' => ['role:admin'], 'uses' => 'UserController@all']);
+
 
 //Orders
 route::get('orders', ['middleware' => ['role:admin'], 'uses' => 'OrderController@index']);

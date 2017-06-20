@@ -20,7 +20,7 @@
                         {{ csrf_field() }}
                         <div class="col-md-12">
                             <div class="form-group has-feedback">
-                                <input id="search-client" type="text" class="form-control" placeholder="Zoeken" name="keyword">
+                                <input id="search-account" type="text" class="form-control" placeholder="Zoeken" name="keyword">
                                 <span class="form-control-feedback"> <i class="fa fa-search"></i></span>
                             </div>
                         </div>
