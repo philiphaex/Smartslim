@@ -35,12 +35,6 @@ Route::post('/subscribe/free','SubscribeController@free');
 
 
 //Email
-//Route::post('/send', 'EmailController@send');
-//Mail confirmation
-/*Route::get('/mail',[
-    'uses' => 'EmailController@send'
-]);*/
-//User confirmation from mail
 Route::get('register/verify/{token}', 'Auth\RegisterController@verify');
 
 //Index
@@ -51,14 +45,14 @@ Route::post('/send/contact','IndexController@contact');
 Route::get('/privacy/accept','IndexController@acceptCookie');
 Route::get('/privacy','IndexController@privacy');
 //Logged in
-Route::get('/dashboard', 'AppController@index');
-Route::get('/clients', 'ClientController@index');
+//Route::get('/dashboard', 'AppController@index');
+Route::get('/clients',['middleware' => ['role:dietician'], 'uses' => 'ClientController@index']);
 //Settings
-Route::get('/settings','AppController@settings');
-Route::post('/settings/update/user/{id}','AppController@updateUser');
-Route::post('/settings/update/business/{id}','AppController@updateBusiness');
+Route::get('/settings',['middleware' => ['role:dietician'], 'uses' =>'AppController@settings']);
+Route::post('/settings/update/user/{id}',['middleware' => ['role:dietician'], 'uses' =>'AppController@updateUser']);
+Route::post('/settings/update/business/{id}',['middleware' => ['role:dietician'], 'uses' =>'AppController@updateBusiness']);
 //Help form
-Route::post('/send/help','IndexController@help');
+Route::post('/send/help',['middleware' => ['role:dietician'], 'uses' =>'IndexController@help']);
 
 
 //Visits
@@ -67,36 +61,30 @@ Route::post('/clients/{client_id}/visits/store/{visit_code}','VisitController@st
 Route::post('/visits/show/{visit_code}','VisitController@show');
 
 //Delete visit from client profile (Ajax Call)
-//Route::delete('/visits/delete/{visit_code}','VisitController@destroy');
-Route::post('clients/visits/delete','VisitController@destroy');
+Route::post('clients/visits/delete',['middleware' => ['role:dietician'], 'uses' =>'VisitController@destroy']);
 
 //Add item to visit (Ajax Calls)
-Route::post('clients/{client_id}/visits/items/store','ItemController@store');
-Route::post('clients/{client_id}/visits/items/edit','ItemController@edit');
-Route::post('clients/{client_id}/visits/items/delete','ItemController@destroy');
+Route::post('clients/{client_id}/visits/items/store',['middleware' => ['role:dietician'], 'uses' =>'ItemController@store']);
+Route::post('clients/{client_id}/visits/items/edit',['middleware' => ['role:dietician'], 'uses' =>'ItemController@edit']);
+Route::post('clients/{client_id}/visits/items/delete',['middleware' => ['role:dietician'], 'uses' =>'ItemController@destroy']);
 
 
 //Client CRUD
 Route::resource('clients', 'ClientController');
-Route::post('clients/search','ClientController@search');
+Route::post('clients/search', ['middleware' => ['role:dietician'], 'uses' => 'ClientController@search']);
 
 //Accounts
 route::resource('accounts','UserController');
-route::post('accounts/confirm','UserController@confirm');
+route::post('accounts/confirm',['middleware' => ['role:admin'], 'uses' => 'UserController@confirm']);
 
 //Orders
-route::get('orders','OrderController@index');
-route::post('orders/confirm','OrderController@confirm');
-route::get('orders/edit/{id}','OrderController@edit');
-route::post('orders/update/{id}','OrderController@update');
+route::get('orders', ['middleware' => ['role:admin'], 'uses' => 'OrderController@index']);
+route::post('orders/confirm', ['middleware' => ['role:admin'], 'uses' => 'OrderController@confirm']);
+route::get('orders/edit/{id}',['middleware' => ['role:admin'], 'uses' => 'OrderController@edit']);
+route::post('orders/update/{id}',['middleware' => ['role:admin'], 'uses' => 'OrderController@update']);
 
-//Roles - Permissions
-//Route::group(['middleware' => ['role:admin']],function(){
-//    Route::get('/dashboard', 'AppController@index_admin');
-//});
-//Route::get('/dashboard', 'AppController@index');
-//Route::get('/dashboard', ['middleware' => ['role:dietician'], 'uses' => 'AppController@index']);
-Route::get('/dashboard', 'AppController@index');
+//Dashboard
+Route::get('/dashboard', ['middleware' => ['role:dietician'], 'uses' => 'AppController@index']);
 Route::get('/admin/dashboard', ['middleware' => ['role:admin'], 'uses' => 'AdminController@index']);
 
 //Admin registratie

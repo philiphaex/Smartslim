@@ -50,7 +50,7 @@
                                 <div class="col-md-4">
                                     <div class="radio">
                                         <label for="sex-0">
-                                            <input type="radio" name="sex" id="sex-0" value="Man">
+                                            <input type="radio" name="sex" id="sex-0" value="Man" required>
                                             Man
                                         </label>
                                     </div>

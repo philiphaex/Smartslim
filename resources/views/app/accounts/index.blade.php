@@ -1,7 +1,9 @@
 @extends('layouts.app')
 
 @section('content')
-    <div class="container">
+    @if(Auth::user()->hasRole('admin'))
+
+        <div class="container">
         <div class="row">
             <div class="panel panel-heading" style="background-color: whitesmoke">
                 <h4>Account beheer</h4>
@@ -36,4 +38,5 @@
 
 
     </div>
+    @endif
 @endsection

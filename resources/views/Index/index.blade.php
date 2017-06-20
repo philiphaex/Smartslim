@@ -66,19 +66,21 @@
     <section id="product">
         <div class="container">
             <div class="row">
-                <div class="col-md-6"></div>
-                <div class="col-md-offset-6 col-md-6">
+                <div class="col-md-offset-2 col-md-4">
+                    <div class="text-center circle"  style="padding-top: 40px"><img  src="/img/database.png" >
+                    </div>
+                </div>
+                <div class="col-md-6">
                     <div class="row">
                         <h4><strong>Beheer uw cliëntdossiers in de cloud</strong></h4>
                         <h4 style="color:#A271E4;">Altijd toegankelijk</h4>
                         <p class="col-md-7">Met de druk van een knop kan u alle cliënten info raadplegen. SmartSlim bundelt alle informatie per klant in een overzichtelijk profielpagina. </p>
                     </div>
                     <div class="row">
-
                         <ul>
                             <li>Creëer onmiddelijk een professioneel opvolging </li>
-                            <li></li>
-                            <li></li>
+                            <li>Beheer alle informatie op één plaats</li>
+                            <li>Mis geen enkel item</li>
                         </ul>
                     </div>
                 </div>
@@ -86,21 +88,42 @@
         </div>
     </section>
 
-    <section id="missie" style="background-color: #464646;height:400px;">
+    <section id="missie" style="background-color: #464646;height:200px;">
         <div class="container">
             <div class="row" >
-                <div class="col-md-6">
+                <div class="col-md-12">
+                <div class="text-center" style="color: white";>
                     <h4><strong  style="color: white";>Missie</strong></h4>
+
+                    <h4 style="color: white";>"Een kwaliteitsvol patiëntbeheersysteem aanbieden voor diëtisten"</h4>
+                    <h5 style="color: lightgrey";>"Consiste informatie inzamelen en aanbieden voor betere service"</h5>
                 </div>
-                <div class="col-md-offset-6 col-md-6"></div>
+                </div>
             </div>
         </div>
     </section>
 
     <section id="services">
         <div class="container">
-            <div class="row">
-
+            <div class="text-center">
+                <div class="row ">
+                    <div class="col-md-3">
+                        <h5 style="color:#9C68E3">Cliëntbeheer</h5>
+                        <h1><i class="fa fa-address-card-o" aria-hidden="true" ></i></h1>
+                    </div>
+                    <div class="col-md-3">
+                        <h5 style="color:#9C68E3">Detailweergave</h5>
+                        <h1><i class="fa fa-bar-chart" aria-hidden="true" ></i></h1>
+                    </div>
+                    <div class="col-md-3">
+                        <h5 style="color:#9C68E3">Toegankelijk</h5>
+                        <h1><i class="fa fa-database" aria-hidden="true" ></i></h1>
+                    </div>
+                    <div class="col-md-3">
+                        <h5 style="color:#9C68E3">Bezoekopvolging</h5>
+                        <h1><i class="fa fa-list" aria-hidden="true" ></i></h1>
+                    </div>
+                </div>
             </div>
         </div>
     </section>
