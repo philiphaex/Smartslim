@@ -60,6 +60,11 @@
         </div>
     </nav>
     <div class="hero-unit">
+        <div class="hero-text">
+            <h1>SmartSlim</h1>
+            <h4>Het platform voor diëtisten!</h4>
+            <a href="{{route('register')}}" class="btn btn-info">Probeer nu</a>
+            </div>
     </div>
 
 
@@ -151,7 +156,7 @@
                     </div>
                 </div>
                 <!--Panel met prijzen-->
-                <div class="col-md-3 text-center">
+                <div class="col-md-offset-1 col-md-3 text-center">
                     <div class="panel panel-default panel-pricing">
                         <div class="panel-heading">
                             <!--<i class="fa fa-desktop"></i>-->
@@ -171,7 +176,7 @@
                     </div>
                 </div>
                 <!--Panel met prijzen-->
-                <div class="col-md-3 text-center">
+                <div class="col-md-offset-1 col-md-3 text-center">
                     <div class="panel panel-default panel-pricing">
                         <div class="panel-heading">
                             <!--<i class="fa fa-desktop"></i>-->
@@ -190,26 +195,7 @@
                         </div>
                     </div>
                 </div>
-                <!--Panel met prijzen-->
-                <div class="col-md-3 text-center">
-                    <div class="panel panel-default panel-pricing">
-                        <div class="panel-heading">
-                            <!--<i class="fa fa-desktop"></i>-->
-                            <h3>Maatwerk</h3>
-                        </div>
-                        <div class="panel-body text-center">
-                            <p><strong>Op afspraak</strong></p>
-                        </div>
-                        <ul class="list-group text-center">
-                            <li class="list-group-item"><i class="fa fa-window-restore"></i>  Alle SmartSlim modules  </li>
-                            <li class="list-group-item"><i class="fa fa-file"></i>  Formulieren op maat</li>
-                            <li class="list-group-item"><i class="fa fa-clock-o"></i> 24/7 Ondersteuning</li>
-                        </ul>
-                        <div class="panel-footer">
-                            <a class="btn btn-lg btn-block btn-primary" href="{{ route('register') }}">Contact</a>
-                        </div>
-                    </div>
-                </div>
+
             </div>
         </div>
     </section>
