@@ -37,12 +37,8 @@
                         </div>
 
                         <div class="col-md-12 form-group">
-                            <label for="dateSubscription" class="col-md-3control-label">Einde abonnement</label>
-                            @if(isset($payment->dateSubscription))
+                            <label for="dateSubscription" class="col-md-3control-label">Einde abonnement - huidig einde: {{$payment->dateSubscription}}</label>
                             <input id="dateSubscription" type="date" class="form-control" name="dateSubscription"  required autofocus>
-                            @else
-                            <input id="dateSubscription" type="date" class="form-control" name="dateSubscription" value="{{$payment->dateSubscription}}"  required autofocus>
-                                @endif
                         </div>
                         <div class="col-md-12 form-group">
                             <label for="status" class="control-label">Status</label>
@@ -54,7 +50,7 @@
                         </div>
 
 
-                        <a href="{{url('/orders')}}" class="btn btn-default">Annuleer</a>
+                        <a href="{{url('/orders')}}" class="btn btn-default">Annuleren</a>
 
                         <button  class="pull-right btn btn-success">
                             Update

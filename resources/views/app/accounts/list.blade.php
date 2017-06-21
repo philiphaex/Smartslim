@@ -88,7 +88,7 @@
 @if ($overdue > 0)
     <div class="panel panel-default">
         <div class="panel-heading">
-            Accounts met verlopen abonnenementen
+            Accounts met verlopen abonnementen
         </div>
 
         <div class="panel-body">

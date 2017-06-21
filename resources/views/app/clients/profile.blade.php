@@ -6,6 +6,7 @@
             <div class="panel panel-default">
                 <div class="panel-heading">
                     <div class="pull-right" style="padding-top: 5px;">
+                        <a href="{{url('clients')}}" class="btn btn-default">Terug</a>
                         <a href="{{url('clients/'.$client->id.'/edit')}}" class="btn btn-default">Gegevens updaten</a>
                         <a href="{{url('clients/'.$client->id.'/visits/create')}}" class="btn btn-primary">Voeg bezoek toe</a>
                     </div>

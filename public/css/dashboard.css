@@ -14,15 +14,17 @@ table{
     left: 0;
     width: 100%;
     height: 30px;
-    padding-top:5px;
+    padding-bottom:10px;
 }
 
 .navbar-top{
     color:white;
-    padding-top:5px;
-    height:22px;
+    /*padding-bottom:5px;*/
+    /*height:22px;*/
     padding-right: 30px;
 }
+
+
 a{
     color:inherit;
 

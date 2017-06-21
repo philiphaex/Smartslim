@@ -44,7 +44,7 @@ class AppController extends Controller
                   from clients
                   inner join client_user on client_user.client_id = clients.id
                   where client_user.user_id='.$user_id. ' and clients.created_at >="'. $prev_date.'" and clients.created_at < "'.$next_date.'"'.
-				  'order by clients.created_at desc';
+				  'order by clients.created_at desc limit 5';
 
 		$clients = DB::select(DB::Raw($query));
 

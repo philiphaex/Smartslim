@@ -39,7 +39,7 @@
                     <!-- Table Body -->
                     <tbody id="account-list">
                     @foreach ($users as $user)
-                            <tr id="user-{{$user->id}}">
+                            <tr id="user-{{$user->user_id}}">
                                 <td class="table-text">
                                     <div>{{  $user->created_at }}</div>
                                 </td>
@@ -55,7 +55,7 @@
 
                                 <td>
                                     <div class="btn-toolbar">
-                                        <a href="{{url('accounts/'.$user->id)}}" class="btn btn-success">Toon gegevens</a>
+                                        <a href="{{url('accounts/'.$user->user_id)}}" class="btn btn-success">Toon gegevens</a>
                                     </div>
                                 </td>
                             </tr>

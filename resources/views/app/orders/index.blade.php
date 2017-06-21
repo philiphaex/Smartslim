@@ -22,7 +22,7 @@
 
                     <!-- Table Headings -->
                         <thead>
-                        <th>Factuurdatum</th>
+                        <th>Betaaldatum</th>
                         <th>Vervaldag</th>
                         <th>Voornaam</th>
                         <th>Achternaam</th>
@@ -60,8 +60,11 @@
                                     <td>
                                         <div class="btn-toolbar">
                                             <!-- Select Button -->
+                                            <a href="{{url('/orders/edit/'.$user['payment_id'])}}" class="btn btn-default">
+                                                Wijzigen
+                                            </a>
                                             <button type="submit" class="btn btn-success confirm-modal" data-toggle="modal" data-target="Modal-confirm-{{$user['payment_id']}}">
-                                                Bevestig betaling
+                                                Bevestigen
                                             </button>
                                             {{--confirm modal--}}
                                             <div id="Modal-confirm-{{$user['payment_id']}}" class="modal">
@@ -83,7 +86,7 @@
                                                                 <button type="submit" class="btn btn-default confirm-payment">
                                                                     Bevestigen
                                                                 </button>
-                                                            </form>
+                                                                </form>
                                                         </div>
                                                     </div>
                                                 </div>
@@ -128,7 +131,7 @@
                         <!-- Table Body -->
                         <tbody id="client-list">
                         @foreach ($users as $user)
-                            @if($user['paymentStatus']==2)
+                            @if($user['paymentStatus']==3)
                                 <tr id="payment-{{$user['payment_id']}}">
                                     <td class="table-text">
                                         <div>{{  $user['dateOfPayment'] }}</div>

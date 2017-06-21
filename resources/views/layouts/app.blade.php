@@ -31,16 +31,16 @@
     {{--<nav class="navbar  navbar-default">--}}
     <div  id="nav-top">
         <div class="container">
-            <a class="brand navbar-top" href="{{url('/')}}" >SmartSlim</a>
+            <span class="brand navbar-top" >SmartSlim</span>
             <div class="pull-right">
                 @if(Auth::user()->hasRole('dietician'))
-                <a class="navbar-top help-modal"  data-toggle="modal" data-target="Modal-help" >Help</a>
-                <a class="navbar-top" href="{{url('/settings')}}" >Instellingen</a>
+                <a class="navbar-top help-modal btn btn-link"  data-toggle="modal" data-target="Modal-help"  style="text-decoration: none;">Help</a>
+                <a class="navbar-top btn btn-link" href="{{url('/settings')}}" >Instellingen</a>
                 @endif
-                <a class="navbar-top" href="{{ route('logout') }}"
+                <a class="navbar-top  btn btn-link" href="{{ route('logout') }}"
                    onclick="event.preventDefault();
                                                      document.getElementById('logout-form').submit();">
-                    Logout
+                    Uitloggen
                 </a>
                 <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
                     {{ csrf_field() }}
@@ -68,7 +68,7 @@
         <div class="collapse navbar-collapse" id="app-navbar-collapse">
             <!-- Left Side Of Navbar -->
             <ul class="nav navbar-nav">
-                <li class="submenu-item {{Request::is('dashboard*') ? 'active' : null }}">
+                <li class="submenu-item {{Request::is('*dashboard*') ? 'active' : null }}">
                     @if(Auth::user()->hasRole('admin'))
 
                     <a href="{{url('/admin/dashboard')}}">
@@ -135,7 +135,7 @@
                         <input name="email" value="{{Auth::user()->email}}" hidden>
                         <input name="firstname" value="{{Auth::user()->firstname}}" hidden>
                         <input name="lastname" value="{{Auth::user()->lastname}}" hidden>
-                        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                        <button type="button" class="btn btn-default" data-dismiss="modal">Annuleren</button>
 
                         <button type="submit" class="btn btn-primary pull-right" id="send-help">Verzenden</button>
                 </form>

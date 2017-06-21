@@ -419,7 +419,7 @@ class UserController extends Controller
                     '<div>'.count($clients).'</div>'.
                     '</td>'.
                     '<td class="table-text">'.
-                    '<a href="accounts/'.$user_id .'" class="btn btn-success"> <i class="fa fa-check-circle-o"></i></a>'.
+                    '<a href="accounts/'.$user_id .'" class="btn btn-success">Toon gegevens</a>'.
                     '</td>'.
                     '</tr>';
 

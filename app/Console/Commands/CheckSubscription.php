@@ -42,9 +42,18 @@ class CheckSubscription extends Command
     public function handle()
     {
         //
-        $users = DB::table('users')->get();
+
+        $query = 'SELECT * FROM users
+        inner join role_user on role_user.user_id = users.id
+        inner join roles on roles.id = role_user.role_id
+        where roles.name = "dietician"';
+
+        $users = DB::select(DB::Raw($query));
+
+
         Foreach($users as $user){
-            $user_id = $user->id;
+            $user_id = $user->user_id;
+
             Log::info($user_id);
             $payment = Payment::where('user_id','=',$user_id)->orderby('created_at','desc')->get();
             $date = Carbon::now()->timestamp;

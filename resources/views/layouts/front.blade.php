@@ -59,7 +59,7 @@
                                 <label for="contactMessage">Bericht</label>
                                 <textarea class="form-control" rows="5" name="helpMessage" required></textarea>
                             </div>
-                            <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                            <button type="button" class="btn btn-default" data-dismiss="modal">Annuleren</button>
 
                             <button type="submit" class="btn btn-primary pull-right" id="send-help">Verzenden</button>
                         </form>

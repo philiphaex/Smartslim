@@ -52,7 +52,7 @@ Route::get('/settings',['middleware' => ['role:dietician'], 'uses' =>'AppControl
 Route::post('/settings/update/user/{id}',['middleware' => ['role:dietician'], 'uses' =>'AppController@updateUser']);
 Route::post('/settings/update/business/{id}',['middleware' => ['role:dietician'], 'uses' =>'AppController@updateBusiness']);
 //Help form
-Route::post('/send/help',['middleware' => ['role:dietician'], 'uses' =>'IndexController@help']);
+Route::post('/send/help','IndexController@help');
 
 
 //Visits
