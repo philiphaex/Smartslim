@@ -37,7 +37,7 @@
                         <td>
                             <div class="btn-toolbar">
                                 <!-- Select Button -->
-                                <a href="{{url('clients/'.$client->id)}}" class="btn btn-success"> <i class="fa fa-check-circle-o"></i></a>
+                                <a href="{{url('clients/'.$client->id)}}" class="btn btn-success"> Toon gegevens</i></a>
                             </div>
                         </td>
                     </tr>
