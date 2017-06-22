@@ -29,16 +29,16 @@ Route::post('/invoice/success', 'SubscribeController@completeInvoice');
 Route::post('/banktransfer', 'SubscribeController@banktransfer');
 Route::post('/banktransfer/success','SubscribeController@webhookBanktransfer');
 Route::get('/banktransfer/success','SubscribeController@webhookBanktransfer');
-Route::get('/banktransfer/complete/{id}', 'SubscribeController@completeBanktransfer');
+Route::get('/banktransfer/complete/{id}','SubscribeController@completeBanktransfer');
 //Gratis formule
 Route::post('/subscribe/free','SubscribeController@free');
 
 
 //Email
-Route::get('register/verify/{token}', 'Auth\RegisterController@verify');
+Route::get('register/verify/{token}','Auth\RegisterController@verify');
 
 //Index
-Route::get('/', 'IndexController@index');
+Route::get('/','IndexController@index');
 //Contact form
 Route::post('/send/contact','IndexController@contact');
 //Cookie
