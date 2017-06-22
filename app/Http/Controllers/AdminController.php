@@ -53,7 +53,7 @@ class AdminController extends Controller
         $user->confirmed = 1;
         $user->save();
 
-        return redirect('login');
+        return redirect('/');
 
     }
 
