@@ -236,11 +236,6 @@
             <p> Copyright &copy; Philip Haex</p>
         </div>
     </footer>
-
-    <!-- Google Analytics -->
-
-
-
     </div>
 
 

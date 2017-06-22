@@ -24,10 +24,8 @@ class ItemController extends Controller
 //            'created_at'=>Carbon::now(),
 //            'updated_at'=>Carbon::now(),
         ])->id;
-        Log::info($item);
 
         $data = Item::select('*')->where('id','=',$item_id)->get();
-        Log::info($data);
 
         if ($data != null) {
            return $data;
@@ -52,9 +50,10 @@ class ItemController extends Controller
         $id = $request->id;
 
         $item= Item::select('*')->where('id','=',$id);
+
         $item->delete();
 
-        
+
     }
 
 }
