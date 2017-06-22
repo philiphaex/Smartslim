@@ -14,7 +14,7 @@ class IndexController extends Controller
 {
 	public function index()
 	{
-		return view('index.index');
+		return view('Index.Index');
     }
 
 	public function contact(Request $request)
