@@ -38,7 +38,10 @@ Route::post('/subscribe/free','SubscribeController@free');
 Route::get('register/verify/{token}','Auth\RegisterController@verify');
 
 //Index
-Route::get('/','IndexController@index');
+//Route::get('/','IndexController@index');
+Route::get('/',function(){
+return view('index.index');
+});
 //Contact form
 Route::post('/send/contact','IndexController@contact');
 //Cookie
