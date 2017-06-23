@@ -35,7 +35,7 @@ class Kernel extends HttpKernel
             \App\Http\Middleware\VerifyCsrfToken::class,
             \Illuminate\Routing\Middleware\SubstituteBindings::class,
 
-//            custom middleware
+//            custom middleware forces https op alle calls
             \App\Http\Middleware\ForceSecure::class,
         ],
 
