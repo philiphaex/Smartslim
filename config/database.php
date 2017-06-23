@@ -45,7 +45,7 @@ return [
             'database' => 'heroku_06380ecda6c8b03',
             'username' => 'b57653ae2094a8',
             'password' => '1d75d69e',
-            'unix_socket' => env('DB_SOCKET', ''),
+//            'unix_socket' => env('DB_SOCKET', ''),
             'charset' => 'utf8mb4',
             'collation' => 'utf8mb4_unicode_ci',
             'prefix' => '',
