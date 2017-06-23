@@ -229,7 +229,7 @@
             </div>
         </div>
     </section>
-    @include('index.cookieConsent')
+    @include('cookieConsent')
 
     <footer>
         <div class="container">
