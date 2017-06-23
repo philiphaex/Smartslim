@@ -92,6 +92,6 @@ Route::get('/dashboard', ['middleware' => ['role:dietician'], 'uses' => 'AppCont
 Route::get('/admin/dashboard', ['middleware' => ['role:admin'], 'uses' => 'AdminController@index']);
 
 //Admin registratie
-Route::get('/admin','AdminController@register');
-Route::post('/admin/create','AdminController@create');
+/*Route::get('/admin','AdminController@register');
+Route::post('/admin/create','AdminController@create');*/
 
