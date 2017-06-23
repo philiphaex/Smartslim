@@ -16,10 +16,15 @@ class ForceSecure
      */
     public function handle(Request $request, Closure $next)
     {
-        if (! $request->secure() && App::environment() !== 'local') {
-            $request->setTrustedProxies([$request->getClientIp()]);
 
-            return redirect()->secure($request->getRequestUri());
+
+        if (!app()->environment('local')) {
+            // for Proxies
+            Request::setTrustedProxies([$request->getClientIp()]);
+
+            if (!$request->isSecure()) {
+                return redirect()->secure($request->getRequestUri());
+            }
         }
 
         return $next($request);

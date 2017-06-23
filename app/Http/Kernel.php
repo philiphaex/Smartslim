@@ -36,7 +36,7 @@ class Kernel extends HttpKernel
             \Illuminate\Routing\Middleware\SubstituteBindings::class,
 
 //            custom middleware
-//            \App\Http\Middleware\ForceSecure::class,
+            \App\Http\Middleware\ForceSecure::class,
         ],
 
         'api' => [
