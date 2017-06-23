@@ -65,9 +65,9 @@ Route::post('/visits/show/{visit_code}','VisitController@show');
 Route::post('clients/visits/delete',['middleware' => ['role:dietician'], 'uses' =>'VisitController@destroy']);
 
 //Add item to visit (Ajax Calls)
-Route::post('clients/{client_id}/visits/items/store',['middleware' => ['role:dietician'], 'uses' =>'ItemController@store']);
-Route::post('clients/{client_id}/visits/items/edit',['middleware' => ['role:dietician'], 'uses' =>'ItemController@edit']);
-Route::post('clients/{client_id}/visits/items/delete',['middleware' => ['role:dietician'], 'uses' =>'ItemController@destroy']);
+Route::post('clients/{client_id}/visits/items/store',['middleware' => ['role:dietician'], 'uses' =>'ItemController@store'])->middleware('secure');
+Route::post('clients/{client_id}/visits/items/edit',['middleware' => ['role:dietician'], 'uses' =>'ItemController@edit'])->middleware('secure');
+Route::post('clients/{client_id}/visits/items/delete',['middleware' => ['role:dietician'], 'uses' =>'ItemController@destroy'])->middleware('secure');
 
 
 //Client CRUD
