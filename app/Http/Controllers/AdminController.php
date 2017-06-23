@@ -60,7 +60,7 @@ class AdminController extends Controller
     public function index()
     {
         if(Auth::user()->hasRole('admin')){
-            $query ='SELECT * FROM homestead.users
+            $query ='SELECT * FROM users
                     inner join role_user on users.id = role_user.user_id
                     where role_user.role_id = 5 and users.confirmed=0';
             $data =DB::select(DB::Raw($query));
