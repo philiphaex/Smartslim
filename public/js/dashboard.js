@@ -3,7 +3,7 @@ $(document).ready(function () {
     $('#add-item').on('click', function (e) {
         e.preventDefault();
         $.ajax({
-            url: 'items/store/',
+            url: 'items/store',
             type: 'post',
             data: {
                 '_token': $('input[name=_token]').val(),
@@ -35,7 +35,7 @@ $(document).ready(function () {
 
         e.preventDefault();
         $.ajax({
-            url: 'items/edit/',
+            url: 'items/edit',
             type: 'post',
             data: {
                 '_token': $('input[name=_token]').val(),
@@ -58,7 +58,7 @@ $(document).ready(function () {
         e.preventDefault();
         $input= $(this).attr('id');
         $.ajax({
-            url: 'items/delete/',
+            url: 'items/delete',
             type: 'post',
             data: {
                 '_token': $('input[name=_token]').val(),
