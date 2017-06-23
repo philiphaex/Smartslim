@@ -252,21 +252,10 @@ class SubscribeController extends Controller
         if($payment->status == 2){
 
             $date = Carbon::now();
-            if($payment->frequency == 1){
                 $dt = $date->addYear();
                 $payment->dateSubscription = $dt->toDateTimeString();
                 $payment->save();
-            }
-            if($payment->frequency == 4){
-                $dt = $date->addDays(90);
-                $payment->dateSubscription =$dt->toDateTimeString();
-                $payment->save();
-            }
-            if($payment->frequency == 12){
-                $dt =  $date->addDays(30);
-                $payment->dateSubscription = $dt->toDateTimeString();
-                $payment->save();
-            }
+           
 
         $user_id = $payment->user_id;
         $user = User::where('id','=',$user_id)->first();
