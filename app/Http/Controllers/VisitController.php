@@ -61,14 +61,7 @@ class VisitController extends Controller
 
     public function destroy(Request $request)
     {
-        /*$visit= Visit::select('*')->where('visit_code','=',$visit_code);
-
-        $visit->delete();
-
-        $items = Item::select('*')->where('visit_code','=',$visit_code);
-        $items->delete();
-
-        return redirect('clients/'.$request->client_id);*/
+        
 
         $visit_code = $request->visit_code;
         $visit= Visit::select('*')->where('visit_code','=',$visit_code);

@@ -2,9 +2,7 @@
 
 namespace App\Http\Controllers;
 
-use App\Client;
 use App\User;
-use App\Visit;
 use App\Payment;
 use App\Business;
 use Carbon\Carbon;
@@ -22,10 +20,7 @@ class AppController extends Controller
 		$start_date_prev = $start->created_at;
 		$start_date_next = $start->created_at;
 		$current_date = Carbon::now();
-//		$start_date = Carbon::parse( $start->created_at)->format('d/m/Y');
-//		$date = Carbon::now();
-
-//		$current_date = Carbon::parse( $date)->format('d/m/Y');
+//
 		$interval = $start_date_prev->diffInDays($current_date);
 		$months = $interval/30;
 		$modulo = $interval%30;
@@ -44,7 +39,7 @@ class AppController extends Controller
                   from clients
                   inner join client_user on client_user.client_id = clients.id
                   where client_user.user_id='.$user_id. ' and clients.created_at >="'. $prev_date.'" and clients.created_at < "'.$next_date.'"'.
-				  'order by clients.created_at desc limit 5';
+				  'order by clients.created_at';
 
 		$clients = DB::select(DB::Raw($query));
 
