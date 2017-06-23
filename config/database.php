@@ -41,7 +41,7 @@ return [
 
         'mysql' => [
             'driver' => 'mysql',
-            'host' => env('us-cdbr-iron-east-03.cleardb.net'),
+            'host' => 'us-cdbr-iron-east-03.cleardb.net',
             'database' => 'heroku_06380ecda6c8b03',
             'username' => 'b57653ae2094a8',
             'password' => '1d75d69e',
