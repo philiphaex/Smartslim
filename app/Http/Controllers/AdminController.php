@@ -67,14 +67,14 @@ class AdminController extends Controller
             $unconfirmed = count($data);
 
 
-            $query ='SELECT * FROM homestead.users
+            $query ='SELECT * FROM users
                     inner join role_user on users.id = role_user.user_id
                     inner join payments on users.id = payments.user_id
                     where role_user.role_id = 5 and payments.status=1;';
             $data =DB::select(DB::Raw($query));
             $open_payments = count($data);
 
-            $query = 'SELECT * FROM homestead.users
+            $query = 'SELECT * FROM users
             inner join role_user on users.id = role_user.user_id
             inner join payments on users.id = payments.user_id
             where role_user.role_id = 5
