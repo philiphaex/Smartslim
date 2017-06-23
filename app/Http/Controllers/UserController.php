@@ -196,7 +196,7 @@ class UserController extends Controller
 
 
 
-        $query = 'SELECT * FROM homestead.roles
+        $query = 'SELECT * FROM roles
                       inner join role_user on role_user.role_id = roles.id
                       where role_user.user_id ='.$user->id;
 
@@ -323,7 +323,7 @@ class UserController extends Controller
             {
                 foreach ($users as $user){
 
-                    $query = 'SELECT * FROM homestead.roles
+                    $query = 'SELECT * FROM roles
                       inner join role_user on role_user.role_id = roles.id
                       where role_user.user_id ='.$user->id;
 
@@ -396,7 +396,7 @@ class UserController extends Controller
 
                 $clients = DB::select(DB::Raw($query));
 
-                $query = 'SELECT * FROM homestead.roles
+                $query = 'SELECT * FROM roles
                       inner join role_user on role_user.role_id = roles.id
                       where role_user.user_id ='.$user_id;
 
