@@ -51,7 +51,7 @@ return [
     |
     */
 
-    'url' => env('APP_URL', 'https://smartslim.herokuapp.com/'),
+    'url' => 'https://smartslim.herokuapp.com/',
 
     /*
     |--------------------------------------------------------------------------
