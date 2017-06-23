@@ -77,18 +77,14 @@ class AppController extends Controller
 	{
 		$user = Auth::user();
 		$id = Auth::id();
-		$city = DB::table('zipcodes')->select('gemeente')->where('zipcode','=',$user->zipcode)->get();
 		$role_id = DB::table('role_user')->select('*')->where('user_id','=',$id)->get();
 		$role = DB::table('roles')->select('*')->where('id','=',$role_id[0]->role_id)->get();
 		$payment = Payment::where('user_id','=',$id)->orderby('created_at','desc')->get();
 		$business = Business::where('user_id','=',$id)->get();
-		$b_city = DB::table('zipcodes')->select('gemeente')->where('zipcode','=',$business[0]->zipcode)->get();
 		$dateSubscription = Carbon::parse($payment[0]->dateSubscription)->format('d/m/Y');
         $today = Carbon::now();
 		return view ('app.settings',[
 			'user'=>$user,
-			'city'=>$city[0]->gemeente,
-			'b_city'=>$b_city[0]->gemeente,
 			'role_id'=>$role_id[0]->role_id,
 			'role'=>$role[0],
 			'payment'=>$payment[0],
